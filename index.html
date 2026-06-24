@@ -1,0 +1,1232 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>AV Action</title>
+<style>
+:root{
+  --bg:#0d0f14;--surface:#13161e;--s2:#1a1e28;--s3:#222736;
+  --border:#2a2f3d;--accent:#5b6af5;--a2:#8b96ff;
+  --gold:#f0b429;--green:#34d399;--red:#f87171;--orange:#fb923c;
+  --text:#e8eaf0;--muted:#6b7280;--muted2:#9ca3af;
+  --r:12px;--r2:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;}
+.hidden{display:none!important;}
+input,textarea,select,button{font-family:inherit;font-size:14px;}
+button{cursor:pointer;touch-action:manipulation;}
+
+/* LOGIN */
+#loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:16px;background:radial-gradient(ellipse at 60% 30%,rgba(91,106,245,.12),transparent 70%);}
+.lbox{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:36px 28px;width:100%;max-width:380px;}
+.llogo{font-size:26px;font-weight:800;color:var(--a2);margin-bottom:4px;}
+.lsub{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:28px;}
+.lbox input{width:100%;background:var(--s2);border:1px solid var(--border);border-radius:var(--r2);padding:13px 14px;color:var(--text);outline:none;margin-bottom:10px;transition:border-color .15s;}
+.lbox input:focus{border-color:var(--accent);}
+.lbox .lbtn{width:100%;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:var(--r2);font-size:15px;font-weight:600;}
+.lbox .lbtn:active{background:#4a58e0;}
+.lerr{color:var(--red);font-size:13px;margin-top:8px;text-align:center;}
+.lsync{color:var(--a2);font-size:12px;margin-top:10px;text-align:center;}
+
+/* APP */
+#app{display:none;flex-direction:column;height:100vh;height:100dvh;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:52px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0;z-index:50;}
+.tlogo{font-size:16px;font-weight:800;color:var(--a2);}
+.tright{display:flex;align-items:center;gap:8px;}
+.trole{font-size:11px;padding:3px 9px;border-radius:20px;font-weight:600;}
+.r-admin{background:rgba(91,106,245,.2);color:var(--a2);}
+.r-student{background:rgba(52,211,153,.15);color:var(--green);}
+.tname{font-size:13px;font-weight:600;max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.blogout{background:transparent;border:1px solid var(--border);color:var(--muted2);padding:5px 10px;border-radius:var(--r2);font-size:12px;}
+.blogout:active{border-color:var(--red);color:var(--red);}
+
+/* MOBILE NAV - bottom bar for student */
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border);z-index:60;padding:4px 0 env(safe-area-inset-bottom);}
+.bottom-nav-inner{display:flex;}
+.bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px;color:var(--muted2);font-size:10px;font-weight:600;cursor:pointer;border:none;background:none;}
+.bnav-item.act{color:var(--a2);}
+.bnav-icon{font-size:20px;}
+
+/* BODY */
+.abody{display:flex;flex:1;overflow:hidden;}
+.sidebar{width:230px;min-width:230px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;}
+.ssec{padding:14px 14px 4px;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:600;}
+.nitem{display:flex;align-items:center;gap:9px;padding:10px 12px;margin:1px 8px;border-radius:var(--r2);cursor:pointer;color:var(--muted2);font-size:13px;font-weight:500;transition:background .1s;user-select:none;border:none;background:none;width:calc(100% - 16px);text-align:left;}
+.nitem:active,.nitem:hover{background:var(--s2);color:var(--text);}
+.nitem.act{background:rgba(91,106,245,.15);color:var(--a2);font-weight:600;}
+.sav{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
+.stnav{margin:1px 8px;padding:8px 10px;border-radius:var(--r2);cursor:pointer;display:flex;align-items:center;gap:8px;transition:background .1s;border:none;background:none;width:calc(100% - 16px);text-align:left;}
+.stnav:active,.stnav:hover{background:var(--s2);}
+.stnav.act{background:rgba(91,106,245,.12);}
+.stn{font-size:13px;font-weight:500;color:var(--text);}
+.stm{font-size:11px;color:var(--muted);}
+
+/* CONTENT */
+.content{flex:1;overflow-y:auto;padding:20px 16px;padding-bottom:80px;}
+@media(min-width:601px){.content{padding:24px 28px;padding-bottom:24px;}}
+
+/* CARDS */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:14px;}
+.ctitle{font-size:11px;font-weight:700;color:var(--muted2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.cdot{width:7px;height:7px;border-radius:50%;}
+.ph{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px;}
+.ptitle{font-size:18px;font-weight:800;}
+.psub{font-size:12px;color:var(--muted);margin-top:2px;}
+
+/* FORMS */
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
+label{font-size:11px;font-weight:700;color:var(--muted2);text-transform:uppercase;letter-spacing:.6px;}
+input[type=text],input[type=date],input[type=password],input[type=email],textarea,select{background:var(--s2);border:1px solid var(--border);border-radius:var(--r2);padding:11px 12px;color:var(--text);font-size:14px;outline:none;transition:border-color .15s;width:100%;}
+input:focus,textarea:focus,select:focus{border-color:var(--accent);}
+textarea{resize:vertical;min-height:80px;}
+select option{background:var(--s2);}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:500px){.g2{grid-template-columns:1fr;}}
+
+/* RADIO */
+.rg{display:flex;flex-wrap:wrap;gap:7px;}
+.ro{padding:8px 14px;border-radius:20px;border:1px solid var(--border);cursor:pointer;font-size:13px;color:var(--muted2);user-select:none;white-space:nowrap;transition:all .1s;}
+.ro:active,.ro:hover{border-color:var(--accent);color:var(--text);}
+.sg{background:rgba(52,211,153,.15);border-color:var(--green);color:var(--green);}
+.so{background:rgba(251,146,60,.15);border-color:var(--orange);color:var(--orange);}
+.sr{background:rgba(248,113,113,.15);border-color:var(--red);color:var(--red);}
+.sgold{background:rgba(240,180,41,.15);border-color:var(--gold);color:var(--gold);}
+.sgr{background:rgba(107,114,128,.2);border-color:var(--muted);color:var(--muted2);}
+.sb{background:rgba(91,106,245,.15);border-color:var(--a2);color:var(--a2);}
+
+/* BTNS */
+.btn{padding:10px 16px;border-radius:var(--r2);border:none;font-size:13px;font-weight:600;transition:opacity .1s;touch-action:manipulation;}
+.btn:active{opacity:.8;}
+.bp{background:var(--accent);color:#fff;}
+.bg2{background:var(--s2);color:var(--muted2);border:1px solid var(--border);}
+.bg2:active,.bg2:hover{color:var(--text);border-color:var(--accent);}
+.bd{background:rgba(248,113,113,.1);color:var(--red);border:1px solid rgba(248,113,113,.2);}
+.bgold{background:rgba(240,180,41,.1);color:var(--gold);border:1px solid rgba(240,180,41,.2);}
+.bsm{padding:6px 11px;font-size:12px;}
+
+/* BADGES */
+.badge{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700;display:inline-block;}
+.bg_{background:rgba(52,211,153,.15);color:var(--green);}
+.bo_{background:rgba(251,146,60,.15);color:var(--orange);}
+.br_{background:rgba(248,113,113,.15);color:var(--red);}
+.bgold_{background:rgba(240,180,41,.15);color:var(--gold);}
+.bgr_{background:rgba(107,114,128,.2);color:var(--muted2);}
+.bb_{background:rgba(91,106,245,.15);color:var(--a2);}
+
+/* STATS */
+.sgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px;}
+@media(min-width:500px){.sgrid{grid-template-columns:repeat(4,1fr);}}
+.sc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px;}
+.sv{font-size:24px;font-weight:800;}
+.sl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-top:2px;}
+
+/* TIMELINE */
+.tli{background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:10px;}
+.tlh{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;gap:8px;flex-wrap:wrap;}
+.tld{font-size:11px;color:var(--muted);}
+.tlf{margin-top:8px;}
+.tlfl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;font-weight:600;margin-bottom:2px;}
+.tlfv{font-size:13px;color:var(--muted2);}
+
+/* BARS */
+.bw{margin:6px 0;}
+.bl{display:flex;justify-content:space-between;font-size:12px;color:var(--muted2);margin-bottom:3px;}
+.bt{background:var(--s3);border-radius:4px;height:8px;overflow:hidden;}
+.bf{height:100%;border-radius:4px;transition:width .5s;}
+
+/* MARKERS */
+.mk{padding:5px 11px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--border);color:var(--muted2);transition:all .1s;user-select:none;display:inline-block;margin:3px;}
+.mk.mka{background:rgba(91,106,245,.2);border-color:var(--a2);color:var(--a2);}
+
+/* AI */
+.aibox{background:linear-gradient(135deg,rgba(91,106,245,.08),rgba(139,150,255,.03));border:1px solid rgba(91,106,245,.2);border-radius:var(--r);padding:16px;margin-bottom:12px;}
+.aititle{font-size:11px;font-weight:700;color:var(--a2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;}
+.aitxt{font-size:13px;color:var(--text);line-height:1.8;white-space:pre-wrap;}
+.spin{width:14px;height:14px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:sp .7s linear infinite;display:inline-block;vertical-align:middle;margin-right:8px;}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* MODAL */
+.moverlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px);}
+@media(min-width:601px){.moverlay{align-items:center;}}
+.mbox{background:var(--surface);border:1px solid var(--border);border-radius:16px 16px 0 0;padding:24px 20px;width:100%;max-height:90vh;overflow-y:auto;}
+@media(min-width:601px){.mbox{border-radius:16px;width:540px;max-width:96vw;}}
+.mtitle{font-size:17px;font-weight:800;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+.mfooter{display:flex;gap:8px;justify-content:flex-end;margin-top:18px;}
+
+/* FAB */
+.fab{position:fixed;bottom:80px;right:20px;z-index:100;background:var(--accent);color:#fff;border:none;border-radius:50px;padding:14px 20px;font-size:15px;font-weight:700;box-shadow:0 4px 20px rgba(91,106,245,.5);touch-action:manipulation;}
+@media(min-width:601px){.fab{bottom:28px;right:28px;}}
+
+/* TABS */
+.tabs{display:flex;gap:2px;background:var(--surface);padding:4px;border-radius:var(--r);border:1px solid var(--border);width:100%;overflow-x:auto;margin-bottom:18px;}
+.tab{padding:7px 12px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:500;color:var(--muted2);white-space:nowrap;border:none;background:none;}
+.tab.act{background:var(--accent);color:#fff;}
+
+/* TOAST */
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--s2);border:1px solid var(--accent);border-radius:var(--r);padding:12px 20px;font-size:13px;color:var(--a2);z-index:300;animation:tin .3s ease;box-shadow:0 8px 24px rgba(0,0,0,.4);white-space:nowrap;max-width:90vw;overflow:hidden;text-overflow:ellipsis;}
+@media(min-width:601px){.toast{bottom:24px;}}
+@keyframes tin{from{transform:translateX(-50%) translateY(12px);opacity:0}to{transform:translateX(-50%) translateY(0);opacity:1}}
+
+/* MISC */
+.rule{background:linear-gradient(135deg,rgba(91,106,245,.07),rgba(139,150,255,.02));border:1px solid rgba(91,106,245,.18);border-radius:var(--r);padding:12px 14px;margin-bottom:16px;font-size:12px;color:var(--muted2);font-style:italic;}
+.rule strong{color:var(--a2);}
+.empty{text-align:center;padding:40px 16px;color:var(--muted);}
+.ei{font-size:32px;margin-bottom:8px;}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+
+/* SYNC INDICATOR */
+.sync-dot{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;margin-left:6px;}
+.sync-dot.off{background:var(--red);}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="lbox">
+    <div class="llogo">AV Action</div>
+    <div class="lsub">Inteligência Comportamental</div>
+    <input type="text" id="lu" placeholder="Usuário" autocomplete="username" autocapitalize="none">
+    <input type="password" id="lp" placeholder="Senha" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="lbtn" onclick="doLogin()">Entrar</button>
+    <div class="lerr hidden" id="lerr">Usuário ou senha incorretos.</div>
+    <div class="lsync hidden" id="lsync">🔄 Conectando...</div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="topbar">
+    <div class="tlogo">AV Action <span class="sync-dot off" id="syncDot" title="Sincronização"></span></div>
+    <div class="tright">
+      <span class="trole" id="roleTag"></span>
+      <span class="tname" id="tname"></span>
+      <button class="blogout" onclick="doLogout()">Sair</button>
+    </div>
+  </div>
+  <div class="abody">
+    <div class="sidebar" id="sidebar"></div>
+    <div class="content" id="content"></div>
+  </div>
+  <!-- Mobile bottom nav (student only) -->
+  <div class="bottom-nav hidden" id="bottomNav">
+    <div class="bottom-nav-inner">
+      <button class="bnav-item" id="bn_inicio" onclick="setPage('aluno_inicio')"><span class="bnav-icon">🏠</span>Início</button>
+      <button class="bnav-item" id="bn_diario" onclick="setPage('aluno_form')"><span class="bnav-icon">📝</span>Diário</button>
+      <button class="bnav-item" id="bn_metas" onclick="setPage('aluno_metas')"><span class="bnav-icon">🎯</span>Metas</button>
+    </div>
+  </div>
+</div>
+
+<!-- FAB -->
+<button class="fab hidden" id="fab" onclick="openModal('registro')">+ Registro</button>
+
+<!-- MODAL -->
+<div id="mo" class="moverlay hidden" onclick="closeModalOutside(event)">
+  <div class="mbox" id="mb"></div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+// SYNC — JSONBin.io (já configurado)
+// ══════════════════════════════════════════════
+const BIN_ID   = '6a3b57aada38895dfef54bb1';
+const BIN_KEY  = '$2a$10$0PJPGRLe/JY7laW56/CGuegftbFHvq5ieRPNWRq62tovlVJHEgBTm';
+const BIN_URL  = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+const BIN_HDRS = { 'Content-Type':'application/json', 'X-Master-Key': BIN_KEY };
+
+const LS_KEY='avaction_v4';
+let db=loadLocalDB();
+let syncOk=false;
+
+function loadLocalDB(){
+  try{const r=localStorage.getItem(LS_KEY);if(r)return JSON.parse(r);}catch(e){}
+  return{users:[{id:'u1',username:'admin',password:'admin123',role:'admin',nome:'Maísa'}],students:[],registros:[],analises:[]};
+}
+function saveLocal(){try{localStorage.setItem(LS_KEY,JSON.stringify(db));}catch(e){}}
+
+// BroadcastChannel: sync instantâneo entre abas no mesmo dispositivo
+let bc=null;
+try{
+  bc=new BroadcastChannel('avaction_sync');
+  bc.onmessage=e=>{
+    if(e.data&&e.data.db){
+      db=e.data.db;saveLocal();
+      if(CU)renderApp();
+    }
+  };
+}catch(ex){}
+
+function setSyncDot(ok){
+  syncOk=ok;
+  const d=document.getElementById('syncDot');
+  if(d){d.className='sync-dot'+(ok?'':' off');d.title=ok?'Sincronizado':'Offline';}
+}
+
+async function remoteGet(){
+  try{
+    const r=await fetch(BIN_URL+'/latest',{headers:{'X-Master-Key':BIN_KEY}});
+    if(!r.ok)return null;
+    const j=await r.json();
+    return j.record||null;
+  }catch(e){return null;}
+}
+
+async function remoteSet(data){
+  try{
+    await fetch(BIN_URL,{
+      method:'PUT',
+      headers:BIN_HDRS,
+      body:JSON.stringify(data)
+    });
+    setSyncDot(true);
+  }catch(e){setSyncDot(false);}
+}
+
+async function save(){
+  db._ts=Date.now();
+  saveLocal();
+  try{if(bc)bc.postMessage({db});}catch(e){}
+  await remoteSet(db);
+}
+
+async function initSync(){
+  setSyncDot(false);
+  const remote=await remoteGet();
+  if(remote&&remote.users){
+    // Usa o mais recente: compara _ts
+    if(!db._ts||(remote._ts&&remote._ts>db._ts)){
+      db=remote;
+      if(!db.users)db.users=[];
+      if(!db.students)db.students=[];
+      if(!db.registros)db.registros=[];
+      if(!db.analises)db.analises=[];
+      saveLocal();
+    }
+    setSyncDot(true);
+  } else {
+    // Primeiro uso: sobe dados locais
+    db._ts=Date.now();
+    await remoteSet(db);
+  }
+  // Polling a cada 5s para pegar atualizações de outros dispositivos
+  setInterval(async()=>{
+    const remote=await remoteGet();
+    if(!remote)return;
+    const remTs=remote._ts||0;
+    const locTs=db._ts||0;
+    if(remTs>locTs){
+      db=remote;
+      if(!db.users)db.users=[];
+      if(!db.students)db.students=[];
+      if(!db.registros)db.registros=[];
+      if(!db.analises)db.analises=[];
+      saveLocal();
+      setSyncDot(true);
+      if(CU)renderApp();
+    }
+  },5000);
+}
+
+// ══════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════
+let CU=null;
+let CP='dashboard';
+let CSid=null;
+let RV={};
+
+// ══════════════════════════════════════════════
+// UTILS
+// ══════════════════════════════════════════════
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
+function today(){return new Date().toISOString().slice(0,10);}
+function fdate(d){if(!d)return'—';const[y,m,day]=d.split('-');return`${day}/${m}/${y}`;}
+function acolor(n){const c=['#5b6af5','#34d399','#f0b429','#f87171','#a78bfa','#38bdf8','#fb923c','#e879f9'];let h=0;for(let ch of(n||'?'))h=ch.charCodeAt(0)+((h<<5)-h);return c[Math.abs(h)%c.length];}
+function ini(n){return(n||'?').split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();}
+function toast(msg){const e=document.createElement('div');e.className='toast';e.textContent=msg;document.body.appendChild(e);setTimeout(()=>e.remove(),3200);}
+function gv(id){const e=document.getElementById(id);return e?e.value.trim():'';}
+function execBadge(v){const m={'Cumpriu':'bg_','Cumpriu Parcialmente':'bo_','Não Cumpriu':'br_','Reprogramou':'bgold_','Não Respondeu':'bgr_'};return`<span class="badge ${m[v]||'bgr_'}">${v||'—'}</span>`;}
+function engBadge(v){const m={'Alto':'bg_','Médio':'bgold_','Baixo':'br_'};return`<span class="badge ${m[v]||'bgr_'}">${v||'—'}</span>`;}
+function origemBadge(v){const m={'WhatsApp':'bg_','Sessão':'bb_','Evento':'bgold_'};return`<span class="badge ${m[v]||'bgr_'}">${v||'—'}</span>`;}
+
+// ══════════════════════════════════════════════
+// LOGIN / LOGOUT
+// ══════════════════════════════════════════════
+function doLogin(){
+  const u=gv('lu').toLowerCase().trim();
+  const p=gv('lp');
+  const found=(db.users||[]).find(x=>x.username===u&&x.password===p);
+  if(!found){document.getElementById('lerr').classList.remove('hidden');return;}
+  CU=found;
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('app').style.display='flex';
+  document.getElementById('tname').textContent=found.nome;
+  const rt=document.getElementById('roleTag');
+  rt.textContent=found.role==='admin'?'Admin':'Aluno';
+  rt.className='trole '+(found.role==='admin'?'r-admin':'r-student');
+  if(found.role==='admin'){
+    document.getElementById('fab').classList.remove('hidden');
+    CP='dashboard';
+  } else {
+    document.getElementById('bottomNav').classList.remove('hidden');
+    CP='aluno_inicio';
+  }
+  renderApp();
+}
+
+function doLogout(){
+  CU=null;CP='dashboard';CSid=null;
+  document.getElementById('app').style.display='none';
+  document.getElementById('loginScreen').style.display='flex';
+  document.getElementById('fab').classList.add('hidden');
+  document.getElementById('bottomNav').classList.add('hidden');
+  document.getElementById('lerr').classList.add('hidden');
+  document.getElementById('lu').value='';
+  document.getElementById('lp').value='';
+}
+
+// ══════════════════════════════════════════════
+// RENDER
+// ══════════════════════════════════════════════
+function renderApp(){renderSidebar();renderContent();updateBottomNav();}
+function setPage(p,sid){CP=p;if(sid!==undefined)CSid=sid;renderApp();}
+
+function updateBottomNav(){
+  if(!CU||CU.role!=='student')return;
+  ['inicio','diario','metas'].forEach(k=>{
+    const el=document.getElementById('bn_'+k);
+    if(el)el.className='bnav-item'+(CP===('aluno_'+(k==='diario'?'form':k))||( k==='diario'&&CP==='aluno_hist')?' act':'');
+  });
+}
+
+function renderSidebar(){
+  const el=document.getElementById('sidebar');
+  if(!CU){el.innerHTML='';return;}
+  if(CU.role==='student'){
+    el.innerHTML=''; // mobile uses bottom nav
+    return;
+  }
+  el.innerHTML=`
+    <div class="ssec">Menu</div>
+    <button class="nitem ${CP==='dashboard'?'act':''}" onclick="CSid=null;setPage('dashboard')">🏠 Início</button>
+    <button class="nitem ${CP==='usuarios'?'act':''}" onclick="setPage('usuarios')">👥 Usuários</button>
+    <div class="ssec">Projetos</div>
+    ${(db.students||[]).map(s=>`
+      <button class="stnav ${CSid===s.id&&CP==='projeto'?'act':''}" onclick="setPage('projeto','${s.id}')">
+        <div class="sav" style="background:${acolor(s.nome)}22;color:${acolor(s.nome)}">${ini(s.nome)}</div>
+        <div><div class="stn">${s.nome}</div><div class="stm">${s.objetivo||'Sem objetivo'}</div></div>
+      </button>`).join('')}
+    <div style="padding:8px 10px">
+      <button class="btn bg2 bsm" style="width:100%" onclick="openModal('newStudent')">+ Novo Aluno</button>
+    </div>`;
+}
+
+function renderContent(){
+  const el=document.getElementById('content');
+  if(!CU){el.innerHTML='';return;}
+  if(CU.role==='student'){
+    if(CP==='aluno_inicio')el.innerHTML=pageAlunoInicio();
+    else if(CP==='aluno_form')el.innerHTML=pageAlunoForm();
+    else if(CP==='aluno_hist')el.innerHTML=pageAlunoHist();
+    else if(CP==='aluno_metas')el.innerHTML=pageAlunoMetas();
+    else el.innerHTML=pageAlunoInicio();
+    return;
+  }
+  if(CP==='dashboard')el.innerHTML=pageDashboard();
+  else if(CP==='usuarios')el.innerHTML=pageUsuarios();
+  else if(CP==='projeto')el.innerHTML=pageProjeto();
+  else el.innerHTML='';
+}
+
+// ══════════════════════════════════════════════
+// DASHBOARD
+// ══════════════════════════════════════════════
+function pageDashboard(){
+  const students=db.students||[];
+  if(!students.length)return`
+    <div class="rule"><strong>Regra de Ouro:</strong> A Maísa registra fatos. O sistema identifica padrões. O Coach interpreta padrões. O aluno transforma padrões em evolução.</div>
+    <div style="text-align:center;padding:50px 16px">
+      <div style="font-size:44px;margin-bottom:14px">🚀</div>
+      <div style="font-size:17px;font-weight:800;margin-bottom:8px">Nenhum aluno ainda</div>
+      <div style="color:var(--muted);margin-bottom:20px;font-size:13px">Crie o primeiro aluno para começar.</div>
+      <button class="btn bp" onclick="openModal('newStudent')">+ Criar Primeiro Aluno</button>
+    </div>`;
+  const cards=students.map(s=>{
+    const recs=(db.registros||[]).filter(r=>r.studentId===s.id);
+    const taxa=calcTaxa(s.id);
+    const ultimo=[...recs].sort((a,b)=>b.data.localeCompare(a.data))[0];
+    const cor=taxa>=70?'var(--green)':taxa>=40?'var(--gold)':'var(--red)';
+    const u=s.userId?(db.users||[]).find(x=>x.id===s.userId):null;
+    return`<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:${acolor(s.nome)}"></div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px" onclick="setPage('projeto','${s.id}')" style="cursor:pointer">
+        <div class="sav" style="width:40px;height:40px;font-size:15px;font-weight:800;border-radius:50%;background:${acolor(s.nome)}22;color:${acolor(s.nome)};flex-shrink:0">${ini(s.nome)}</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:14px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${s.nome}</div>
+          <div style="font-size:11px;color:var(--muted)">${s.objetivo||'Sem objetivo'}</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0">
+          <div style="font-size:20px;font-weight:800;color:${cor}">${taxa}%</div>
+          <div style="font-size:9px;color:var(--muted);text-transform:uppercase">execução</div>
+        </div>
+      </div>
+      ${u?`<div style="font-size:11px;color:var(--muted);margin-bottom:10px">Login: <strong style="color:var(--a2);font-family:monospace">${u.username}</strong> / <strong style="color:var(--gold);font-family:monospace">${u.password}</strong></div>`:''}
+      <div style="font-size:11px;color:var(--muted2);margin-bottom:10px">${recs.length} registro${recs.length!==1?'s':''} · Último: ${ultimo?fdate(ultimo.data):'—'}</div>
+      <div style="display:flex;gap:6px">
+        <button class="btn bg2 bsm" style="flex:1" onclick="setPage('projeto','${s.id}')">Ver projeto</button>
+        <button class="btn bg2 bsm" onclick="openModal('editStudent','${s.id}')">✏️</button>
+        <button class="btn bd bsm" data-sid="${s.id}" onclick="window.delStudent(this.dataset.sid)">🗑</button>
+      </div>
+    </div>`;
+  }).join('');
+  return`
+    <div class="ph">
+      <div><div class="ptitle">Alunos</div><div class="psub">${students.length} cadastrado${students.length!==1?'s':''}</div></div>
+      <button class="btn bp bsm" onclick="openModal('newStudent')">+ Novo Aluno</button>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px">${cards}</div>`;
+}
+
+window.delStudent=function(sid){
+  if(!confirm('Excluir este aluno e todos os registros?'))return;
+  db.students=(db.students||[]).filter(s=>s.id!==sid);
+  db.registros=(db.registros||[]).filter(r=>r.studentId!==sid);
+  db.analises=(db.analises||[]).filter(a=>a.studentId!==sid);
+  const u=(db.users||[]).find(x=>x.id===(db.students||[]).find(s=>s.id===sid)?.userId);
+  // Remove usuário vinculado
+  const st=(db.students||[]).find(s=>s.id===sid);
+  if(st&&st.userId) db.users=(db.users||[]).filter(u=>u.id!==st.userId);
+  if(CSid===sid){CSid=null;CP='dashboard';}
+  save();toast('Aluno removido.');renderApp();
+};
+
+// ══════════════════════════════════════════════
+// PROJETO
+// ══════════════════════════════════════════════
+function pageProjeto(){
+  const s=(db.students||[]).find(x=>x.id===CSid);
+  if(!s)return'<div class="empty"><div class="ei">⚠️</div><p>Aluno não encontrado</p></div>';
+  const u=s.userId?(db.users||[]).find(x=>x.id===s.userId):null;
+  const tabs=['timeline','evolucao','perfil','aluno_dados'];
+  const tnames=['📋 Timeline','📈 Evolução','🧠 Perfil','👤 Dados Aluno'];
+  const ct=window._pt||'timeline';
+  const recs=(db.registros||[]).filter(r=>r.studentId===s.id).sort((a,b)=>b.data.localeCompare(a.data)||b.id.localeCompare(a.id));
+  const taxa=calcTaxa(s.id);
+  let body='';
+  if(ct==='timeline')body=renderTimeline(s,recs);
+  else if(ct==='evolucao')body=renderEvolucao(s,recs);
+  else if(ct==='aluno_dados')body=renderAdminAlunoDados(s);
+  else body=renderPerfil(s);
+  return`
+    <div class="ph">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <button class="btn bg2 bsm" onclick="setPage('dashboard')">← Início</button>
+        <div>
+          <div class="ptitle">${s.nome}</div>
+          <div class="psub">${s.objetivo||'Sem objetivo'} · ${fdate(s.inicio)}</div>
+          ${u?`<div style="margin-top:3px;font-size:12px">Login: <strong style="color:var(--a2);font-family:monospace">${u.username}</strong>&nbsp;&nbsp;Senha: <strong style="color:var(--gold);font-family:monospace">${u.password}</strong></div>`:'<div style="font-size:11px;color:var(--orange);margin-top:3px">⚠️ Sem login</div>'}
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+        <div style="text-align:right"><div style="font-size:22px;font-weight:800">${taxa}%</div><div style="font-size:9px;color:var(--muted);text-transform:uppercase">execução</div></div>
+        <button class="btn bgold bsm" onclick="gerarAnalise('${s.id}')">🤖 IA</button>
+        <button class="btn bp bsm" onclick="openModal('registro')">+ Registro</button>
+      </div>
+    </div>
+    <div class="tabs">${tabs.map((t,i)=>`<div class="tab ${ct===t?'act':''}" onclick="window._pt='${t}';renderApp()">${tnames[i]}</div>`).join('')}</div>
+    ${body}`;
+}
+
+function renderTimeline(s,recs){
+  const list=recs.map(r=>{
+    const c=r.campos||{};
+    const isAluno=r.origem==='Aluno';
+    let campos='';
+    if(r.origem==='WhatsApp'||r.origem==='Sessão'){
+      campos=`
+        ${c.execucao?`<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">${execBadge(c.execucao)}${c.engajamento?engBadge(c.engajamento):''}</div>`:''}
+        ${c.resumo?`<div class="tlf"><div class="tlfl">Resumo</div><div class="tlfv">${c.resumo}</div></div>`:''}
+        ${c.dificuldades?`<div class="tlf"><div class="tlfl" style="color:var(--red)">Dificuldades</div><div class="tlfv">${c.dificuldades}</div></div>`:''}
+        ${c.avancos?`<div class="tlf"><div class="tlfl" style="color:var(--green)">Avanços</div><div class="tlfv">${c.avancos}</div></div>`:''}
+        ${c.meta?`<div class="tlf"><div class="tlfl" style="color:var(--gold)">Meta</div><div class="tlfv">${c.meta}</div></div>`:''}
+        ${c.observacao?`<div class="tlf"><div class="tlfl">Obs</div><div class="tlfv" style="font-style:italic">"${c.observacao}"</div></div>`:''}
+        ${c.intervencao?`<div style="margin-top:6px"><span class="badge bb_">${c.intervencao}</span></div>`:''}`;
+    } else if(r.origem==='Evento'){
+      campos=`${c.impacto?`<span class="badge ${c.impacto==='Positivo'?'bg_':c.impacto==='Negativo'?'br_':'bgold_'}" style="margin-bottom:6px;display:inline-block">${c.impacto}</span>`:''}<div style="font-size:13px">${c.descricao||''}</div>`;
+    } else if(isAluno){
+      const d={'Muito Baixa':'br_','Baixa':'bo_','Média':'bgold_','Boa':'bg_','Excelente':'bg_'};
+      campos=`<div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px"><span class="badge ${c.estudou==='Sim'?'bg_':'br_'}">${c.estudou==='Sim'?'✓ Estudou':'✗ Não estudou'}</span>${c.disposicao?`<span class="badge ${d[c.disposicao]||'bgr_'}">${c.disposicao}</span>`:''}</div>${c.sentimento?`<div class="tlf"><div class="tlfl">Como se sente</div><div class="tlfv">${c.sentimento}</div></div>`:''}${c.dificuldade?`<div class="tlf"><div class="tlfl" style="color:var(--red)">Dificuldade</div><div class="tlfv">${c.dificuldade}</div></div>`:''}${c.vitoria?`<div class="tlf"><div class="tlfl" style="color:var(--green)">🏆 Vitória</div><div class="tlfv">${c.vitoria}</div></div>`:''}`;
+    }
+    return`<div class="tli">
+      <div class="tlh">
+        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+          ${origemBadge(r.origem)}
+          <span style="font-size:11px;color:var(--muted)">por <strong style="color:var(--muted2)">${r.quemRegistrou||'—'}</strong></span>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <span class="tld">${fdate(r.data)}</span>
+          ${!isAluno?`<button class="btn bg2 bsm" onclick="openModal('editRegistro','${r.id}')">✏️</button>`:''}
+          <button class="btn bd bsm" data-rid="${r.id}" onclick="window.delReg(this.dataset.rid)">🗑</button>
+        </div>
+      </div>
+      ${campos}
+    </div>`;
+  }).join('')||'<div class="empty"><div class="ei">💬</div><p>Nenhum registro. Use + Registro.</p></div>';
+  return`<div class="card"><div class="ctitle"><div class="cdot" style="background:#5b6af5"></div>Todos os Registros</div>${list}</div>`;
+}
+
+window.delReg=function(id){
+  if(!confirm('Remover este registro?'))return;
+  db.registros=(db.registros||[]).filter(r=>r.id!==id);
+  save();toast('Removido.');renderApp();
+};
+
+function renderEvolucao(s,recs){
+  const maiRecs=recs.filter(r=>r.origem==='WhatsApp'||r.origem==='Sessão');
+  const bySem={};
+  maiRecs.forEach(r=>{
+    if(!r.campos||!r.campos.execucao)return;
+    const d=new Date(r.data),sem=`${d.getFullYear()}-W${String(Math.ceil((d.getDate()-d.getDay()+6)/7)).padStart(2,'0')}`;
+    if(!bySem[sem])bySem[sem]={total:0,ok:0,label:fdate(r.data)};
+    bySem[sem].total++;
+    if(r.campos.execucao==='Cumpriu')bySem[sem].ok++;
+  });
+  const sems=Object.entries(bySem).sort((a,b)=>a[0].localeCompare(b[0])).slice(-8);
+  const bars=sems.map(([k,v])=>{const p=Math.round(v.ok/v.total*100),cor=p>=70?'var(--green)':p>=40?'var(--gold)':'var(--red)';return`<div class="bw"><div class="bl"><span>${v.label}</span><span style="color:${cor}">${p}% (${v.ok}/${v.total})</span></div><div class="bt"><div class="bf" style="width:${p}%;background:${cor}"></div></div></div>`;}).join('')||'<div style="color:var(--muted);font-size:13px">Sem dados de execução ainda.</div>';
+  const analises=(db.analises||[]).filter(a=>a.studentId===s.id).sort((a,b)=>b.geradoEm.localeCompare(a.geradoEm));
+  const aiHtml=analises.map(a=>`<div class="aibox"><div class="aititle">🤖 Análise · ${fdate(a.geradoEm.slice(0,10))}</div><div class="aitxt">${formatAI(a.conteudo)}</div></div>`).join('')||'<div style="color:var(--muted);font-size:13px">Nenhuma análise gerada ainda.</div>';
+  return`
+    <div class="card"><div class="ctitle"><div class="cdot" style="background:#34d399"></div>Execução Semanal</div>${bars}</div>
+    <div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <div class="ctitle" style="margin-bottom:0"><div class="cdot" style="background:#a78bfa"></div>Análises da IA</div>
+        <button class="btn bgold bsm" onclick="gerarAnalise('${s.id}')">🤖 Gerar</button>
+      </div>
+      <div id="aiArea_${s.id}">${aiHtml}</div>
+    </div>`;
+}
+
+function renderAdminAlunoDados(s){
+  const diarios=(db.registros||[]).filter(r=>r.studentId===s.id&&r.origem==='Aluno').sort((a,b)=>b.data.localeCompare(a.data));
+  const metas=s.metas||[];
+  const hoje=today();
+  function ms(m){
+    if(m.status==='Concluída')return{l:'Concluída',c:'bg_',i:'✅'};
+    if(!m.prazo)return{l:'Em andamento',c:'bb_',i:'🔵'};
+    if(m.prazo<hoje)return{l:'Em atraso',c:'br_',i:'🔴'};
+    if((new Date(m.prazo)-new Date(hoje))/(86400000)<=3)return{l:'Vence em breve',c:'bgold_',i:'🟡'};
+    return{l:'Em dia',c:'bg_',i:'🟢'};
+  }
+  const d={'Muito Baixa':'br_','Baixa':'bo_','Média':'bgold_','Boa':'bg_','Excelente':'bg_'};
+  const dHtml=diarios.map(r=>`<div class="tli">
+    <div class="tlh">
+      <div style="display:flex;gap:5px"><span class="badge ${r.campos.estudou==='Sim'?'bg_':'br_'}">${r.campos.estudou==='Sim'?'✓ Estudou':'✗ Não estudou'}</span>${r.campos.disposicao?`<span class="badge ${d[r.campos.disposicao]||'bgr_'}">${r.campos.disposicao}</span>`:''}</div>
+      <span class="tld">${fdate(r.data)}</span>
+    </div>
+    ${r.campos.sentimento?`<div class="tlf"><div class="tlfl">Sentimento</div><div class="tlfv">${r.campos.sentimento}</div></div>`:''}
+    ${r.campos.dificuldade?`<div class="tlf"><div class="tlfl" style="color:var(--red)">Dificuldade</div><div class="tlfv">${r.campos.dificuldade}</div></div>`:''}
+    ${r.campos.vitoria?`<div class="tlf"><div class="tlfl" style="color:var(--green)">🏆 Vitória</div><div class="tlfv">${r.campos.vitoria}</div></div>`:''}
+  </div>`).join('')||'<div class="empty"><div class="ei">📭</div><p>Aluno ainda não preencheu o diário.</p></div>';
+  const mHtml=metas.length?`<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:13px">
+    <thead><tr style="border-bottom:2px solid var(--border)">
+      <th style="text-align:left;padding:8px;color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase">Meta</th>
+      <th style="text-align:center;padding:8px;color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase">Prazo</th>
+      <th style="text-align:center;padding:8px;color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase">Status</th>
+      <th style="text-align:center;padding:8px;color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase">Ação</th>
+    </tr></thead>
+    <tbody>${metas.map((m,i)=>{const st=ms(m);return`<tr style="border-bottom:1px solid var(--border)">
+      <td style="padding:10px 8px"><div style="font-weight:600">${m.titulo}</div>${m.descricao?`<div style="font-size:11px;color:var(--muted2)">${m.descricao}</div>`:''}</td>
+      <td style="text-align:center;padding:10px 8px;color:var(--muted2)">${m.prazo?fdate(m.prazo):'—'}</td>
+      <td style="text-align:center;padding:10px 8px"><span class="badge ${st.c}">${st.i} ${st.l}</span></td>
+      <td style="text-align:center;padding:10px 8px">
+        <select onchange="updMetaSt('${s.id}',${i},this.value)" style="font-size:11px;padding:4px;width:auto">
+          <option value="Pendente" ${m.status==='Pendente'?'selected':''}>Pendente</option>
+          <option value="Em andamento" ${m.status==='Em andamento'?'selected':''}>Andamento</option>
+          <option value="Concluída" ${m.status==='Concluída'?'selected':''}>Concluída</option>
+        </select>
+        <button class="btn bd bsm" style="margin-top:4px" data-sid="${s.id}" data-idx="${i}" onclick="window.delMeta(this.dataset.sid,this.dataset.idx)">🗑</button>
+      </td>
+    </tr>`;}).join('')}</tbody>
+  </table></div>`:'<div class="empty"><div class="ei">🎯</div><p>Nenhuma meta ainda.</p></div>';
+  return`
+    <div style="display:grid;grid-template-columns:1fr;gap:14px">
+      <div class="card"><div class="ctitle"><div class="cdot" style="background:#34d399"></div>Diário do Aluno (${diarios.length})</div>${dHtml}</div>
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <div class="ctitle" style="margin-bottom:0"><div class="cdot" style="background:#f0b429"></div>Metas</div>
+          <button class="btn bp bsm" onclick="openModal('novaMeta','${s.id}')">+ Meta</button>
+        </div>
+        ${mHtml}
+      </div>
+    </div>`;
+}
+
+function updMetaSt(sid,idx,val){
+  const s=(db.students||[]).find(x=>x.id===sid);
+  if(!s||!s.metas||!s.metas[idx])return;
+  s.metas[idx].status=val;save();toast('✓ Status atualizado!');renderApp();
+}
+window.delMeta=function(sid,idx){
+  if(!confirm('Remover meta?'))return;
+  const s=(db.students||[]).find(x=>x.id===sid);
+  if(!s||!s.metas)return;
+  s.metas.splice(idx,1);save();toast('Meta removida.');renderApp();
+};
+
+function renderPerfil(s){
+  const all=['Procrastinação','Perfeccionismo','Ansiedade','Autossabotagem','Baixa autoconfiança','Excesso de comparação','Dificuldade de organização','Impulsividade','Disciplina elevada','Consistência elevada'];
+  const mk=s.markers||[];
+  const eventos=(db.registros||[]).filter(r=>r.studentId===s.id&&r.origem==='Evento').sort((a,b)=>b.data.localeCompare(a.data));
+  return`
+    <div class="card"><div class="ctitle"><div class="cdot" style="background:#8b96ff"></div>Marcadores <span style="font-size:10px;color:var(--muted);text-transform:none;font-weight:400">(clique para ativar)</span></div>
+      <div>${all.map(m=>`<div class="mk ${mk.includes(m)?'mka':''}" onclick="toggleMk('${s.id}','${m}')">${m}</div>`).join('')}</div>
+      ${mk.length?`<div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;margin-bottom:6px">Ativos</div><div>${mk.map(m=>`<span class="badge bb_" style="margin:2px">${m}</span>`).join('')}</div></div>`:''}
+    </div>
+    <div class="card"><div class="ctitle"><div class="cdot" style="background:#f0b429"></div>Eventos Relevantes</div>
+      ${eventos.map(e=>`<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)"><div style="font-size:18px">⚡</div><div><div style="font-size:13px">${e.campos.descricao||'—'}</div><div style="font-size:11px;color:var(--muted)">${fdate(e.data)} ${e.campos.impacto?`· <span style="color:var(--a2)">${e.campos.impacto}</span>`:''}</div></div></div>`).join('')||'<div style="color:var(--muted);font-size:13px">Nenhum evento.</div>'}
+    </div>
+    <div class="card"><div class="ctitle"><div class="cdot" style="background:#34d399"></div>Dados do Perfil</div>
+      <div class="g2">
+        <div class="fg"><label>Nome</label><input type="text" value="${s.nome}" onchange="updSt('${s.id}','nome',this.value)"></div>
+        <div class="fg"><label>Objetivo</label><input type="text" value="${s.objetivo||''}" onchange="updSt('${s.id}','objetivo',this.value)"></div>
+        <div class="fg"><label>Início</label><input type="date" value="${s.inicio||today()}" onchange="updSt('${s.id}','inicio',this.value)"></div>
+        <div class="fg"><label>E-mail</label><input type="email" value="${s.email||''}" onchange="updSt('${s.id}','email',this.value)"></div>
+      </div>
+    </div>`;
+}
+
+function updSt(sid,field,val){const s=(db.students||[]).find(x=>x.id===sid);if(s){s[field]=val;save();toast('✓ Salvo');}}
+function toggleMk(sid,m){
+  const s=(db.students||[]).find(x=>x.id===sid);if(!s)return;
+  if(!s.markers)s.markers=[];
+  const i=s.markers.indexOf(m);if(i>=0)s.markers.splice(i,1);else s.markers.push(m);
+  save();renderApp();
+}
+function calcTaxa(sid){
+  const r=(db.registros||[]).filter(t=>t.studentId===sid&&t.campos&&t.campos.execucao);
+  if(!r.length)return 0;
+  return Math.round(r.filter(t=>t.campos.execucao==='Cumpriu').length/r.length*100);
+}
+
+// ══════════════════════════════════════════════
+// USUÁRIOS
+// ══════════════════════════════════════════════
+function pageUsuarios(){
+  const admins=(db.users||[]).filter(u=>u.role==='admin');
+  const alunos=(db.users||[]).filter(u=>u.role==='student');
+  return`
+    <div class="ph">
+      <div><div class="ptitle">Usuários</div></div>
+      <div style="display:flex;gap:8px">
+        <button class="btn bg2 bsm" onclick="openModal('newAdmin')">+ Admin</button>
+      </div>
+    </div>
+    <div class="card"><div class="ctitle"><div class="cdot" style="background:#5b6af5"></div>Admins</div>
+      ${admins.map(u=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)">
+        <div style="display:flex;align-items:center;gap:8px"><div class="sav" style="background:${acolor(u.nome)}22;color:${acolor(u.nome)}">${ini(u.nome)}</div><div><div style="font-weight:600">${u.nome}</div><div style="font-size:11px;color:var(--muted)">@${u.username}</div></div></div>
+        <span class="badge bb_">Admin</span>
+      </div>`).join('')}
+    </div>
+    <div class="card"><div class="ctitle"><div class="cdot" style="background:#34d399"></div>Alunos com Login</div>
+      ${alunos.map(u=>{const st=(db.students||[]).find(s=>s.userId===u.id);return`<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)">
+        <div style="display:flex;align-items:center;gap:8px"><div class="sav" style="background:${acolor(u.nome)}22;color:${acolor(u.nome)}">${ini(u.nome)}</div><div><div style="font-weight:600">${u.nome}</div><div style="font-size:11px;color:var(--muted)">@${u.username} · ${u.password}</div></div></div>
+        <span class="badge bg_">Aluno</span>
+      </div>`;}).join('')||'<div style="color:var(--muted);font-size:13px;padding:10px 0">Nenhum aluno com login.</div>'}
+    </div>`;
+}
+
+// ══════════════════════════════════════════════
+// ALUNO PAGES
+// ══════════════════════════════════════════════
+function pageAlunoInicio(){
+  const st=(db.students||[]).find(s=>s.userId===CU.id);
+  const nome=st?st.nome.split(' ')[0]:CU.nome.split(' ')[0];
+  const hoje=today();
+  const jaHoje=st&&(db.registros||[]).some(r=>r.studentId===st.id&&r.origem==='Aluno'&&r.data===hoje);
+  const total=st?(db.registros||[]).filter(r=>r.studentId===st.id&&r.origem==='Aluno').length:0;
+  const metas=st&&st.metas||[];
+  const ativas=metas.filter(m=>m.status!=='Concluída').length;
+  return`
+    <div style="max-width:600px">
+      <div style="margin-bottom:24px">
+        <div style="font-size:20px;font-weight:800">Olá, ${nome} 👋</div>
+        <div style="font-size:13px;color:var(--muted2)">${new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'})}</div>
+      </div>
+      ${!st?`<div style="background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.2);border-radius:var(--r);padding:14px;margin-bottom:16px;font-size:13px;color:var(--muted2)">⚠️ Perfil não configurado. Fale com o admin.</div>`:''}
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+        <div onclick="setPage('aluno_form')" style="background:var(--surface);border:2px solid ${jaHoje?'var(--green)':'var(--accent)'};border-radius:var(--r);padding:20px;cursor:pointer;position:relative;overflow:hidden">
+          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:${jaHoje?'var(--green)':'var(--accent)'}"></div>
+          <div style="font-size:28px;margin-bottom:10px">📝</div>
+          <div style="font-size:15px;font-weight:800;margin-bottom:4px">Diário</div>
+          <div style="font-size:12px;color:var(--muted2);margin-bottom:10px">Como foi seu dia</div>
+          ${jaHoje?`<div style="font-size:11px;font-weight:700;color:var(--green)">✓ Registrado hoje</div>`:`<div style="font-size:11px;font-weight:700;color:var(--a2)">→ Responder agora</div>`}
+          <div style="font-size:10px;color:var(--muted);margin-top:4px">${total} registro${total!==1?'s':''}</div>
+        </div>
+        <div onclick="setPage('aluno_metas')" style="background:var(--surface);border:2px solid var(--gold);border-radius:var(--r);padding:20px;cursor:pointer;position:relative;overflow:hidden">
+          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold)"></div>
+          <div style="font-size:28px;margin-bottom:10px">🎯</div>
+          <div style="font-size:15px;font-weight:800;margin-bottom:4px">Metas</div>
+          <div style="font-size:12px;color:var(--muted2);margin-bottom:10px">Seus objetivos</div>
+          <div style="font-size:11px;font-weight:700;color:var(--gold)">${ativas} ativa${ativas!==1?'s':''}</div>
+        </div>
+      </div>
+      ${total>0?`<div class="card"><div class="ctitle"><div class="cdot" style="background:#34d399"></div>Últimos Registros</div>
+        ${(db.registros||[]).filter(r=>st&&r.studentId===st.id&&r.origem==='Aluno').sort((a,b)=>b.data.localeCompare(a.data)).slice(0,3).map(r=>{
+          const d={'Muito Baixa':'br_','Baixa':'bo_','Média':'bgold_','Boa':'bg_','Excelente':'bg_'};
+          return`<div style="display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border)">
+            <div style="display:flex;gap:5px;flex-wrap:wrap"><span class="badge ${r.campos.estudou==='Sim'?'bg_':'br_'}">${r.campos.estudou==='Sim'?'✓':'✗'}</span>${r.campos.disposicao?`<span class="badge ${d[r.campos.disposicao]||'bgr_'}" style="font-size:10px">${r.campos.disposicao}</span>`:''}</div>
+            <span style="font-size:11px;color:var(--muted)">${fdate(r.data)}</span>
+          </div>`;
+        }).join('')}
+        <div style="text-align:center;margin-top:10px"><button class="btn bg2 bsm" onclick="setPage('aluno_hist')">Ver histórico →</button></div>
+      </div>`:''}
+    </div>`;
+}
+
+function pageAlunoForm(){
+  const st=(db.students||[]).find(s=>s.userId===CU.id);
+  const nome=st?st.nome.split(' ')[0]:CU.nome.split(' ')[0];
+  return`
+    <div class="ph"><div><div class="ptitle">📝 Diário</div><div class="psub">Como foi hoje, ${nome}?</div></div></div>
+    <div class="card" style="max-width:560px">
+      <div class="fg"><label>Data</label><input type="date" id="af_data" value="${today()}"></div>
+      <div style="height:1px;background:var(--border);margin:4px 0 14px"></div>
+      <div class="fg"><label>1 · Você estudou hoje?</label><div class="rg" id="rg_est"><div class="ro" onclick="selR('rg_est',this,'Sim')">✓ Sim</div><div class="ro" onclick="selR('rg_est',this,'Não')">✗ Não</div></div></div>
+      <div class="fg"><label>2 · Disposição antes de estudar</label><div class="rg" id="rg_disp">${['Muito Baixa','Baixa','Média','Boa','Excelente'].map(o=>`<div class="ro" onclick="selR('rg_disp',this,'${o}')">${o}</div>`).join('')}</div></div>
+      <div class="fg"><label>3 · Como você se sente agora?</label><textarea id="af_sent" placeholder="Descreva como está se sentindo..."></textarea></div>
+      <div class="fg"><label>4 · O que dificultou sua execução hoje?</label><textarea id="af_dif" placeholder="Cansaço, distração, falta de tempo..."></textarea></div>
+      <div class="fg"><label>5 · Qual foi sua principal vitória hoje?</label><textarea id="af_vit" placeholder="Revisei X questões, mantive foco..."></textarea></div>
+      <button class="btn bp" style="width:100%;padding:13px;font-size:15px;margin-top:4px" onclick="saveAlunoReg()">Enviar Registro</button>
+    </div>`;
+}
+
+function pageAlunoMetas(){
+  const st=(db.students||[]).find(s=>s.userId===CU.id);
+  const metas=st&&st.metas||[];
+  const hoje=today();
+  function ms(m){
+    if(m.status==='Concluída')return{l:'Concluída',c:'bg_',i:'✅'};
+    if(!m.prazo)return{l:'Em andamento',c:'bb_',i:'🔵'};
+    if(m.prazo<hoje)return{l:'Em atraso',c:'br_',i:'🔴'};
+    if((new Date(m.prazo)-new Date(hoje))/86400000<=3)return{l:'Vence em breve',c:'bgold_',i:'🟡'};
+    return{l:'Em dia',c:'bg_',i:'🟢'};
+  }
+  return`
+    <div class="ph"><div><div class="ptitle">🎯 Metas</div><div class="psub">Seus objetivos</div></div></div>
+    ${metas.length?`<div class="sgrid" style="grid-template-columns:repeat(3,1fr);max-width:400px">
+      <div class="sc"><div class="sv" style="font-size:20px">${metas.length}</div><div class="sl">Total</div></div>
+      <div class="sc"><div class="sv" style="font-size:20px;color:var(--green)">${metas.filter(m=>m.status==='Concluída').length}</div><div class="sl">Concluídas</div></div>
+      <div class="sc"><div class="sv" style="font-size:20px;color:var(--red)">${metas.filter(m=>ms(m).l==='Em atraso').length}</div><div class="sl">Atraso</div></div>
+    </div>`:''}
+    <div class="card" style="max-width:640px">
+      ${metas.length?`<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead><tr style="border-bottom:2px solid var(--border)">
+          <th style="text-align:left;padding:8px;color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase">Meta</th>
+          <th style="text-align:center;padding:8px;color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase">Prazo</th>
+          <th style="text-align:center;padding:8px;color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase">Status</th>
+        </tr></thead>
+        <tbody>${metas.map(m=>{const s=ms(m);return`<tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 8px"><div style="font-weight:600">${m.titulo}</div>${m.descricao?`<div style="font-size:11px;color:var(--muted2)">${m.descricao}</div>`:''}</td><td style="text-align:center;padding:10px 8px;color:var(--muted2);font-size:12px">${m.prazo?fdate(m.prazo):'—'}</td><td style="text-align:center;padding:10px 8px"><span class="badge ${s.c}">${s.i} ${s.l}</span></td></tr>`;}).join('')}</tbody>
+      </table></div>`:'<div class="empty"><div class="ei">🎯</div><p style="color:var(--muted2)">Nenhuma meta ainda.<br><span style="font-size:12px;color:var(--muted)">Definidas pelo coach nas sessões.</span></p></div>'}
+    </div>`;
+}
+
+function pageAlunoHist(){
+  const st=(db.students||[]).find(s=>s.userId===CU.id);
+  if(!st)return'<div class="empty"><div class="ei">⚠️</div><p>Perfil não configurado.</p></div>';
+  const recs=(db.registros||[]).filter(r=>r.studentId===st.id&&r.origem==='Aluno').sort((a,b)=>b.data.localeCompare(a.data));
+  const d={'Muito Baixa':'br_','Baixa':'bo_','Média':'bgold_','Boa':'bg_','Excelente':'bg_'};
+  return`
+    <div class="ph"><div><div class="ptitle">📚 Histórico</div></div><button class="btn bp bsm" onclick="setPage('aluno_form')">+ Registro</button></div>
+    ${recs.map(r=>`<div class="tli">
+      <div class="tlh">
+        <div style="display:flex;gap:5px"><span class="badge ${r.campos.estudou==='Sim'?'bg_':'br_'}">${r.campos.estudou==='Sim'?'✓ Estudou':'✗ Não estudou'}</span>${r.campos.disposicao?`<span class="badge ${d[r.campos.disposicao]||'bgr_'}">${r.campos.disposicao}</span>`:''}</div>
+        <span class="tld">${fdate(r.data)}</span>
+      </div>
+      ${r.campos.sentimento?`<div class="tlf"><div class="tlfl">Sentimento</div><div class="tlfv">${r.campos.sentimento}</div></div>`:''}
+      ${r.campos.dificuldade?`<div class="tlf"><div class="tlfl">Dificuldade</div><div class="tlfv">${r.campos.dificuldade}</div></div>`:''}
+      ${r.campos.vitoria?`<div class="tlf"><div class="tlfl" style="color:var(--green)">🏆 Vitória</div><div class="tlfv">${r.campos.vitoria}</div></div>`:''}
+    </div>`).join('')||'<div class="empty"><div class="ei">📭</div><p>Nenhum registro ainda.</p></div>'}`;
+}
+
+function saveAlunoReg(){
+  const st=(db.students||[]).find(s=>s.userId===CU.id);
+  if(!st){toast('Perfil não configurado. Fale com o admin.');return;}
+  if(!db.registros)db.registros=[];
+  db.registros.push({
+    id:uid(),studentId:st.id,authorId:CU.id,
+    data:document.getElementById('af_data').value||today(),
+    origem:'Aluno',quemRegistrou:CU.nome,
+    campos:{
+      estudou:RV['rg_est']||'',disposicao:RV['rg_disp']||'',
+      sentimento:gv('af_sent'),dificuldade:gv('af_dif'),vitoria:gv('af_vit')
+    }
+  });
+  save();RV={};toast('✓ Registro enviado!');setPage('aluno_inicio');
+}
+
+// ══════════════════════════════════════════════
+// MODAIS
+// ══════════════════════════════════════════════
+function openModal(type,extra,origemForce){
+  RV={};
+  document.getElementById('mo').classList.remove('hidden');
+  const box=document.getElementById('mb');
+
+  if(type==='newStudent'){
+    box.innerHTML=`
+      <div class="mtitle">👤 Novo Aluno</div>
+      <div style="background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.2);border-radius:var(--r2);padding:10px 12px;font-size:12px;color:var(--muted2);margin-bottom:14px">🔐 Login gerado automaticamente.</div>
+      <div class="fg"><label>Nome completo *</label><input type="text" id="m_nome" placeholder="João Silva"></div>
+      <div class="g2">
+        <div class="fg"><label>Objetivo</label><input type="text" id="m_obj" placeholder="TRT 2025"></div>
+        <div class="fg"><label>Início</label><input type="date" id="m_ini" value="${today()}"></div>
+      </div>
+      <div class="fg"><label>E-mail</label><input type="email" id="m_email"></div>
+      <div class="mfooter"><button class="btn bg2" onclick="closeModal()">Cancelar</button><button class="btn bp" onclick="saveNewStudent()">Criar Aluno</button></div>`;
+    return;
+  }
+
+  if(type==='editStudent'){
+    const s=(db.students||[]).find(x=>x.id===extra);if(!s)return;
+    box.innerHTML=`
+      <div class="mtitle">✏️ Editar — ${s.nome}</div>
+      <div class="fg"><label>Nome *</label><input type="text" id="e_nome" value="${s.nome}"></div>
+      <div class="g2">
+        <div class="fg"><label>Objetivo</label><input type="text" id="e_obj" value="${s.objetivo||''}"></div>
+        <div class="fg"><label>Início</label><input type="date" id="e_ini" value="${s.inicio||today()}"></div>
+      </div>
+      <div class="fg"><label>E-mail</label><input type="email" id="e_email" value="${s.email||''}"></div>
+      <div class="mfooter"><button class="btn bg2" onclick="closeModal()">Cancelar</button><button class="btn bp" onclick="saveEditStudent('${extra}')">Salvar</button></div>`;
+    return;
+  }
+
+  if(type==='registro'){
+    const opts=(db.students||[]).map(s=>`<option value="${s.nome}">`).join('');
+    box.innerHTML=`
+      <div class="mtitle">➕ Novo Registro</div>
+      <div class="g2">
+        <div class="fg"><label>Aluno *</label><input type="text" id="m_aluno" list="alList" autocomplete="off" placeholder="Nome do aluno"><datalist id="alList">${opts}</datalist></div>
+        <div class="fg"><label>Data *</label><input type="date" id="m_data" value="${today()}"></div>
+      </div>
+      <div class="g2">
+        <div class="fg"><label>Quem registrou *</label><input type="text" id="m_quem" value="${CU?CU.nome:''}"></div>
+        <div class="fg"><label>Tipo *</label><div class="rg" id="rg_orig">
+          <div class="ro" onclick="selR('rg_orig',this,'WhatsApp');showOF('WhatsApp')">📱 WhatsApp</div>
+          <div class="ro" onclick="selR('rg_orig',this,'Sessão');showOF('Sessão')">🎯 Sessão</div>
+          <div class="ro" onclick="selR('rg_orig',this,'Evento');showOF('Evento')">⚡ Evento</div>
+        </div></div>
+      </div>
+      <div id="origF"></div>
+      <div class="mfooter"><button class="btn bg2" onclick="closeModal()">Cancelar</button><button class="btn bp" onclick="saveRegistro()">Salvar</button></div>`;
+    if(origemForce){const el=document.querySelector(`#rg_orig .ro[onclick*="${origemForce}"]`);if(el){selR('rg_orig',el,origemForce);showOF(origemForce);}}
+    if(CSid){const s=(db.students||[]).find(x=>x.id===CSid);if(s)document.getElementById('m_aluno').value=s.nome;}
+    return;
+  }
+
+  if(type==='editRegistro'){
+    const r=(db.registros||[]).find(x=>x.id===extra);if(!r)return;
+    const c=r.campos||{};
+    let fh='';
+    if(r.origem==='WhatsApp'){
+      if(c.execucao)RV['rg_exec']=c.execucao;
+      if(c.engajamento)RV['rg_eng']=c.engajamento;
+      if(c.intervencao)RV['rg_int']=c.intervencao;
+      fh=`<div class="fg"><label>Execução</label><div class="rg" id="rg_exec">${['Cumpriu','Cumpriu Parcialmente','Não Cumpriu','Reprogramou','Não Respondeu'].map(o=>`<div class="ro ${c.execucao===o?execSC(o):''}" onclick="selR('rg_exec',this,'${o.replace(/'/g,"\\'")}')"> ${o}</div>`).join('')}</div></div>
+        <div class="fg"><label>Engajamento</label><div class="rg" id="rg_eng">${['Alto','Médio','Baixo'].map(o=>`<div class="ro ${c.engajamento===o?(o==='Alto'?'sg':o==='Médio'?'sgold':'sr'):''}" onclick="selR('rg_eng',this,'${o}')">${o}</div>`).join('')}</div></div>
+        <div class="fg"><label>Observação</label><textarea id="f_obs">${c.observacao||''}</textarea></div>
+        <div class="fg"><label>Intervenção</label><div class="rg" id="rg_int">${['Incentivo','Elogio','Reorganização','Cobrança','Encaminhamento'].map(o=>`<div class="ro ${c.intervencao===o?'sb':''}" onclick="selR('rg_int',this,'${o}')">${o}</div>`).join('')}</div></div>`;
+    } else if(r.origem==='Sessão'){
+      if(c.execucao)RV['rg_exec']=c.execucao;
+      fh=`<div class="fg"><label>Resumo</label><textarea id="f_resumo">${c.resumo||''}</textarea></div>
+        <div class="g2"><div class="fg"><label>Dificuldades</label><textarea id="f_dif">${c.dificuldades||''}</textarea></div><div class="fg"><label>Avanços</label><textarea id="f_av">${c.avancos||''}</textarea></div></div>
+        <div class="g2"><div class="fg"><label>Meta</label><input type="text" id="f_meta" value="${c.meta||''}"></div><div class="fg"><label>Próximo</label><input type="text" id="f_prox" value="${c.proximo||''}"></div></div>
+        <div class="fg"><label>Execução</label><div class="rg" id="rg_exec">${['Cumpriu','Cumpriu Parcialmente','Não Cumpriu','Reprogramou','Não Respondeu'].map(o=>`<div class="ro ${c.execucao===o?execSC(o):''}" onclick="selR('rg_exec',this,'${o.replace(/'/g,"\\'")}')"> ${o}</div>`).join('')}</div></div>
+        <div class="fg"><label>Obs estratégicas</label><textarea id="f_obs">${c.observacao||''}</textarea></div>`;
+    } else if(r.origem==='Evento'){
+      if(c.impacto)RV['rg_imp']=c.impacto;
+      fh=`<div class="fg"><label>Descrição *</label><textarea id="f_desc">${c.descricao||''}</textarea></div>
+        <div class="fg"><label>Impacto</label><div class="rg" id="rg_imp">${['Positivo','Negativo','Neutro','Incerto'].map(o=>`<div class="ro ${c.impacto===o?(o==='Positivo'?'sg':o==='Negativo'?'sr':o==='Incerto'?'sgold':'sgr'):''}" onclick="selR('rg_imp',this,'${o}')">${o}</div>`).join('')}</div></div>`;
+    }
+    box.innerHTML=`<div class="mtitle">✏️ Editar · ${r.origem}</div>
+      <div class="g2"><div class="fg"><label>Data</label><input type="date" id="e_rdata" value="${r.data}"></div><div class="fg"><label>Quem registrou</label><input type="text" id="e_rquem" value="${r.quemRegistrou||''}"></div></div>
+      ${fh}
+      <div class="mfooter"><button class="btn bg2" onclick="closeModal()">Cancelar</button><button class="btn bp" onclick="saveEditReg('${extra}')">Salvar</button></div>`;
+    return;
+  }
+
+  if(type==='novaMeta'){
+    box.innerHTML=`<div class="mtitle">🎯 Nova Meta</div>
+      <div class="fg"><label>Título *</label><input type="text" id="m_titulo" placeholder="Ex: Concluir módulo X..."></div>
+      <div class="fg"><label>Descrição</label><textarea id="m_desc" style="min-height:60px" placeholder="Detalhes..."></textarea></div>
+      <div class="g2"><div class="fg"><label>Prazo</label><input type="date" id="m_prazo"></div><div class="fg"><label>Status</label><select id="m_status"><option value="Pendente">Pendente</option><option value="Em andamento">Em andamento</option></select></div></div>
+      <div class="mfooter"><button class="btn bg2" onclick="closeModal()">Cancelar</button><button class="btn bp" onclick="saveMeta('${extra}')">Criar</button></div>`;
+    return;
+  }
+
+  if(type==='newAdmin'){
+    box.innerHTML=`<div class="mtitle">🔐 Novo Admin</div>
+      <div class="fg"><label>Nome *</label><input type="text" id="m_nome"></div>
+      <div class="g2"><div class="fg"><label>Usuário *</label><input type="text" id="m_user" autocapitalize="none"></div><div class="fg"><label>Senha *</label><input type="text" id="m_pass"></div></div>
+      <div class="mfooter"><button class="btn bg2" onclick="closeModal()">Cancelar</button><button class="btn bp" onclick="saveNewAdmin()">Criar</button></div>`;
+    return;
+  }
+}
+
+function showOF(orig){
+  const el=document.getElementById('origF');if(!el)return;
+  if(orig==='WhatsApp'){el.innerHTML=`
+    <div class="fg"><label>Execução</label><div class="rg" id="rg_exec">${['Cumpriu','Cumpriu Parcialmente','Não Cumpriu','Reprogramou','Não Respondeu'].map(o=>`<div class="ro" onclick="selR('rg_exec',this,'${o.replace(/'/g,"\\'")}')">${o}</div>`).join('')}</div></div>
+    <div class="fg"><label>Engajamento</label><div class="rg" id="rg_eng">${['Alto','Médio','Baixo'].map(o=>`<div class="ro" onclick="selR('rg_eng',this,'${o}')">${o}</div>`).join('')}</div></div>
+    <div class="fg"><label>Observação</label><textarea id="f_obs" placeholder="Relato livre..."></textarea></div>
+    <div class="fg"><label>Intervenção</label><div class="rg" id="rg_int">${['Incentivo','Elogio','Reorganização','Cobrança','Encaminhamento'].map(o=>`<div class="ro" onclick="selR('rg_int',this,'${o}')">${o}</div>`).join('')}</div></div>`;}
+  else if(orig==='Sessão'){el.innerHTML=`
+    <div class="fg"><label>Resumo</label><textarea id="f_resumo" placeholder="O que foi discutido..."></textarea></div>
+    <div class="g2"><div class="fg"><label>Dificuldades</label><textarea id="f_dif"></textarea></div><div class="fg"><label>Avanços</label><textarea id="f_av"></textarea></div></div>
+    <div class="g2"><div class="fg"><label>Meta definida</label><input type="text" id="f_meta"></div><div class="fg"><label>Próximo objetivo</label><input type="text" id="f_prox"></div></div>
+    <div class="fg"><label>Execução</label><div class="rg" id="rg_exec">${['Cumpriu','Cumpriu Parcialmente','Não Cumpriu','Reprogramou','Não Respondeu'].map(o=>`<div class="ro" onclick="selR('rg_exec',this,'${o.replace(/'/g,"\\'")}')">${o}</div>`).join('')}</div></div>
+    <div class="fg"><label>Obs estratégicas</label><textarea id="f_obs"></textarea></div>`;}
+  else if(orig==='Evento'){el.innerHTML=`
+    <div class="fg"><label>Descrição *</label><textarea id="f_desc" placeholder="Ex: demissão, aprovação..."></textarea></div>
+    <div class="fg"><label>Impacto</label><div class="rg" id="rg_imp">${['Positivo','Negativo','Neutro','Incerto'].map(o=>`<div class="ro" onclick="selR('rg_imp',this,'${o}')">${o}</div>`).join('')}</div></div>`;}
+}
+
+function saveNewStudent(){
+  const nome=gv('m_nome');if(!nome){alert('Nome obrigatório!');return;}
+  // Auto login
+  const base=nome.split(' ')[0].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');
+  const pin=String(Math.floor(1000+Math.random()*9000));
+  let u=base;let c=1;
+  while((db.users||[]).find(x=>x.username===u)){u=base+c;c++;}
+  if(!db.users)db.users=[];
+  const nid=uid();
+  db.users.push({id:nid,username:u,password:pin,role:'student',nome});
+  if(!db.students)db.students=[];
+  const s={id:uid(),nome,objetivo:gv('m_obj'),inicio:gv('m_ini')||today(),email:gv('m_email'),markers:[],metas:[],userId:nid};
+  db.students.push(s);
+  save();closeModal();
+  toast(`✓ Criado! Login: ${u} / Senha: ${pin}`);
+  CSid=s.id;CP='projeto';window._pt='timeline';renderApp();
+}
+
+function saveEditStudent(sid){
+  const s=(db.students||[]).find(x=>x.id===sid);if(!s)return;
+  const nome=gv('e_nome');if(!nome){alert('Nome obrigatório!');return;}
+  s.nome=nome;s.objetivo=gv('e_obj');s.inicio=gv('e_ini');s.email=gv('e_email');
+  if(s.userId){const u=(db.users||[]).find(x=>x.id===s.userId);if(u)u.nome=nome;}
+  save();closeModal();toast('✓ Atualizado!');renderApp();
+}
+
+function saveRegistro(){
+  const nomeAluno=document.getElementById('m_aluno')?.value.trim();
+  const origem=RV['rg_orig'];
+  const quem=gv('m_quem');
+  if(!nomeAluno){toast('Informe o aluno!');return;}
+  if(!origem){toast('Selecione o tipo!');return;}
+  if(!quem){toast('Informe quem registrou!');return;}
+  let s=(db.students||[]).find(x=>x.nome.toLowerCase()===nomeAluno.toLowerCase());
+  if(!s){s={id:uid(),nome:nomeAluno,objetivo:'',inicio:today(),markers:[],metas:[],userId:null};if(!db.students)db.students=[];db.students.push(s);toast(`Aluno "${nomeAluno}" criado.`);}
+  let campos={};
+  if(origem==='WhatsApp')campos={execucao:RV['rg_exec']||'',engajamento:RV['rg_eng']||'',observacao:gv('f_obs'),intervencao:RV['rg_int']||''};
+  else if(origem==='Sessão')campos={resumo:gv('f_resumo'),dificuldades:gv('f_dif'),avancos:gv('f_av'),meta:gv('f_meta'),proximo:gv('f_prox'),execucao:RV['rg_exec']||'',observacao:gv('f_obs')};
+  else if(origem==='Evento'){const d=gv('f_desc');if(!d){toast('Descrição obrigatória!');return;}campos={descricao:d,impacto:RV['rg_imp']||''};}
+  if(!db.registros)db.registros=[];
+  db.registros.push({id:uid(),studentId:s.id,authorId:CU?CU.id:'',data:gv('m_data')||today(),origem,quemRegistrou:quem,campos});
+  save();closeModal();toast('✓ Registro salvo!');CSid=s.id;CP='projeto';window._pt='timeline';renderApp();
+}
+
+function saveEditReg(rid){
+  const r=(db.registros||[]).find(x=>x.id===rid);if(!r)return;
+  r.data=gv('e_rdata')||r.data;r.quemRegistrou=gv('e_rquem')||r.quemRegistrou;
+  if(r.origem==='WhatsApp'){r.campos.execucao=RV['rg_exec']||r.campos.execucao;r.campos.engajamento=RV['rg_eng']||r.campos.engajamento;r.campos.observacao=gv('f_obs');r.campos.intervencao=RV['rg_int']||r.campos.intervencao;}
+  else if(r.origem==='Sessão'){r.campos.resumo=gv('f_resumo');r.campos.dificuldades=gv('f_dif');r.campos.avancos=gv('f_av');r.campos.meta=gv('f_meta');r.campos.proximo=gv('f_prox');r.campos.execucao=RV['rg_exec']||r.campos.execucao;r.campos.observacao=gv('f_obs');}
+  else if(r.origem==='Evento'){const d=gv('f_desc');if(!d){alert('Descrição obrigatória!');return;}r.campos.descricao=d;r.campos.impacto=RV['rg_imp']||r.campos.impacto;}
+  save();closeModal();toast('✓ Registro atualizado!');renderApp();
+}
+
+function saveMeta(sid){
+  const titulo=gv('m_titulo');if(!titulo){alert('Título obrigatório!');return;}
+  const s=(db.students||[]).find(x=>x.id===sid);if(!s)return;
+  if(!s.metas)s.metas=[];
+  s.metas.push({titulo,descricao:gv('m_desc'),prazo:gv('m_prazo')||null,status:gv('m_status')||'Pendente'});
+  save();closeModal();toast('✓ Meta criada!');renderApp();
+}
+
+function saveNewAdmin(){
+  const nome=gv('m_nome'),user=gv('m_user').toLowerCase(),pass=gv('m_pass');
+  if(!nome||!user||!pass){alert('Todos os campos são obrigatórios!');return;}
+  if((db.users||[]).find(u=>u.username===user)){alert('Usuário já existe!');return;}
+  if(!db.users)db.users=[];
+  db.users.push({id:uid(),username:user,password:pass,role:'admin',nome});
+  save();closeModal();toast('✓ Admin criado!');renderApp();
+}
+
+function closeModal(){document.getElementById('mo').classList.add('hidden');RV={};}
+function closeModalOutside(e){if(e.target===document.getElementById('mo'))closeModal();}
+
+// ══════════════════════════════════════════════
+// RADIO
+// ══════════════════════════════════════════════
+const RC={'Cumpriu':'sg','Cumpriu Parcialmente':'so','Não Cumpriu':'sr','Reprogramou':'sgold','Não Respondeu':'sgr','Alto':'sg','Médio':'sgold','Baixo':'sr','Sim':'sg','Não':'sr','Muito Baixa':'sr','Baixa':'so','Média':'sgold','Boa':'sg','Excelente':'sg','Incentivo':'sb','Elogio':'sg','Reorganização':'sb','Cobrança':'so','Encaminhamento':'sb','Positivo':'sg','Negativo':'sr','Neutro':'sgr','Incerto':'sgold','WhatsApp':'sg','Sessão':'sb','Evento':'sgold'};
+function selR(gid,el,val){document.querySelectorAll(`#${gid} .ro`).forEach(o=>{o.className='ro';});RV[gid]=val;el.classList.add(RC[val]||'sb');}
+function execSC(v){return{'Cumpriu':'sg','Cumpriu Parcialmente':'so','Não Cumpriu':'sr','Reprogramou':'sgold','Não Respondeu':'sgr'}[v]||'';}
+
+// ══════════════════════════════════════════════
+// AI ANALYSIS
+// ══════════════════════════════════════════════
+function formatAI(txt){
+  return txt.replace(/#{1,3}\s*/g,'').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'$1')
+    .split('\n').map(l=>{const t=l.trim();if(!t)return'<div style="height:5px"></div>';if(/^[📊📈⚠️🧠🎯✅❌🔴🟡🟢]\s/.test(t))return`<div style="font-weight:700;color:var(--a2);margin-top:12px;margin-bottom:3px">${t}</div>`;return`<div style="margin-bottom:2px">${t}</div>`;}).join('');
+}
+
+async function gerarAnalise(sid){
+  const s=(db.students||[]).find(x=>x.id===sid);if(!s)return;
+  const recs=(db.registros||[]).filter(r=>r.studentId===sid);
+  if(recs.length<2){toast('Adicione mais registros antes.');return;}
+
+  const mR=recs.filter(r=>r.origem==='WhatsApp').slice(-14).map(r=>`[${r.data}] Exec:${r.campos.execucao||'—'} Eng:${r.campos.engajamento||'—'} Obs:${r.campos.observacao||'—'}`).join('\n');
+  const sR=recs.filter(r=>r.origem==='Sessão').slice(-5).map(r=>`[${r.data}] ${r.campos.resumo||'—'} | Dif:${r.campos.dificuldades||'—'} | Av:${r.campos.avancos||'—'}`).join('\n');
+  const aR=recs.filter(r=>r.origem==='Aluno').slice(-14).map(r=>`[${r.data}] Estudou:${r.campos.estudou||'—'} Disp:${r.campos.disposicao||'—'} Sent:"${r.campos.sentimento||'—'}" Dif:"${r.campos.dificuldade||'—'}" Vit:"${r.campos.vitoria||'—'}"`).join('\n');
+  const ev=recs.filter(r=>r.origem==='Evento').map(r=>`[${r.data}] ${r.campos.descricao||'—'} (${r.campos.impacto||'—'})`).join('\n');
+
+  const prompt=`Você é um analista comportamental especialista em coaching educacional. Analise os dados abaixo e gere um relatório comportamental semanal.
+
+ALUNO: ${s.nome}
+OBJETIVO: ${s.objetivo||'—'}
+MARCADORES ATIVOS: ${(s.markers||[]).join(', ')||'Nenhum'}
+
+── REGISTROS MAÍSA/WHATSAPP ──
+${mR||'Sem registros'}
+
+── SESSÕES DE COACHING ──
+${sR||'Sem sessões'}
+
+── AUTO-REGISTROS DO ALUNO ──
+${aR||'Sem registros'}
+
+── EVENTOS RELEVANTES ──
+${ev||'Nenhum'}
+
+Gere o relatório neste formato:
+
+📊 RESUMO DA SEMANA
+[2-3 frases sobre o estado geral]
+
+📈 EVOLUÇÃO IDENTIFICADA
+[melhorias concretas observadas]
+
+⚠️ PADRÕES DE ATENÇÃO
+[padrões negativos ou de risco]
+
+🧠 ANÁLISE COMPORTAMENTAL
+[interpretação psicológica baseada nos dados]
+
+🎯 RECOMENDAÇÕES PARA A PRÓXIMA SEMANA
+1. [ação específica]
+2. [ação específica]
+3. [ação específica]`;
+
+  // Mostra loading
+  document.getElementById('mo').classList.remove('hidden');
+  const box=document.getElementById('mb');
+  box.innerHTML=`
+    <div class="mtitle">🤖 Gerando Análise — ${s.nome}</div>
+    <div style="padding:40px;text-align:center;color:var(--muted2)">
+      <div><span class="spin"></span> Analisando dados comportamentais...</div>
+      <div style="font-size:12px;margin-top:12px;color:var(--muted)">Isso pode levar alguns segundos</div>
+    </div>`;
+
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'x-api-key':'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',
+        'anthropic-version':'2023-06-01',
+        'anthropic-dangerous-direct-browser-access':'true'
+      },
+      body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:1200,messages:[{role:'user',content:prompt}]})
+    });
+    if(!res.ok){const e=await res.text();throw new Error(e);}
+    const data=await res.json();
+    const txt=data.content?.map(b=>b.text||'').join('')||'Sem resposta.';
+    salvarAnaliseTexto(sid,txt);
+  }catch(e){
+    console.error(e);
+    // Tenta via função Netlify como fallback
+    try{
+      const res2=await fetch('/.netlify/functions/analise',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:1200,messages:[{role:'user',content:prompt}]})
+      });
+      const data2=await res2.json();
+      const txt2=data2.texto||'';
+      if(txt2&&txt2!=='Sem resposta.'){salvarAnaliseTexto(sid,txt2);return;}
+    }catch(e2){console.error(e2);}
+    box.innerHTML=`
+      <div class="mtitle">🤖 Análise — ${s.nome}</div>
+      <div style="background:rgba(240,180,41,.07);border:1px solid rgba(240,180,41,.2);border-radius:var(--r);padding:12px 14px;margin-bottom:14px;font-size:12px;color:var(--muted2)">
+        Cole o prompt no Claude.ai e cole a resposta abaixo.
+      </div>
+      <button class="btn bp" style="width:100%;margin-bottom:14px" onclick="copiarPromptAI(${JSON.stringify(prompt)})">📋 Copiar Prompt</button>
+      <div class="fg"><label>Cole a resposta aqui</label>
+        <textarea id="ai_resposta" style="min-height:180px" placeholder="Cole a análise..."></textarea>
+      </div>
+      <div class="mfooter">
+        <button class="btn bg2" onclick="closeModal()">Cancelar</button>
+        <button class="btn bp" onclick="salvarAnaliseManual('${sid}')">Salvar</button>
+      </div>`;
+  }
+  }
+}
+
+function salvarAnaliseTexto(sid,txt){
+  if(!db.analises)db.analises=[];
+  db.analises.push({id:uid(),studentId:sid,geradoEm:new Date().toISOString(),conteudo:txt});
+  save();closeModal();toast('✓ Análise gerada!');window._pt='evolucao';renderApp();
+}
+
+function copiarPromptAI(prompt){
+  navigator.clipboard.writeText(prompt).then(()=>{
+    toast('✓ Prompt copiado! Cole no Claude.ai');
+  }).catch(()=>{
+    const ta=document.createElement('textarea');
+    ta.value=prompt;ta.style.position='fixed';ta.style.opacity='0';
+    document.body.appendChild(ta);ta.focus();ta.select();
+    try{document.execCommand('copy');toast('✓ Copiado!');}catch(e){toast('Copie manualmente.');}
+    document.body.removeChild(ta);
+  });
+}
+
+function salvarAnaliseManual(sid){
+  const txt=document.getElementById('ai_resposta')?.value.trim();
+  if(!txt){alert('Cole a resposta antes de salvar.');return;}
+  salvarAnaliseTexto(sid,txt);
+}
+
+// ══════════════════════════════════════════════
+// DEMO + INIT
+// ══════════════════════════════════════════════
+(function ensureDemo(){
+  if(!(db.users||[]).find(u=>u.username==='aluno.demo')){
+    if(!db.users)db.users=[];
+    db.users.push({id:'u_demo',username:'aluno.demo',password:'demo123',role:'student',nome:'Aluno Demo'});
+    if(!db.students)db.students=[];
+    if(!(db.students||[]).find(s=>s.userId==='u_demo'))
+      db.students.push({id:'s_demo',nome:'Aluno Demo',objetivo:'Perfil de teste',inicio:today(),markers:[],metas:[],userId:'u_demo'});
+    saveLocal();
+  }
+})();
+
+// Inicia sync (Firebase se configurado, senão só local)
+initSync();
+
+document.getElementById('lu').focus();
+</script>
+</body>
+</html>
