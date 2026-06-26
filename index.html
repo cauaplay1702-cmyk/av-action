@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -24,12 +23,10 @@ button{cursor:pointer;touch-action:manipulation;}
 .lbox{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:36px 28px;width:100%;max-width:380px;}
 .llogo{font-size:26px;font-weight:800;color:var(--a2);margin-bottom:4px;}
 .lsub{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:28px;}
-.lbox input{width:100%;background:var(--s2);border:1px solid var(--border);border-radius:var(--r2);padding:13px 14px;color:var(--text);outline:none;margin-bottom:10px;transition:border-color .15s;}
+.lbox input{width:100%;background:var(--s2);border:1px solid var(--border);border-radius:var(--r2);padding:13px 14px;color:var(--text);outline:none;margin-bottom:10px;}
 .lbox input:focus{border-color:var(--accent);}
-.lbox .lbtn{width:100%;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:var(--r2);font-size:15px;font-weight:600;}
-.lbox .lbtn:active{background:#4a58e0;}
+.lbtn{width:100%;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:var(--r2);font-size:15px;font-weight:600;}
 .lerr{color:var(--red);font-size:13px;margin-top:8px;text-align:center;}
-.lsync{color:var(--a2);font-size:12px;margin-top:10px;text-align:center;}
 
 /* APP */
 #app{display:none;flex-direction:column;height:100vh;height:100dvh;}
@@ -41,25 +38,20 @@ button{cursor:pointer;touch-action:manipulation;}
 .r-student{background:rgba(52,211,153,.15);color:var(--green);}
 .tname{font-size:13px;font-weight:600;max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .blogout{background:transparent;border:1px solid var(--border);color:var(--muted2);padding:5px 10px;border-radius:var(--r2);font-size:12px;}
-.blogout:active{border-color:var(--red);color:var(--red);}
 
-/* MOBILE NAV - bottom bar for student */
-.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border);z-index:60;padding:4px 0 env(safe-area-inset-bottom);}
-.bottom-nav-inner{display:flex;}
-.bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px;color:var(--muted2);font-size:10px;font-weight:600;cursor:pointer;border:none;background:none;}
-.bnav-item.act{color:var(--a2);}
-.bnav-icon{font-size:20px;}
+/* NOTIF BADGE */
+.notif-badge{background:var(--red);color:#fff;border-radius:50%;width:18px;height:18px;font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;margin-left:4px;}
 
 /* BODY */
 .abody{display:flex;flex:1;overflow:hidden;}
 .sidebar{width:230px;min-width:230px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;}
 .ssec{padding:14px 14px 4px;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:600;}
-.nitem{display:flex;align-items:center;gap:9px;padding:10px 12px;margin:1px 8px;border-radius:var(--r2);cursor:pointer;color:var(--muted2);font-size:13px;font-weight:500;transition:background .1s;user-select:none;border:none;background:none;width:calc(100% - 16px);text-align:left;}
-.nitem:active,.nitem:hover{background:var(--s2);color:var(--text);}
+.nitem{display:flex;align-items:center;gap:9px;padding:10px 12px;margin:1px 8px;border-radius:var(--r2);cursor:pointer;color:var(--muted2);font-size:13px;font-weight:500;border:none;background:none;width:calc(100% - 16px);text-align:left;}
+.nitem:hover{background:var(--s2);color:var(--text);}
 .nitem.act{background:rgba(91,106,245,.15);color:var(--a2);font-weight:600;}
 .sav{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
-.stnav{margin:1px 8px;padding:8px 10px;border-radius:var(--r2);cursor:pointer;display:flex;align-items:center;gap:8px;transition:background .1s;border:none;background:none;width:calc(100% - 16px);text-align:left;}
-.stnav:active,.stnav:hover{background:var(--s2);}
+.stnav{margin:1px 8px;padding:8px 10px;border-radius:var(--r2);cursor:pointer;display:flex;align-items:center;gap:8px;border:none;background:none;width:calc(100% - 16px);text-align:left;}
+.stnav:hover{background:var(--s2);}
 .stnav.act{background:rgba(91,106,245,.12);}
 .stn{font-size:13px;font-weight:500;color:var(--text);}
 .stm{font-size:11px;color:var(--muted);}
@@ -67,6 +59,14 @@ button{cursor:pointer;touch-action:manipulation;}
 /* CONTENT */
 .content{flex:1;overflow-y:auto;padding:20px 16px;padding-bottom:80px;}
 @media(min-width:601px){.content{padding:24px 28px;padding-bottom:24px;}}
+
+/* BOTTOM NAV */
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border);z-index:60;padding:4px 0 env(safe-area-inset-bottom);}
+.bottom-nav-inner{display:flex;}
+.bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px;color:var(--muted2);font-size:10px;font-weight:600;border:none;background:none;position:relative;}
+.bnav-item.act{color:var(--a2);}
+.bnav-icon{font-size:20px;}
+@media(max-width:600px){.bottom-nav{display:block;}.sidebar{display:none;}}
 
 /* CARDS */
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:14px;}
@@ -79,17 +79,23 @@ button{cursor:pointer;touch-action:manipulation;}
 /* FORMS */
 .fg{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
 label{font-size:11px;font-weight:700;color:var(--muted2);text-transform:uppercase;letter-spacing:.6px;}
-input[type=text],input[type=date],input[type=password],input[type=email],textarea,select{background:var(--s2);border:1px solid var(--border);border-radius:var(--r2);padding:11px 12px;color:var(--text);font-size:14px;outline:none;transition:border-color .15s;width:100%;}
+input[type=text],input[type=date],input[type=password],input[type=email],textarea,select{background:var(--s2);border:1px solid var(--border);border-radius:var(--r2);padding:11px 12px;color:var(--text);font-size:14px;outline:none;width:100%;}
 input:focus,textarea:focus,select:focus{border-color:var(--accent);}
-textarea{resize:vertical;min-height:80px;}
+textarea{resize:vertical;min-height:70px;}
 select option{background:var(--s2);}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 @media(max-width:500px){.g2{grid-template-columns:1fr;}}
 
+/* EMOJI PICKER */
+.emoji-row{display:flex;gap:8px;justify-content:center;margin:8px 0;}
+.emoji-opt{width:48px;height:48px;border-radius:50%;border:2px solid var(--border);background:var(--s2);cursor:pointer;font-size:24px;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.emoji-opt:hover{border-color:var(--accent);transform:scale(1.1);}
+.emoji-opt.sel{border-color:var(--accent);background:rgba(91,106,245,.2);transform:scale(1.15);}
+
 /* RADIO */
 .rg{display:flex;flex-wrap:wrap;gap:7px;}
-.ro{padding:8px 14px;border-radius:20px;border:1px solid var(--border);cursor:pointer;font-size:13px;color:var(--muted2);user-select:none;white-space:nowrap;transition:all .1s;}
-.ro:active,.ro:hover{border-color:var(--accent);color:var(--text);}
+.ro{padding:8px 14px;border-radius:20px;border:1px solid var(--border);cursor:pointer;font-size:13px;color:var(--muted2);user-select:none;white-space:nowrap;}
+.ro:hover{border-color:var(--accent);color:var(--text);}
 .sg{background:rgba(52,211,153,.15);border-color:var(--green);color:var(--green);}
 .so{background:rgba(251,146,60,.15);border-color:var(--orange);color:var(--orange);}
 .sr{background:rgba(248,113,113,.15);border-color:var(--red);color:var(--red);}
@@ -98,13 +104,13 @@ select option{background:var(--s2);}
 .sb{background:rgba(91,106,245,.15);border-color:var(--a2);color:var(--a2);}
 
 /* BTNS */
-.btn{padding:10px 16px;border-radius:var(--r2);border:none;font-size:13px;font-weight:600;transition:opacity .1s;touch-action:manipulation;}
-.btn:active{opacity:.8;}
+.btn{padding:10px 16px;border-radius:var(--r2);border:none;font-size:13px;font-weight:600;touch-action:manipulation;cursor:pointer;}
 .bp{background:var(--accent);color:#fff;}
 .bg2{background:var(--s2);color:var(--muted2);border:1px solid var(--border);}
-.bg2:active,.bg2:hover{color:var(--text);border-color:var(--accent);}
+.bg2:hover{color:var(--text);border-color:var(--accent);}
 .bd{background:rgba(248,113,113,.1);color:var(--red);border:1px solid rgba(248,113,113,.2);}
 .bgold{background:rgba(240,180,41,.1);color:var(--gold);border:1px solid rgba(240,180,41,.2);}
+.bgreen{background:rgba(52,211,153,.1);color:var(--green);border:1px solid rgba(52,211,153,.2);}
 .bsm{padding:6px 11px;font-size:12px;}
 
 /* BADGES */
@@ -116,6 +122,31 @@ select option{background:var(--s2);}
 .bgr_{background:rgba(107,114,128,.2);color:var(--muted2);}
 .bb_{background:rgba(91,106,245,.15);color:var(--a2);}
 
+/* PROGRESS BAR */
+.prog-wrap{background:var(--s3);border-radius:8px;height:10px;overflow:hidden;margin:6px 0;}
+.prog-fill{height:100%;border-radius:8px;transition:width .6s ease;}
+
+/* FASES */
+.fase-card{background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:8px;}
+.fase-card.ativa{border-color:var(--accent);background:rgba(91,106,245,.08);}
+.fase-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
+
+/* CONQUISTAS */
+.conquista-card{background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:14px;display:flex;align-items:center;gap:12px;margin-bottom:8px;}
+.conquista-card.desbloqueada{border-color:var(--gold);background:rgba(240,180,41,.06);}
+.conquista-icon{font-size:28px;flex-shrink:0;}
+.conquista-locked{filter:grayscale(1);opacity:.4;}
+
+/* TIMELINE */
+.tl-dia{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);}
+.tl-dia-avatar{width:36px;height:36px;border-radius:50%;background:var(--s2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;border:2px solid var(--border);}
+.tl-dia-avatar.validado{border-color:var(--green);}
+.tl-dia-avatar.rejeitado{border-color:var(--red);}
+.tl-dia-avatar.pendente{border-color:var(--gold);}
+
+/* VALIDAÇÃO */
+.validar-card{background:rgba(240,180,41,.07);border:1px solid rgba(240,180,41,.25);border-radius:var(--r);padding:14px;margin-bottom:10px;}
+
 /* STATS */
 .sgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px;}
 @media(min-width:500px){.sgrid{grid-template-columns:repeat(4,1fr);}}
@@ -123,30 +154,17 @@ select option{background:var(--s2);}
 .sv{font-size:24px;font-weight:800;}
 .sl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-top:2px;}
 
-/* TIMELINE */
-.tli{background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:10px;}
-.tlh{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;gap:8px;flex-wrap:wrap;}
-.tld{font-size:11px;color:var(--muted);}
-.tlf{margin-top:8px;}
-.tlfl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;font-weight:600;margin-bottom:2px;}
-.tlfv{font-size:13px;color:var(--muted2);}
-
-/* BARS */
-.bw{margin:6px 0;}
-.bl{display:flex;justify-content:space-between;font-size:12px;color:var(--muted2);margin-bottom:3px;}
-.bt{background:var(--s3);border-radius:4px;height:8px;overflow:hidden;}
-.bf{height:100%;border-radius:4px;transition:width .5s;}
-
-/* MARKERS */
-.mk{padding:5px 11px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--border);color:var(--muted2);transition:all .1s;user-select:none;display:inline-block;margin:3px;}
-.mk.mka{background:rgba(91,106,245,.2);border-color:var(--a2);color:var(--a2);}
-
 /* AI */
-.aibox{background:linear-gradient(135deg,rgba(91,106,245,.08),rgba(139,150,255,.03));border:1px solid rgba(91,106,245,.2);border-radius:var(--r);padding:16px;margin-bottom:12px;}
+.aibox{background:linear-gradient(135deg,rgba(91,106,245,.08),transparent);border:1px solid rgba(91,106,245,.2);border-radius:var(--r);padding:16px;margin-bottom:12px;}
 .aititle{font-size:11px;font-weight:700;color:var(--a2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;}
-.aitxt{font-size:13px;color:var(--text);line-height:1.8;white-space:pre-wrap;}
+.aitxt{font-size:13px;color:var(--text);line-height:1.8;}
 .spin{width:14px;height:14px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:sp .7s linear infinite;display:inline-block;vertical-align:middle;margin-right:8px;}
 @keyframes sp{to{transform:rotate(360deg)}}
+
+/* TABS */
+.tabs{display:flex;gap:2px;background:var(--surface);padding:4px;border-radius:var(--r);border:1px solid var(--border);width:100%;overflow-x:auto;margin-bottom:18px;}
+.tab{padding:7px 12px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:500;color:var(--muted2);white-space:nowrap;border:none;background:none;}
+.tab.act{background:var(--accent);color:#fff;}
 
 /* MODAL */
 .moverlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px);}
@@ -157,30 +175,19 @@ select option{background:var(--s2);}
 .mfooter{display:flex;gap:8px;justify-content:flex-end;margin-top:18px;}
 
 /* FAB */
-.fab{position:fixed;bottom:80px;right:20px;z-index:100;background:var(--accent);color:#fff;border:none;border-radius:50px;padding:14px 20px;font-size:15px;font-weight:700;box-shadow:0 4px 20px rgba(91,106,245,.5);touch-action:manipulation;}
+.fab{position:fixed;bottom:80px;right:20px;z-index:100;background:var(--accent);color:#fff;border:none;border-radius:50px;padding:14px 20px;font-size:15px;font-weight:700;box-shadow:0 4px 20px rgba(91,106,245,.5);}
 @media(min-width:601px){.fab{bottom:28px;right:28px;}}
 
-/* TABS */
-.tabs{display:flex;gap:2px;background:var(--surface);padding:4px;border-radius:var(--r);border:1px solid var(--border);width:100%;overflow-x:auto;margin-bottom:18px;}
-.tab{padding:7px 12px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:500;color:var(--muted2);white-space:nowrap;border:none;background:none;}
-.tab.act{background:var(--accent);color:#fff;}
-
 /* TOAST */
-.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--s2);border:1px solid var(--accent);border-radius:var(--r);padding:12px 20px;font-size:13px;color:var(--a2);z-index:300;animation:tin .3s ease;box-shadow:0 8px 24px rgba(0,0,0,.4);white-space:nowrap;max-width:90vw;overflow:hidden;text-overflow:ellipsis;}
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--s2);border:1px solid var(--accent);border-radius:var(--r);padding:12px 20px;font-size:13px;color:var(--a2);z-index:300;animation:tin .3s ease;box-shadow:0 8px 24px rgba(0,0,0,.4);white-space:nowrap;max-width:90vw;}
 @media(min-width:601px){.toast{bottom:24px;}}
 @keyframes tin{from{transform:translateX(-50%) translateY(12px);opacity:0}to{transform:translateX(-50%) translateY(0);opacity:1}}
 
-/* MISC */
-.rule{background:linear-gradient(135deg,rgba(91,106,245,.07),rgba(139,150,255,.02));border:1px solid rgba(91,106,245,.18);border-radius:var(--r);padding:12px 14px;margin-bottom:16px;font-size:12px;color:var(--muted2);font-style:italic;}
-.rule strong{color:var(--a2);}
-.empty{text-align:center;padding:40px 16px;color:var(--muted);}
-.ei{font-size:32px;margin-bottom:8px;}
+/* STREAK FIRE */
+.streak{display:flex;align-items:center;gap:6px;background:rgba(240,180,41,.1);border:1px solid rgba(240,180,41,.25);border-radius:var(--r);padding:10px 14px;}
+
 ::-webkit-scrollbar{width:3px;}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
-
-/* SYNC INDICATOR */
-.sync-dot{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;margin-left:6px;}
-.sync-dot.off{background:var(--red);}
 </style>
 </head>
 <body>
@@ -190,18 +197,17 @@ select option{background:var(--s2);}
   <div class="lbox">
     <div class="llogo">AV Action</div>
     <div class="lsub">Inteligência Comportamental</div>
-    <input type="text" id="lu" placeholder="Usuário" autocomplete="username" autocapitalize="none">
-    <input type="password" id="lp" placeholder="Senha" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+    <input type="text" id="lu" placeholder="Usuário" autocapitalize="none">
+    <input type="password" id="lp" placeholder="Senha" onkeydown="if(event.key==='Enter')doLogin()">
     <button class="lbtn" onclick="doLogin()">Entrar</button>
     <div class="lerr hidden" id="lerr">Usuário ou senha incorretos.</div>
-    <div class="lsync hidden" id="lsync">🔄 Conectando...</div>
   </div>
 </div>
 
 <!-- APP -->
 <div id="app">
   <div class="topbar">
-    <div class="tlogo">AV Action <span class="sync-dot off" id="syncDot" title="Sincronização"></span></div>
+    <div class="tlogo">AV Action</div>
     <div class="tright">
       <span class="trole" id="roleTag"></span>
       <span class="tname" id="tname"></span>
@@ -212,133 +218,59 @@ select option{background:var(--s2);}
     <div class="sidebar" id="sidebar"></div>
     <div class="content" id="content"></div>
   </div>
-  <!-- Mobile bottom nav (student only) -->
   <div class="bottom-nav hidden" id="bottomNav">
     <div class="bottom-nav-inner">
-      <button class="bnav-item" id="bn_inicio" onclick="setPage('aluno_inicio')"><span class="bnav-icon">🏠</span>Início</button>
-      <button class="bnav-item" id="bn_diario" onclick="setPage('aluno_form')"><span class="bnav-icon">📝</span>Diário</button>
-      <button class="bnav-item" id="bn_metas" onclick="setPage('aluno_metas')"><span class="bnav-icon">🎯</span>Metas</button>
+      <button class="bnav-item" id="bn_painel" onclick="setPage('aluno_painel')"><span class="bnav-icon">🏠</span>Início</button>
+      <button class="bnav-item" id="bn_registro" onclick="setPage('aluno_form')"><span class="bnav-icon">📝</span>Registro</button>
+      <button class="bnav-item" id="bn_ranking" onclick="setPage('aluno_ranking')"><span class="bnav-icon">🚀</span>Ranking</button>
+      <button class="bnav-item" id="bn_evolucao" onclick="setPage('aluno_evolucao')"><span class="bnav-icon">📈</span>Evolução</button>
+      <button class="bnav-item" id="bn_conquistas" onclick="setPage('aluno_conquistas')"><span class="bnav-icon">🏆</span>Conquistas</button>
     </div>
   </div>
 </div>
 
-<!-- FAB -->
 <button class="fab hidden" id="fab" onclick="openModal('registro')">+ Registro</button>
 
-<!-- MODAL -->
 <div id="mo" class="moverlay hidden" onclick="closeModalOutside(event)">
   <div class="mbox" id="mb"></div>
 </div>
 
 <script>
 // ══════════════════════════════════════════════
-// SYNC — JSONBin.io (já configurado)
+// SYNC — JSONBin
 // ══════════════════════════════════════════════
-const BIN_ID   = '6a3b57aada38895dfef54bb1';
-const BIN_KEY  = '$2a$10$0PJPGRLe/JY7laW56/CGuegftbFHvq5ieRPNWRq62tovlVJHEgBTm';
-const BIN_URL  = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
-const BIN_HDRS = { 'Content-Type':'application/json', 'X-Master-Key': BIN_KEY };
-
+const BIN_ID='6a3b57aada38895dfef54bb1';
+const BIN_KEY='$2a$10$0PJPGRLe/JY7laW56/CGuegftbFHvq5ieRPNWRq62tovlVJHEgBTm';
+const BIN_URL=`https://api.jsonbin.io/v3/b/${BIN_ID}`;
 const LS_KEY='avaction_v4';
-let db=loadLocalDB();
-let syncOk=false;
 
-function loadLocalDB(){
+function loadLocal(){
   try{const r=localStorage.getItem(LS_KEY);if(r)return JSON.parse(r);}catch(e){}
-  return{users:[{id:'u1',username:'admin',password:'admin123',role:'admin',nome:'Maísa'}],students:[],registros:[],analises:[]};
+  return{users:[{id:'u1',username:'admin',password:'admin123',role:'admin',nome:'Maísa'}],students:[],registros:[],analises:[],validacoes:[]};
 }
 function saveLocal(){try{localStorage.setItem(LS_KEY,JSON.stringify(db));}catch(e){}}
 
-// BroadcastChannel: sync instantâneo entre abas no mesmo dispositivo
-let bc=null;
-try{
-  bc=new BroadcastChannel('avaction_sync');
-  bc.onmessage=e=>{
-    if(e.data&&e.data.db){
-      db=e.data.db;saveLocal();
-      if(CU)renderApp();
-    }
-  };
-}catch(ex){}
-
-function setSyncDot(ok){
-  syncOk=ok;
-  const d=document.getElementById('syncDot');
-  if(d){d.className='sync-dot'+(ok?'':' off');d.title=ok?'Sincronizado':'Offline';}
-}
-
+let db=loadLocal();
+let CU=null,CP='dashboard',CSid=null,RV={};
 async function remoteGet(){
-  try{
-    const r=await fetch(BIN_URL+'/latest',{headers:{'X-Master-Key':BIN_KEY}});
-    if(!r.ok)return null;
-    const j=await r.json();
-    return j.record||null;
-  }catch(e){return null;}
+  try{const r=await fetch(BIN_URL+'/latest',{headers:{'X-Master-Key':BIN_KEY}});if(!r.ok)return null;const j=await r.json();return j.record||null;}catch(e){return null;}
 }
-
-async function remoteSet(data){
-  try{
-    await fetch(BIN_URL,{
-      method:'PUT',
-      headers:BIN_HDRS,
-      body:JSON.stringify(data)
-    });
-    setSyncDot(true);
-  }catch(e){setSyncDot(false);}
+async function remoteSet(d){
+  try{await fetch(BIN_URL,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':BIN_KEY},body:JSON.stringify(d)});}catch(e){}
 }
-
 async function save(){
-  db._ts=Date.now();
-  saveLocal();
+  db._ts=Date.now();saveLocal();
   try{if(bc)bc.postMessage({db});}catch(e){}
   await remoteSet(db);
 }
-
+let bc=null;
+try{bc=new BroadcastChannel('avaction_v5');bc.onmessage=e=>{if(e.data?.db){db=e.data.db;saveLocal();if(CU)renderApp();}};}catch(e){}
 async function initSync(){
-  setSyncDot(false);
-  const remote=await remoteGet();
-  if(remote&&remote.users){
-    // Usa o mais recente: compara _ts
-    if(!db._ts||(remote._ts&&remote._ts>db._ts)){
-      db=remote;
-      if(!db.users)db.users=[];
-      if(!db.students)db.students=[];
-      if(!db.registros)db.registros=[];
-      if(!db.analises)db.analises=[];
-      saveLocal();
-    }
-    setSyncDot(true);
-  } else {
-    // Primeiro uso: sobe dados locais
-    db._ts=Date.now();
-    await remoteSet(db);
-  }
-  // Polling a cada 5s para pegar atualizações de outros dispositivos
-  setInterval(async()=>{
-    const remote=await remoteGet();
-    if(!remote)return;
-    const remTs=remote._ts||0;
-    const locTs=db._ts||0;
-    if(remTs>locTs){
-      db=remote;
-      if(!db.users)db.users=[];
-      if(!db.students)db.students=[];
-      if(!db.registros)db.registros=[];
-      if(!db.analises)db.analises=[];
-      saveLocal();
-      setSyncDot(true);
-      if(CU)renderApp();
-    }
-  },5000);
+  const r=await remoteGet();
+  if(r?.users){if(!db._ts||(r._ts&&r._ts>db._ts)){db=r;['users','students','registros','analises','validacoes'].forEach(k=>{if(!db[k])db[k]=[];});saveLocal();}}
+  else{db._ts=Date.now();await remoteSet(db);}
+  setInterval(async()=>{const r=await remoteGet();if(r&&(r._ts||0)>(db._ts||0)){db=r;['users','students','registros','analises','validacoes'].forEach(k=>{if(!db[k])db[k]=[];});saveLocal();if(CU)renderApp();if(CU&&CU.role==='admin')setTimeout(()=>verificarAnaliseAuto(),2000);}},5000);
 }
-
-// ══════════════════════════════════════════════
-// STATE
-// ══════════════════════════════════════════════
-let CU=null;
-let CP='dashboard';
-let CSid=null;
-let RV={};
 
 // ══════════════════════════════════════════════
 // UTILS
@@ -346,82 +278,138 @@ let RV={};
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
 function today(){return new Date().toISOString().slice(0,10);}
 function fdate(d){if(!d)return'—';const[y,m,day]=d.split('-');return`${day}/${m}/${y}`;}
-function acolor(n){const c=['#5b6af5','#34d399','#f0b429','#f87171','#a78bfa','#38bdf8','#fb923c','#e879f9'];let h=0;for(let ch of(n||'?'))h=ch.charCodeAt(0)+((h<<5)-h);return c[Math.abs(h)%c.length];}
+function acolor(n){const c=['#5b6af5','#34d399','#f0b429','#f87171','#a78bfa','#38bdf8','#fb923c'];let h=0;for(let ch of(n||'?'))h=ch.charCodeAt(0)+((h<<5)-h);return c[Math.abs(h)%c.length];}
 function ini(n){return(n||'?').split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();}
-function toast(msg){const e=document.createElement('div');e.className='toast';e.textContent=msg;document.body.appendChild(e);setTimeout(()=>e.remove(),3200);}
+function toast(m){const e=document.createElement('div');e.className='toast';e.textContent=m;document.body.appendChild(e);setTimeout(()=>e.remove(),3200);}
 function gv(id){const e=document.getElementById(id);return e?e.value.trim():'';}
-function execBadge(v){const m={'Cumpriu':'bg_','Cumpriu Parcialmente':'bo_','Não Cumpriu':'br_','Reprogramou':'bgold_','Não Respondeu':'bgr_'};return`<span class="badge ${m[v]||'bgr_'}">${v||'—'}</span>`;}
-function engBadge(v){const m={'Alto':'bg_','Médio':'bgold_','Baixo':'br_'};return`<span class="badge ${m[v]||'bgr_'}">${v||'—'}</span>`;}
-function origemBadge(v){const m={'WhatsApp':'bg_','Sessão':'bb_','Evento':'bgold_'};return`<span class="badge ${m[v]||'bgr_'}">${v||'—'}</span>`;}
 
-// ══════════════════════════════════════════════
-// LOGIN / LOGOUT
-// ══════════════════════════════════════════════
-function doLogin(){
-  const u=gv('lu').toLowerCase().trim();
-  const p=gv('lp');
-  const found=(db.users||[]).find(x=>x.username===u&&x.password===p);
-  if(!found){document.getElementById('lerr').classList.remove('hidden');return;}
-  CU=found;
-  document.getElementById('loginScreen').style.display='none';
-  document.getElementById('app').style.display='flex';
-  document.getElementById('tname').textContent=found.nome;
-  const rt=document.getElementById('roleTag');
-  rt.textContent=found.role==='admin'?'Admin':'Aluno';
-  rt.className='trole '+(found.role==='admin'?'r-admin':'r-student');
-  if(found.role==='admin'){
-    document.getElementById('fab').classList.remove('hidden');
-    CP='dashboard';
-  } else {
-    document.getElementById('bottomNav').classList.remove('hidden');
-    CP='aluno_inicio';
-  }
-  renderApp();
+// FASES
+const FASES=[
+  {nome:'Ativação',inicio:1,fim:7,cor:'#fb923c'},
+  {nome:'Instalação de Hábito',inicio:8,fim:21,cor:'#5b6af5'},
+  {nome:'Consistência',inicio:22,fim:42,cor:'#34d399'},
+  {nome:'Performance',inicio:43,fim:100,cor:'#f0b429'}
+];
+function getFaseAtual(dias){
+  if(dias<=0)return FASES[0];
+  return FASES.find(f=>dias>=f.inicio&&dias<=f.fim)||FASES[FASES.length-1];
+}
+function getDiasValidados(sid){
+  return(db.registros||[]).filter(r=>
+    r.studentId===sid &&
+    r.validado===true &&
+    r.campos?.estudou==='Sim'
+  ).length;
 }
 
+// CONQUISTAS
+const CONQUISTAS_DEF=[
+  {id:'c1',nome:'Primeiro Passo',desc:'Enviou o primeiro registro',icon:'🌱',check:s=>getDiasValidados(s.id)>=1},
+  {id:'c2',nome:'1 Semana',desc:'7 dias validados',icon:'🔥',check:s=>getDiasValidados(s.id)>=7},
+  {id:'c3',nome:'2 Semanas',desc:'14 dias validados',icon:'💪',check:s=>getDiasValidados(s.id)>=14},
+  {id:'c4',nome:'21 Dias',desc:'Instalação de Hábito concluída',icon:'🧠',check:s=>getDiasValidados(s.id)>=21},
+  {id:'c5',nome:'1 Mês',desc:'30 dias validados',icon:'🏅',check:s=>getDiasValidados(s.id)>=30},
+  {id:'c6',nome:'Consistência',desc:'42 dias validados',icon:'⭐',check:s=>getDiasValidados(s.id)>=42},
+  {id:'c7',nome:'Performance',desc:'60 dias validados',icon:'🏆',check:s=>getDiasValidados(s.id)>=60},
+  {id:'c8',nome:'Lenda',desc:'100 dias validados',icon:'👑',check:s=>getDiasValidados(s.id)>=100},
+];
+
+function getStreak(sid){
+  const datas=(db.registros||[])
+    .filter(r=>r.studentId===sid&&r.validado===true&&r.campos?.estudou==='Sim')
+    .map(r=>r.data).sort((a,b)=>b.localeCompare(a));
+  if(!datas.length)return 0;
+  let streak=0;
+  let esperado=new Date(today());
+  for(let i=0;i<datas.length;i++){
+    const d=new Date(datas[i]);
+    const diff=Math.round((esperado-d)/86400000);
+    if(diff===0||diff===streak){streak++;esperado=new Date(d);esperado.setDate(esperado.getDate()-1);}
+    else if(diff>1)break;
+  }
+  return streak;
+}
+
+// EMOJIS DISPOSIÇÃO
+const EMOJIS=[
+  {val:'Muito Baixa',emoji:'😔',label:'Muito Baixa'},
+  {val:'Baixa',emoji:'😕',label:'Baixa'},
+  {val:'Média',emoji:'😐',label:'Normal'},
+  {val:'Boa',emoji:'🙂',label:'Motivado'},
+  {val:'Excelente',emoji:'😁',label:'Muito Motivado'},
+];
+
+// ══════════════════════════════════════════════
+// LOGIN
+// ══════════════════════════════════════════════
+function doLogin(){
+  const u=gv('lu').toLowerCase().trim(),p=gv('lp');
+  const f=(db.users||[]).find(x=>x.username===u&&x.password===p);
+  if(!f){document.getElementById('lerr').classList.remove('hidden');return;}
+  CU=f;
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('app').style.display='flex';
+  document.getElementById('tname').textContent=f.nome;
+  const rt=document.getElementById('roleTag');
+  rt.textContent=f.role==='admin'?'Admin':'Aluno';
+  rt.className='trole '+(f.role==='admin'?'r-admin':'r-student');
+  if(f.role==='admin'){document.getElementById('fab').classList.remove('hidden');CP='dashboard';
+    // Verifica análises automáticas ao fazer login como admin
+    setTimeout(()=>verificarAnaliseAuto(),3000);
+  }
+  else{document.getElementById('bottomNav').classList.remove('hidden');CP='aluno_painel';}
+  renderApp();
+}
 function doLogout(){
   CU=null;CP='dashboard';CSid=null;
   document.getElementById('app').style.display='none';
   document.getElementById('loginScreen').style.display='flex';
   document.getElementById('fab').classList.add('hidden');
   document.getElementById('bottomNav').classList.add('hidden');
-  document.getElementById('lerr').classList.add('hidden');
-  document.getElementById('lu').value='';
-  document.getElementById('lp').value='';
+  document.getElementById('lu').value='';document.getElementById('lp').value='';
 }
 
 // ══════════════════════════════════════════════
 // RENDER
 // ══════════════════════════════════════════════
-function renderApp(){renderSidebar();renderContent();updateBottomNav();}
+function renderApp(){renderSidebar();renderContent();updateBN();}
 function setPage(p,sid){CP=p;if(sid!==undefined)CSid=sid;renderApp();}
 
-function updateBottomNav(){
+function updateBN(){
   if(!CU||CU.role!=='student')return;
-  ['inicio','diario','metas'].forEach(k=>{
+  const map={'aluno_painel':'painel','aluno_form':'registro','aluno_hist':'registro','aluno_ranking':'ranking','aluno_evolucao':'evolucao','aluno_conquistas':'conquistas','aluno_perfil':'perfil'};
+  ['painel','registro','ranking','evolucao','conquistas'].forEach(k=>{
     const el=document.getElementById('bn_'+k);
-    if(el)el.className='bnav-item'+(CP===('aluno_'+(k==='diario'?'form':k))||( k==='diario'&&CP==='aluno_hist')?' act':'');
+    if(el)el.className='bnav-item'+(map[CP]===k?' act':'');
   });
+}
+
+function getPendentes(){
+  return(db.registros||[]).filter(r=>
+    r.origem==='Aluno' &&
+    (r.validado===null||r.validado===undefined) &&
+    (r.campos?.disposicao||r.campos?.sentimento) // tem conteúdo real
+  );
 }
 
 function renderSidebar(){
   const el=document.getElementById('sidebar');
   if(!CU){el.innerHTML='';return;}
-  if(CU.role==='student'){
-    el.innerHTML=''; // mobile uses bottom nav
-    return;
-  }
+  if(CU.role==='student'){el.innerHTML='';return;}
+  const pend=getPendentes().length;
   el.innerHTML=`
     <div class="ssec">Menu</div>
     <button class="nitem ${CP==='dashboard'?'act':''}" onclick="CSid=null;setPage('dashboard')">🏠 Início</button>
+    <button class="nitem ${CP==='validar'?'act':''}" onclick="setPage('validar')">✅ Validações${pend?`<span class="notif-badge">${pend}</span>`:''}
+    </button>
     <button class="nitem ${CP==='usuarios'?'act':''}" onclick="setPage('usuarios')">👥 Usuários</button>
     <div class="ssec">Projetos</div>
     ${(db.students||[]).map(s=>`
       <button class="stnav ${CSid===s.id&&CP==='projeto'?'act':''}" onclick="setPage('projeto','${s.id}')">
         <div class="sav" style="background:${acolor(s.nome)}22;color:${acolor(s.nome)}">${ini(s.nome)}</div>
-        <div><div class="stn">${s.nome}</div><div class="stm">${s.objetivo||'Sem objetivo'}</div></div>
+        <div><div class="stn">${s.nome}</div><div class="stm">${getDiasValidados(s.id)} dias</div></div>
       </button>`).join('')}
-    <div style="padding:8px 10px">
+    <div style="padding:6px 8px">
       <button class="btn bg2 bsm" style="width:100%" onclick="openModal('newStudent')">+ Novo Aluno</button>
     </div>`;
 }
@@ -430,674 +418,1145 @@ function renderContent(){
   const el=document.getElementById('content');
   if(!CU){el.innerHTML='';return;}
   if(CU.role==='student'){
-    if(CP==='aluno_inicio')el.innerHTML=pageAlunoInicio();
-    else if(CP==='aluno_form')el.innerHTML=pageAlunoForm();
-    else if(CP==='aluno_hist')el.innerHTML=pageAlunoHist();
-    else if(CP==='aluno_metas')el.innerHTML=pageAlunoMetas();
-    else el.innerHTML=pageAlunoInicio();
-    return;
+    const pages={
+      'aluno_painel':alunoPanel,
+      'aluno_form':alunoForm,
+      'aluno_evolucao':alunoEvolucao,
+      'aluno_conquistas':alunoConquistas,
+      'aluno_perfil':alunoPerfil,
+      'aluno_ranking':alunoRanking
+    };
+    el.innerHTML=(pages[CP]||alunoPanel)();return;
   }
-  if(CP==='dashboard')el.innerHTML=pageDashboard();
-  else if(CP==='usuarios')el.innerHTML=pageUsuarios();
-  else if(CP==='projeto')el.innerHTML=pageProjeto();
-  else el.innerHTML='';
+  const pages={dashboard,validar:pageValidar,usuarios:pageUsuarios,projeto:pageProjeto};
+  el.innerHTML=(pages[CP]||dashboard)();
 }
 
 // ══════════════════════════════════════════════
-// DASHBOARD
+// ADMIN — DASHBOARD
 // ══════════════════════════════════════════════
-function pageDashboard(){
-  const students=db.students||[];
-  if(!students.length)return`
-    <div class="rule"><strong>Regra de Ouro:</strong> A Maísa registra fatos. O sistema identifica padrões. O Coach interpreta padrões. O aluno transforma padrões em evolução.</div>
-    <div style="text-align:center;padding:50px 16px">
-      <div style="font-size:44px;margin-bottom:14px">🚀</div>
-      <div style="font-size:17px;font-weight:800;margin-bottom:8px">Nenhum aluno ainda</div>
-      <div style="color:var(--muted);margin-bottom:20px;font-size:13px">Crie o primeiro aluno para começar.</div>
-      <button class="btn bp" onclick="openModal('newStudent')">+ Criar Primeiro Aluno</button>
-    </div>`;
-  const cards=students.map(s=>{
-    const recs=(db.registros||[]).filter(r=>r.studentId===s.id);
-    const taxa=calcTaxa(s.id);
-    const ultimo=[...recs].sort((a,b)=>b.data.localeCompare(a.data))[0];
-    const cor=taxa>=70?'var(--green)':taxa>=40?'var(--gold)':'var(--red)';
+function dashboard(){
+  const sts=db.students||[];
+  const pend=getPendentes().length;
+  if(!sts.length)return`<div style="text-align:center;padding:50px 16px"><div style="font-size:40px;margin-bottom:12px">🚀</div><div style="font-size:16px;font-weight:800;margin-bottom:6px">Nenhum aluno ainda</div><button class="btn bp" style="margin-top:12px" onclick="openModal('newStudent')">+ Criar Aluno</button></div>`;
+  const cards=sts.map(s=>{
+    const dias=getDiasValidados(s.id);
+    const fase=getFaseAtual(dias);
+    const pct=dias<=0?0:Math.min(100,Math.round((dias-fase.inicio)/(fase.fim-fase.inicio+1)*100));
     const u=s.userId?(db.users||[]).find(x=>x.id===s.userId):null;
-    return`<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;position:relative;overflow:hidden;">
-      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:${acolor(s.nome)}"></div>
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px" onclick="setPage('projeto','${s.id}')" style="cursor:pointer">
-        <div class="sav" style="width:40px;height:40px;font-size:15px;font-weight:800;border-radius:50%;background:${acolor(s.nome)}22;color:${acolor(s.nome)};flex-shrink:0">${ini(s.nome)}</div>
-        <div style="flex:1;min-width:0">
-          <div style="font-size:14px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${s.nome}</div>
-          <div style="font-size:11px;color:var(--muted)">${s.objetivo||'Sem objetivo'}</div>
+    const pendSt=(db.registros||[]).filter(r=>r.studentId===s.id&&(r.validado===null||r.validado===undefined)).length;
+    return`<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:${fase.cor}"></div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+        <div class="sav" style="width:38px;height:38px;font-size:14px;font-weight:800;border-radius:50%;background:${acolor(s.nome)}22;color:${acolor(s.nome)}">${ini(s.nome)}</div>
+        <div style="flex:1">
+          <div style="font-size:13px;font-weight:700">${s.nome}</div>
+          <div style="font-size:10px;color:var(--muted)">${fase.nome} · Dia ${dias}</div>
         </div>
-        <div style="text-align:right;flex-shrink:0">
-          <div style="font-size:20px;font-weight:800;color:${cor}">${taxa}%</div>
-          <div style="font-size:9px;color:var(--muted);text-transform:uppercase">execução</div>
-        </div>
+        ${pendSt?`<span class="notif-badge" style="background:var(--gold);color:#000">${pendSt}</span>`:''}
       </div>
-      ${u?`<div style="font-size:11px;color:var(--muted);margin-bottom:10px">Login: <strong style="color:var(--a2);font-family:monospace">${u.username}</strong> / <strong style="color:var(--gold);font-family:monospace">${u.password}</strong></div>`:''}
-      <div style="font-size:11px;color:var(--muted2);margin-bottom:10px">${recs.length} registro${recs.length!==1?'s':''} · Último: ${ultimo?fdate(ultimo.data):'—'}</div>
-      <div style="display:flex;gap:6px">
+      <div class="prog-wrap"><div class="prog-fill" style="width:${pct}%;background:${fase.cor}"></div></div>
+      <div style="font-size:10px;color:var(--muted);margin-bottom:10px">${pct}% da fase atual</div>
+      ${u?`<div style="font-size:10px;color:var(--muted);margin-bottom:8px">Login: <b style="color:var(--a2);font-family:monospace">${u.username}</b> / <b style="color:var(--gold);font-family:monospace">${u.password}</b></div>`:''}
+      <div style="display:flex;gap:5px">
         <button class="btn bg2 bsm" style="flex:1" onclick="setPage('projeto','${s.id}')">Ver projeto</button>
-        <button class="btn bg2 bsm" onclick="openModal('editStudent','${s.id}')">✏️</button>
-        <button class="btn bd bsm" data-sid="${s.id}" onclick="window.delStudent(this.dataset.sid)">🗑</button>
+        <button class="btn bg2 bsm" onclick="openModal('editStudent','${s.id}')">✏️ Editar</button>
+        <button class="btn bd bsm" data-sid="${s.id}" onclick="window.delSt(this.dataset.sid)">Encerrar Sessão</button>
       </div>
     </div>`;
   }).join('');
   return`
     <div class="ph">
-      <div><div class="ptitle">Alunos</div><div class="psub">${students.length} cadastrado${students.length!==1?'s':''}</div></div>
-      <button class="btn bp bsm" onclick="openModal('newStudent')">+ Novo Aluno</button>
+      <div><div class="ptitle">Alunos</div></div>
+      <div style="display:flex;gap:8px">
+        ${pend?`<button class="btn bgold bsm" onclick="setPage('validar')">✅ ${pend} pendente${pend>1?'s':''}</button>`:''}
+        <button class="btn bp bsm" onclick="openModal('newStudent')">+ Novo Aluno</button>
+      </div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px">${cards}</div>`;
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px">${cards}</div>`;
 }
 
-window.delStudent=function(sid){
-  if(!confirm('Excluir este aluno e todos os registros?'))return;
+window.delSt=function(sid){
+  if(!confirm('Encerrar sessão deste aluno? Todos os registros serão removidos permanentemente.'))return;
+  const st=(db.students||[]).find(s=>s.id===sid);
+  if(st&&st.userId)db.users=(db.users||[]).filter(u=>u.id!==st.userId);
   db.students=(db.students||[]).filter(s=>s.id!==sid);
   db.registros=(db.registros||[]).filter(r=>r.studentId!==sid);
   db.analises=(db.analises||[]).filter(a=>a.studentId!==sid);
-  const u=(db.users||[]).find(x=>x.id===(db.students||[]).find(s=>s.id===sid)?.userId);
-  // Remove usuário vinculado
-  const st=(db.students||[]).find(s=>s.id===sid);
-  if(st&&st.userId) db.users=(db.users||[]).filter(u=>u.id!==st.userId);
   if(CSid===sid){CSid=null;CP='dashboard';}
   save();toast('Aluno removido.');renderApp();
 };
 
 // ══════════════════════════════════════════════
-// PROJETO
+// ADMIN — VALIDAÇÕES
+// ══════════════════════════════════════════════
+function pageValidar(){
+  const pendentes=(db.registros||[]).filter(r=>
+    r.origem==='Aluno' &&
+    (r.validado===null||r.validado===undefined) &&
+    (r.campos?.disposicao||r.campos?.sentimento)
+  ).sort((a,b)=>b.data.localeCompare(a.data));
+  if(!pendentes.length)return`<div style="text-align:center;padding:50px"><div style="font-size:40px;margin-bottom:12px">✅</div><div style="font-size:16px;font-weight:800">Tudo validado!</div><div style="color:var(--muted);margin-top:8px">Nenhum registro pendente.</div></div>`;
+  const list=pendentes.map(r=>{
+    const s=(db.students||[]).find(x=>x.id===r.studentId);
+    const emoji=EMOJIS.find(e=>e.val===r.campos?.disposicao)||EMOJIS[2];
+    const dias=getDiasValidados(r.studentId);
+    const fase=getFaseAtual(dias);
+    return`<div class="validar-card">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <div class="sav" style="width:40px;height:40px;font-size:14px;font-weight:800;border-radius:50%;background:${acolor(s?.nome||'?')}22;color:${acolor(s?.nome||'?')}">${ini(s?.nome||'?')}</div>
+        <div style="flex:1">
+          <div style="font-size:14px;font-weight:800">${s?.nome||'Aluno'}</div>
+          <div style="font-size:11px;color:var(--muted)">${fase.nome} · Dia ${dias} · ${fdate(r.data)}</div>
+        </div>
+        <span style="font-size:32px">${emoji.emoji}</span>
+      </div>
+
+      <div style="background:var(--s3);border-radius:var(--r2);padding:12px;margin-bottom:12px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+          <div>
+            <div style="font-size:10px;color:var(--muted);text-transform:uppercase;margin-bottom:3px">Estudou</div>
+            <div style="font-size:13px;font-weight:600;color:${r.campos?.estudou==='Sim'?'var(--green)':'var(--red)'}">${r.campos?.estudou==='Sim'?'✓ Sim':'✗ Não'}</div>
+          </div>
+          ${r.campos?.horas?`<div>
+            <div style="font-size:10px;color:var(--muted);text-transform:uppercase;margin-bottom:3px">Horas</div>
+            <div style="font-size:13px;font-weight:600;color:var(--a2)">⏱ ${r.campos.horas}h</div>
+          </div>`:''}
+          <div>
+            <div style="font-size:10px;color:var(--muted);text-transform:uppercase;margin-bottom:3px">Disposição</div>
+            <div style="font-size:13px">${emoji.emoji} ${emoji.label}</div>
+          </div>
+        </div>
+        ${r.campos?.sentimento?`<div style="margin-bottom:8px"><div style="font-size:10px;color:var(--muted);text-transform:uppercase;margin-bottom:3px">Como se sente</div><div style="font-size:13px;color:var(--muted2);font-style:italic">"${r.campos.sentimento}"</div></div>`:''}
+        ${r.campos?.dificuldade?`<div style="margin-bottom:8px"><div style="font-size:10px;color:var(--red);text-transform:uppercase;margin-bottom:3px">⚠️ Dificuldade</div><div style="font-size:13px;color:var(--muted2)">${r.campos.dificuldade}</div></div>`:''}
+        ${r.campos?.vitoria?`<div><div style="font-size:10px;color:var(--green);text-transform:uppercase;margin-bottom:3px">🏆 Vitória</div><div style="font-size:13px;color:var(--muted2)">${r.campos.vitoria}</div></div>`:''}
+      </div>
+
+      <div style="display:flex;gap:8px">
+        <button class="btn bgreen" style="flex:1;padding:11px;font-size:14px" data-rid="${r.id}" onclick="window.validarReg(this.dataset.rid,true)">✅ ${r.campos?.estudou==='Sim'?'Validar Dia (+1 dia)':'Confirmar (sem +dia)'}</button>
+        <button class="btn bd" style="flex:1;padding:11px;font-size:14px" data-rid="${r.id}" onclick="window.validarReg(this.dataset.rid,false)">❌ Rejeitar</button>
+      </div>
+    </div>`;
+  }).join('');
+  return`<div class="ph"><div><div class="ptitle">✅ Validações</div><div class="psub">${pendentes.length} registro${pendentes.length>1?'s':''} aguardando</div></div></div>${list}`;
+}
+
+window.validarReg=function(rid,aprovado){
+  const r=(db.registros||[]).find(x=>x.id===rid);
+  if(!r)return;
+  r.validado=aprovado;
+  r.validadoEm=new Date().toISOString();
+  save();
+  toast(aprovado?'✅ Dia validado!':'❌ Dia rejeitado.');
+
+  // Verifica se deve gerar análise automática (a cada 7 registros validados)
+  if(aprovado){
+    const sid=r.studentId;
+    const totalValidados=(db.registros||[]).filter(x=>
+      x.studentId===sid&&x.origem==='Aluno'&&x.validado===true
+    ).length;
+    const totalAnalises=(db.analises||[]).filter(a=>a.studentId===sid).length;
+    // Gera análise a cada 7 validados
+    if(totalValidados>0 && totalValidados%7===0 && totalAnalises<Math.floor(totalValidados/7)){
+      toast('🤖 Gerando análise automática...');
+      setTimeout(()=>gerarAnaliseAuto(sid),500);
+    }
+  }
+
+  renderApp();
+};
+
+// ══════════════════════════════════════════════
+// ADMIN — PROJETO
 // ══════════════════════════════════════════════
 function pageProjeto(){
   const s=(db.students||[]).find(x=>x.id===CSid);
-  if(!s)return'<div class="empty"><div class="ei">⚠️</div><p>Aluno não encontrado</p></div>';
+  if(!s)return'';
   const u=s.userId?(db.users||[]).find(x=>x.id===s.userId):null;
-  const tabs=['timeline','evolucao','perfil','aluno_dados'];
-  const tnames=['📋 Timeline','📈 Evolução','🧠 Perfil','👤 Dados Aluno'];
-  const ct=window._pt||'timeline';
-  const recs=(db.registros||[]).filter(r=>r.studentId===s.id).sort((a,b)=>b.data.localeCompare(a.data)||b.id.localeCompare(a.id));
-  const taxa=calcTaxa(s.id);
+  const dias=getDiasValidados(s.id);
+  const fase=getFaseAtual(dias);
+  const streak=getStreak(s.id);
+  const ct=window['_pt']||'timeline';
+  const tabs=['timeline','perfil','aluno_dados','motivacional','ia'];
+  const tn=['📋 Timeline','🧠 Perfil','👤 Aluno','💬 Mensagem','🤖 IA'];
+  const recs=(db.registros||[]).filter(r=>r.studentId===s.id).sort((a,b)=>b.data.localeCompare(a.data));
   let body='';
-  if(ct==='timeline')body=renderTimeline(s,recs);
-  else if(ct==='evolucao')body=renderEvolucao(s,recs);
-  else if(ct==='aluno_dados')body=renderAdminAlunoDados(s);
-  else body=renderPerfil(s);
+  if(ct==='timeline')body=adminTimeline(s,recs);
+  else if(ct==='perfil')body=adminPerfil(s);
+  else if(ct==='motivacional')body=adminMotivacional(s);
+  else if(ct==='ia')body=adminIA(s);
+  else body=adminAlunoDados(s);
   return`
     <div class="ph">
       <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
         <button class="btn bg2 bsm" onclick="setPage('dashboard')">← Início</button>
         <div>
           <div class="ptitle">${s.nome}</div>
-          <div class="psub">${s.objetivo||'Sem objetivo'} · ${fdate(s.inicio)}</div>
-          ${u?`<div style="margin-top:3px;font-size:12px">Login: <strong style="color:var(--a2);font-family:monospace">${u.username}</strong>&nbsp;&nbsp;Senha: <strong style="color:var(--gold);font-family:monospace">${u.password}</strong></div>`:'<div style="font-size:11px;color:var(--orange);margin-top:3px">⚠️ Sem login</div>'}
+          <div class="psub">${fase.nome} · Dia ${dias} · ${streak} dias seguidos 🔥</div>
+          ${u?`<div style="font-size:11px;margin-top:2px">Login: <b style="color:var(--a2);font-family:monospace">${u.username}</b> / <b style="color:var(--gold);font-family:monospace">${u.password}</b></div>`:''}
         </div>
       </div>
-      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-        <div style="text-align:right"><div style="font-size:22px;font-weight:800">${taxa}%</div><div style="font-size:9px;color:var(--muted);text-transform:uppercase">execução</div></div>
+      <div style="display:flex;gap:8px">
         <button class="btn bgold bsm" onclick="gerarAnalise('${s.id}')">🤖 IA</button>
         <button class="btn bp bsm" onclick="openModal('registro')">+ Registro</button>
       </div>
     </div>
-    <div class="tabs">${tabs.map((t,i)=>`<div class="tab ${ct===t?'act':''}" onclick="window._pt='${t}';renderApp()">${tnames[i]}</div>`).join('')}</div>
+    <div class="tabs">${tabs.map((t,i)=>`<div class="tab ${ct===t?'act':''}" onclick="window._pt='${t}';document.getElementById('content').innerHTML=pageProjeto()">${tn[i]}</div>`).join('')}</div>
     ${body}`;
 }
 
-function renderTimeline(s,recs){
+function adminTimeline(s,recs){
   const list=recs.map(r=>{
     const c=r.campos||{};
     const isAluno=r.origem==='Aluno';
-    let campos='';
-    if(r.origem==='WhatsApp'||r.origem==='Sessão'){
-      campos=`
-        ${c.execucao?`<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">${execBadge(c.execucao)}${c.engajamento?engBadge(c.engajamento):''}</div>`:''}
-        ${c.resumo?`<div class="tlf"><div class="tlfl">Resumo</div><div class="tlfv">${c.resumo}</div></div>`:''}
-        ${c.dificuldades?`<div class="tlf"><div class="tlfl" style="color:var(--red)">Dificuldades</div><div class="tlfv">${c.dificuldades}</div></div>`:''}
-        ${c.avancos?`<div class="tlf"><div class="tlfl" style="color:var(--green)">Avanços</div><div class="tlfv">${c.avancos}</div></div>`:''}
-        ${c.meta?`<div class="tlf"><div class="tlfl" style="color:var(--gold)">Meta</div><div class="tlfv">${c.meta}</div></div>`:''}
-        ${c.observacao?`<div class="tlf"><div class="tlfl">Obs</div><div class="tlfv" style="font-style:italic">"${c.observacao}"</div></div>`:''}
-        ${c.intervencao?`<div style="margin-top:6px"><span class="badge bb_">${c.intervencao}</span></div>`:''}`;
-    } else if(r.origem==='Evento'){
-      campos=`${c.impacto?`<span class="badge ${c.impacto==='Positivo'?'bg_':c.impacto==='Negativo'?'br_':'bgold_'}" style="margin-bottom:6px;display:inline-block">${c.impacto}</span>`:''}<div style="font-size:13px">${c.descricao||''}</div>`;
-    } else if(isAluno){
-      const d={'Muito Baixa':'br_','Baixa':'bo_','Média':'bgold_','Boa':'bg_','Excelente':'bg_'};
-      campos=`<div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px"><span class="badge ${c.estudou==='Sim'?'bg_':'br_'}">${c.estudou==='Sim'?'✓ Estudou':'✗ Não estudou'}</span>${c.disposicao?`<span class="badge ${d[c.disposicao]||'bgr_'}">${c.disposicao}</span>`:''}</div>${c.sentimento?`<div class="tlf"><div class="tlfl">Como se sente</div><div class="tlfv">${c.sentimento}</div></div>`:''}${c.dificuldade?`<div class="tlf"><div class="tlfl" style="color:var(--red)">Dificuldade</div><div class="tlfv">${c.dificuldade}</div></div>`:''}${c.vitoria?`<div class="tlf"><div class="tlfl" style="color:var(--green)">🏆 Vitória</div><div class="tlfv">${c.vitoria}</div></div>`:''}`;
+    const emoji=EMOJIS.find(e=>e.val===c.disposicao)||EMOJIS[2];
+    let status='';
+    if(isAluno){
+      if(r.validado===true)status=`<span class="badge bg_">✅ Validado</span>`;
+      else if(r.validado===false)status=`<span class="badge br_">❌ Rejeitado</span>`;
+      else status=`<span class="badge bgold_">⏳ Pendente</span>`;
     }
-    return`<div class="tli">
-      <div class="tlh">
-        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-          ${origemBadge(r.origem)}
-          <span style="font-size:11px;color:var(--muted)">por <strong style="color:var(--muted2)">${r.quemRegistrou||'—'}</strong></span>
+    let body='';
+    if(isAluno){
+      body=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <span style="font-size:22px">${emoji.emoji}</span>
+        <span style="font-size:12px;color:var(--muted2)">${emoji.label}</span>
+        ${status}
+      </div>
+      ${c.sentimento?`<div style="font-size:13px;color:var(--muted2);font-style:italic;margin-bottom:4px">"${c.sentimento}"</div>`:''}
+      ${c.vitoria?`<div style="font-size:12px;color:var(--green)">🏆 ${c.vitoria}</div>`:''}
+      ${c.dificuldade?`<div style="font-size:12px;color:var(--red)">⚠️ ${c.dificuldade}</div>`:''}
+      ${(r.origem==='Aluno'&&(r.validado===null||r.validado===undefined)&&(r.campos?.disposicao||r.campos?.sentimento))?`<div style="display:flex;gap:6px;margin-top:8px">
+        <button class="btn bgreen bsm" data-rid="${r.id}" onclick="window.validarReg(this.dataset.rid,true)">✅ Validar</button>
+        <button class="btn bd bsm" data-rid="${r.id}" onclick="window.validarReg(this.dataset.rid,false)">❌ Rejeitar</button>
+      </div>`:''}`;
+    } else {
+      body=`${c.execucao?`<div style="margin-bottom:6px"><span class="badge ${{'Cumpriu':'bg_','Cumpriu Parcialmente':'bo_','Não Cumpriu':'br_','Reprogramou':'bgold_','Não Respondeu':'bgr_'}[c.execucao]||'bgr_'}">${c.execucao}</span></div>`:''}
+      ${c.resumo?`<div style="font-size:13px;color:var(--muted2)">${c.resumo}</div>`:''}
+      ${c.observacao?`<div style="font-size:12px;color:var(--muted2);font-style:italic">"${c.observacao}"</div>`:''}
+      ${c.descricao?`<div style="font-size:13px">${c.descricao}</div>`:''}`;
+    }
+    return`<div style="background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:12px;margin-bottom:8px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:6px">
+        <div style="display:flex;align-items:center;gap:6px">
+          <span class="badge bb_">${r.origem}</span>
+          <span style="font-size:11px;color:var(--muted)">por ${r.quemRegistrou||'—'}</span>
         </div>
         <div style="display:flex;align-items:center;gap:6px">
-          <span class="tld">${fdate(r.data)}</span>
+          <span style="font-size:11px;color:var(--muted)">${fdate(r.data)}</span>
           ${!isAluno?`<button class="btn bg2 bsm" onclick="openModal('editRegistro','${r.id}')">✏️</button>`:''}
           <button class="btn bd bsm" data-rid="${r.id}" onclick="window.delReg(this.dataset.rid)">🗑</button>
         </div>
       </div>
-      ${campos}
+      ${body}
     </div>`;
-  }).join('')||'<div class="empty"><div class="ei">💬</div><p>Nenhum registro. Use + Registro.</p></div>';
-  return`<div class="card"><div class="ctitle"><div class="cdot" style="background:#5b6af5"></div>Todos os Registros</div>${list}</div>`;
+  }).join('')||'<div style="text-align:center;padding:30px;color:var(--muted)">Nenhum registro ainda.</div>';
+  return`<div class="card"><div class="ctitle"><div class="cdot" style="background:#5b6af5"></div>Registros</div>${list}</div>`;
 }
 
-window.delReg=function(id){
-  if(!confirm('Remover este registro?'))return;
-  db.registros=(db.registros||[]).filter(r=>r.id!==id);
-  save();toast('Removido.');renderApp();
-};
+window.delReg=function(id){if(!confirm('Remover?'))return;db.registros=(db.registros||[]).filter(r=>r.id!==id);save();toast('Removido.');document.getElementById('content').innerHTML=pageProjeto();};
 
-function renderEvolucao(s,recs){
-  const maiRecs=recs.filter(r=>r.origem==='WhatsApp'||r.origem==='Sessão');
-  const bySem={};
-  maiRecs.forEach(r=>{
-    if(!r.campos||!r.campos.execucao)return;
-    const d=new Date(r.data),sem=`${d.getFullYear()}-W${String(Math.ceil((d.getDate()-d.getDay()+6)/7)).padStart(2,'0')}`;
-    if(!bySem[sem])bySem[sem]={total:0,ok:0,label:fdate(r.data)};
-    bySem[sem].total++;
-    if(r.campos.execucao==='Cumpriu')bySem[sem].ok++;
-  });
-  const sems=Object.entries(bySem).sort((a,b)=>a[0].localeCompare(b[0])).slice(-8);
-  const bars=sems.map(([k,v])=>{const p=Math.round(v.ok/v.total*100),cor=p>=70?'var(--green)':p>=40?'var(--gold)':'var(--red)';return`<div class="bw"><div class="bl"><span>${v.label}</span><span style="color:${cor}">${p}% (${v.ok}/${v.total})</span></div><div class="bt"><div class="bf" style="width:${p}%;background:${cor}"></div></div></div>`;}).join('')||'<div style="color:var(--muted);font-size:13px">Sem dados de execução ainda.</div>';
+function adminMotivacional(s){
+  const msg=s.msgMotivacional||null;
+  return`<div class="card" style="max-width:560px">
+    <div class="ctitle"><div class="cdot" style="background:#a78bfa"></div>💬 Mensagem Motivacional</div>
+    <div style="font-size:12px;color:var(--muted2);margin-bottom:16px">Esta mensagem aparece no painel do aluno. Atualize sempre que quiser deixar um recado especial.</div>
+    <div class="fg"><label>Mensagem *</label><textarea id="motiv_txt" style="min-height:120px" placeholder="Ex: Você está indo muito bem! Cada dia conta...">${msg?.texto||''}</textarea></div>
+    <div class="fg"><label>Assinatura</label><input type="text" id="motiv_autor" placeholder="Ex: Maísa" value="${msg?.autor||'Maísa'}"></div>
+    <button class="btn bp" style="width:100%;padding:12px;font-size:14px" onclick="saveMotivacional('${s.id}')">💾 Salvar Mensagem</button>
+    ${msg?`<div style="margin-top:16px;padding:14px;background:linear-gradient(135deg,rgba(91,106,245,.08),transparent);border:1px solid rgba(91,106,245,.2);border-radius:var(--r)">
+      <div style="font-size:10px;color:var(--a2);text-transform:uppercase;font-weight:700;margin-bottom:8px">Preview — como o aluno vê:</div>
+      <div style="font-size:14px;color:var(--text);font-style:italic;line-height:1.7">"${msg.texto}"</div>
+      <div style="font-size:11px;color:var(--muted);text-align:right;margin-top:8px">— ${msg.autor||'Coach'} · ${fdate(msg.data)}</div>
+    </div>`:''}
+  </div>`;
+}
+
+function saveMotivacional(sid){
+  const txt=document.getElementById('motiv_txt')?.value.trim();
+  const autor=document.getElementById('motiv_autor')?.value.trim()||'Maísa';
+  if(!txt){alert('Escreva uma mensagem!');return;}
+  const s=(db.students||[]).find(x=>x.id===sid);if(!s)return;
+  s.msgMotivacional={texto:txt,autor,data:today()};
+  save();toast('✓ Mensagem salva!');document.getElementById('content').innerHTML=pageProjeto();
+}
+
+function adminIA(s){
   const analises=(db.analises||[]).filter(a=>a.studentId===s.id).sort((a,b)=>b.geradoEm.localeCompare(a.geradoEm));
-  const aiHtml=analises.map(a=>`<div class="aibox"><div class="aititle">🤖 Análise · ${fdate(a.geradoEm.slice(0,10))}</div><div class="aitxt">${formatAI(a.conteudo)}</div></div>`).join('')||'<div style="color:var(--muted);font-size:13px">Nenhuma análise gerada ainda.</div>';
-  return`
-    <div class="card"><div class="ctitle"><div class="cdot" style="background:#34d399"></div>Execução Semanal</div>${bars}</div>
-    <div class="card">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-        <div class="ctitle" style="margin-bottom:0"><div class="cdot" style="background:#a78bfa"></div>Análises da IA</div>
-        <button class="btn bgold bsm" onclick="gerarAnalise('${s.id}')">🤖 Gerar</button>
-      </div>
-      <div id="aiArea_${s.id}">${aiHtml}</div>
-    </div>`;
-}
-
-function renderAdminAlunoDados(s){
-  const diarios=(db.registros||[]).filter(r=>r.studentId===s.id&&r.origem==='Aluno').sort((a,b)=>b.data.localeCompare(a.data));
-  const metas=s.metas||[];
-  const hoje=today();
-  function ms(m){
-    if(m.status==='Concluída')return{l:'Concluída',c:'bg_',i:'✅'};
-    if(!m.prazo)return{l:'Em andamento',c:'bb_',i:'🔵'};
-    if(m.prazo<hoje)return{l:'Em atraso',c:'br_',i:'🔴'};
-    if((new Date(m.prazo)-new Date(hoje))/(86400000)<=3)return{l:'Vence em breve',c:'bgold_',i:'🟡'};
-    return{l:'Em dia',c:'bg_',i:'🟢'};
-  }
-  const d={'Muito Baixa':'br_','Baixa':'bo_','Média':'bgold_','Boa':'bg_','Excelente':'bg_'};
-  const dHtml=diarios.map(r=>`<div class="tli">
-    <div class="tlh">
-      <div style="display:flex;gap:5px"><span class="badge ${r.campos.estudou==='Sim'?'bg_':'br_'}">${r.campos.estudou==='Sim'?'✓ Estudou':'✗ Não estudou'}</span>${r.campos.disposicao?`<span class="badge ${d[r.campos.disposicao]||'bgr_'}">${r.campos.disposicao}</span>`:''}</div>
-      <span class="tld">${fdate(r.data)}</span>
-    </div>
-    ${r.campos.sentimento?`<div class="tlf"><div class="tlfl">Sentimento</div><div class="tlfv">${r.campos.sentimento}</div></div>`:''}
-    ${r.campos.dificuldade?`<div class="tlf"><div class="tlfl" style="color:var(--red)">Dificuldade</div><div class="tlfv">${r.campos.dificuldade}</div></div>`:''}
-    ${r.campos.vitoria?`<div class="tlf"><div class="tlfl" style="color:var(--green)">🏆 Vitória</div><div class="tlfv">${r.campos.vitoria}</div></div>`:''}
-  </div>`).join('')||'<div class="empty"><div class="ei">📭</div><p>Aluno ainda não preencheu o diário.</p></div>';
-  const mHtml=metas.length?`<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:13px">
-    <thead><tr style="border-bottom:2px solid var(--border)">
-      <th style="text-align:left;padding:8px;color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase">Meta</th>
-      <th style="text-align:center;padding:8px;color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase">Prazo</th>
-      <th style="text-align:center;padding:8px;color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase">Status</th>
-      <th style="text-align:center;padding:8px;color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase">Ação</th>
-    </tr></thead>
-    <tbody>${metas.map((m,i)=>{const st=ms(m);return`<tr style="border-bottom:1px solid var(--border)">
-      <td style="padding:10px 8px"><div style="font-weight:600">${m.titulo}</div>${m.descricao?`<div style="font-size:11px;color:var(--muted2)">${m.descricao}</div>`:''}</td>
-      <td style="text-align:center;padding:10px 8px;color:var(--muted2)">${m.prazo?fdate(m.prazo):'—'}</td>
-      <td style="text-align:center;padding:10px 8px"><span class="badge ${st.c}">${st.i} ${st.l}</span></td>
-      <td style="text-align:center;padding:10px 8px">
-        <select onchange="updMetaSt('${s.id}',${i},this.value)" style="font-size:11px;padding:4px;width:auto">
-          <option value="Pendente" ${m.status==='Pendente'?'selected':''}>Pendente</option>
-          <option value="Em andamento" ${m.status==='Em andamento'?'selected':''}>Andamento</option>
-          <option value="Concluída" ${m.status==='Concluída'?'selected':''}>Concluída</option>
-        </select>
-        <button class="btn bd bsm" style="margin-top:4px" data-sid="${s.id}" data-idx="${i}" onclick="window.delMeta(this.dataset.sid,this.dataset.idx)">🗑</button>
-      </td>
-    </tr>`;}).join('')}</tbody>
-  </table></div>`:'<div class="empty"><div class="ei">🎯</div><p>Nenhuma meta ainda.</p></div>';
-  return`
-    <div style="display:grid;grid-template-columns:1fr;gap:14px">
-      <div class="card"><div class="ctitle"><div class="cdot" style="background:#34d399"></div>Diário do Aluno (${diarios.length})</div>${dHtml}</div>
-      <div class="card">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-          <div class="ctitle" style="margin-bottom:0"><div class="cdot" style="background:#f0b429"></div>Metas</div>
-          <button class="btn bp bsm" onclick="openModal('novaMeta','${s.id}')">+ Meta</button>
+  const aiH=analises.map((a,i)=>`
+    <div class="aibox" style="margin-bottom:14px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <div class="aititle">🤖 Análise ${a.auto?'<span style="font-size:9px;background:rgba(52,211,153,.2);color:var(--green);padding:2px 6px;border-radius:8px;margin-left:4px">AUTO</span>':''}</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:11px;color:var(--muted)">${fdate(a.geradoEm.slice(0,10))}</span>
+          <button class="btn bd bsm" data-aid="${a.id}" onclick="window.delAnalise(this.dataset.aid)">🗑</button>
         </div>
-        ${mHtml}
       </div>
-    </div>`;
+      <div class="aitxt">${fmtAI(a.conteudo)}</div>
+    </div>`).join('')||'<div style="text-align:center;padding:40px;color:var(--muted)"><div style="font-size:36px;margin-bottom:12px">🤖</div><p>Nenhuma análise gerada ainda.</p><p style="font-size:12px;margin-top:6px">Clique em 🤖 IA no topo para gerar.</p></div>';
+  return`<div class="ph" style="margin-bottom:16px">
+    <div><div class="ptitle" style="font-size:15px">🤖 Análises de IA</div><div class="psub">${analises.length} análise${analises.length!==1?'s':''} gerada${analises.length!==1?'s':''}</div></div>
+    <button class="btn bgold bsm" onclick="gerarAnalise('${s.id}')">+ Gerar Agora</button>
+  </div>${aiH}`;
 }
 
-function updMetaSt(sid,idx,val){
-  const s=(db.students||[]).find(x=>x.id===sid);
-  if(!s||!s.metas||!s.metas[idx])return;
-  s.metas[idx].status=val;save();toast('✓ Status atualizado!');renderApp();
-}
-window.delMeta=function(sid,idx){
-  if(!confirm('Remover meta?'))return;
-  const s=(db.students||[]).find(x=>x.id===sid);
-  if(!s||!s.metas)return;
-  s.metas.splice(idx,1);save();toast('Meta removida.');renderApp();
+window.delAnalise=function(aid){
+  if(!confirm('Remover esta análise?'))return;
+  db.analises=(db.analises||[]).filter(a=>a.id!==aid);
+  save();toast('Análise removida.');document.getElementById('content').innerHTML=pageProjeto();
 };
 
-function renderPerfil(s){
+function adminPerfil(s){
   const all=['Procrastinação','Perfeccionismo','Ansiedade','Autossabotagem','Baixa autoconfiança','Excesso de comparação','Dificuldade de organização','Impulsividade','Disciplina elevada','Consistência elevada'];
   const mk=s.markers||[];
-  const eventos=(db.registros||[]).filter(r=>r.studentId===s.id&&r.origem==='Evento').sort((a,b)=>b.data.localeCompare(a.data));
-  return`
-    <div class="card"><div class="ctitle"><div class="cdot" style="background:#8b96ff"></div>Marcadores <span style="font-size:10px;color:var(--muted);text-transform:none;font-weight:400">(clique para ativar)</span></div>
-      <div>${all.map(m=>`<div class="mk ${mk.includes(m)?'mka':''}" onclick="toggleMk('${s.id}','${m}')">${m}</div>`).join('')}</div>
-      ${mk.length?`<div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;margin-bottom:6px">Ativos</div><div>${mk.map(m=>`<span class="badge bb_" style="margin:2px">${m}</span>`).join('')}</div></div>`:''}
-    </div>
-    <div class="card"><div class="ctitle"><div class="cdot" style="background:#f0b429"></div>Eventos Relevantes</div>
-      ${eventos.map(e=>`<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)"><div style="font-size:18px">⚡</div><div><div style="font-size:13px">${e.campos.descricao||'—'}</div><div style="font-size:11px;color:var(--muted)">${fdate(e.data)} ${e.campos.impacto?`· <span style="color:var(--a2)">${e.campos.impacto}</span>`:''}</div></div></div>`).join('')||'<div style="color:var(--muted);font-size:13px">Nenhum evento.</div>'}
-    </div>
-    <div class="card"><div class="ctitle"><div class="cdot" style="background:#34d399"></div>Dados do Perfil</div>
-      <div class="g2">
-        <div class="fg"><label>Nome</label><input type="text" value="${s.nome}" onchange="updSt('${s.id}','nome',this.value)"></div>
-        <div class="fg"><label>Objetivo</label><input type="text" value="${s.objetivo||''}" onchange="updSt('${s.id}','objetivo',this.value)"></div>
-        <div class="fg"><label>Início</label><input type="date" value="${s.inicio||today()}" onchange="updSt('${s.id}','inicio',this.value)"></div>
-        <div class="fg"><label>E-mail</label><input type="email" value="${s.email||''}" onchange="updSt('${s.id}','email',this.value)"></div>
+  return`<div class="card"><div class="ctitle"><div class="cdot" style="background:#8b96ff"></div>Marcadores</div>
+    <div>${all.map(m=>`<div style="padding:5px 11px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid ${mk.includes(m)?'var(--a2)':'var(--border)'};color:${mk.includes(m)?'var(--a2)':'var(--muted2)'};background:${mk.includes(m)?'rgba(91,106,245,.2)':'transparent'};display:inline-block;margin:2px" onclick="tgMk('${s.id}','${m}')">${m}</div>`).join('')}</div>
+  </div>`;
+}
+window.tgMk=function(sid,m){const s=(db.students||[]).find(x=>x.id===sid);if(!s)return;if(!s.markers)s.markers=[];const i=s.markers.indexOf(m);if(i>=0)s.markers.splice(i,1);else s.markers.push(m);save();document.getElementById('content').innerHTML=pageProjeto();};
+
+function adminAlunoDados(s){
+  const ds=(db.registros||[]).filter(r=>r.studentId===s.id&&r.origem==='Aluno').sort((a,b)=>b.data.localeCompare(a.data));
+  const mt=s.metas||[];
+  const cfg=s.metaCfg||{horasDia:1,folgas:[]};
+  const DIAS_SEMANA=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+
+  const dH=ds.map(r=>{
+    const emoji=EMOJIS.find(e=>e.val===r.campos?.disposicao)||EMOJIS[2];
+    return`<div style="background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:12px;margin-bottom:8px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+        <div style="display:flex;align-items:center;gap:8px"><span style="font-size:22px">${emoji.emoji}</span><span style="font-size:12px;color:var(--muted2)">${emoji.label}</span></div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <span style="font-size:11px;color:var(--muted)">${fdate(r.data)}</span>
+          ${r.validado===true?`<span class="badge bg_">✅</span>`:r.validado===false?`<span class="badge br_">❌</span>`:`<span class="badge bgold_">⏳</span>`}
+        </div>
       </div>
+      ${r.campos?.sentimento?`<div style="font-size:12px;color:var(--muted2);font-style:italic">"${r.campos.sentimento}"</div>`:''}
+      ${r.campos?.vitoria?`<div style="font-size:12px;color:var(--green)">🏆 ${r.campos.vitoria}</div>`:''}
     </div>`;
-}
+  }).join('')||'<div style="color:var(--muted);font-size:13px">Aluno ainda não preencheu.</div>';
 
-function updSt(sid,field,val){const s=(db.students||[]).find(x=>x.id===sid);if(s){s[field]=val;save();toast('✓ Salvo');}}
-function toggleMk(sid,m){
+  const mH=mt.length?mt.map((m,i)=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+    <div><div style="font-size:13px;font-weight:600">${m.titulo}</div>${m.prazo?`<div style="font-size:11px;color:var(--muted)">${fdate(m.prazo)}</div>`:''}</div>
+    <div style="display:flex;align-items:center;gap:6px">
+      <select style="font-size:11px;padding:3px;width:auto" onchange="updMt('${s.id}',${i},this.value)">
+        <option value="Pendente" ${m.status==='Pendente'?'selected':''}>Pendente</option>
+        <option value="Em andamento" ${m.status==='Em andamento'?'selected':''}>Andamento</option>
+        <option value="Concluída" ${m.status==='Concluída'?'selected':''}>Concluída</option>
+      </select>
+      <button class="btn bd bsm" data-sid="${s.id}" data-i="${i}" onclick="window.delMt(this.dataset.sid,this.dataset.i)">🗑</button>
+    </div>
+  </div>`).join(''):'<div style="color:var(--muted);font-size:13px">Nenhuma meta.</div>';
+
+  return`
+  <div class="card" style="margin-bottom:12px">
+    <div class="ctitle"><div class="cdot" style="background:#f0b429"></div>⚙️ Configuração de Meta Semanal</div>
+    <div class="g2" style="margin-bottom:12px">
+      <div class="fg">
+        <label>Meta de horas por dia</label>
+        <select id="cfg_horas" onchange="saveCfg('${s.id}')">
+          ${[0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8].map(h=>`<option value="${h}" ${cfg.horasDia==h?'selected':''}>${h}h/dia</option>`).join('')}
+        </select>
+      </div>
+      <div class="fg">
+        <label>Meta semanal total</label>
+        <div style="font-size:20px;font-weight:800;color:var(--a2);padding:8px 0" id="metaTotal_${s.id}">${((cfg.horasDia||1)*(7-(cfg.folgas||[]).length)).toFixed(1)}h</div>
+      </div>
+    </div>
+    <div class="fg">
+      <label>Dias de folga (clique para marcar)</label>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        ${DIAS_SEMANA.map((d,i)=>`<div onclick="tgFolga('${s.id}',${i})" style="padding:6px 12px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;border:1px solid ${(cfg.folgas||[]).includes(i)?'var(--red)':'var(--border)'};background:${(cfg.folgas||[]).includes(i)?'rgba(248,113,113,.15)':'var(--s2)'};color:${(cfg.folgas||[]).includes(i)?'var(--red)':'var(--muted2)'}">${d}</div>`).join('')}
+      </div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+    <div class="card"><div class="ctitle"><div class="cdot" style="background:#34d399"></div>Diário (${ds.length})</div>${dH}</div>
+    <div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <div class="ctitle" style="margin-bottom:0"><div class="cdot" style="background:#f0b429"></div>Metas</div>
+        <button class="btn bp bsm" onclick="openModal('novaMeta','${s.id}')">+ Meta</button>
+      </div>
+      ${mH}
+    </div>
+  </div>`;
+}
+window.updMt=function(sid,i,v){const s=(db.students||[]).find(x=>x.id===sid);if(!s||!s.metas[i])return;s.metas[i].status=v;save();toast('✓');document.getElementById('content').innerHTML=pageProjeto();};
+window.delMt=function(sid,i){if(!confirm('Remover?'))return;const s=(db.students||[]).find(x=>x.id===sid);if(!s)return;s.metas.splice(i,1);save();toast('Removida.');document.getElementById('content').innerHTML=pageProjeto();};
+
+function saveCfg(sid){
   const s=(db.students||[]).find(x=>x.id===sid);if(!s)return;
-  if(!s.markers)s.markers=[];
-  const i=s.markers.indexOf(m);if(i>=0)s.markers.splice(i,1);else s.markers.push(m);
-  save();renderApp();
-}
-function calcTaxa(sid){
-  const r=(db.registros||[]).filter(t=>t.studentId===sid&&t.campos&&t.campos.execucao);
-  if(!r.length)return 0;
-  return Math.round(r.filter(t=>t.campos.execucao==='Cumpriu').length/r.length*100);
+  if(!s.metaCfg)s.metaCfg={horasDia:1,folgas:[]};
+  const hEl=document.getElementById('cfg_horas');
+  if(hEl)s.metaCfg.horasDia=parseFloat(hEl.value)||1;
+  const total=document.getElementById('metaTotal_'+sid);
+  if(total)total.textContent=(s.metaCfg.horasDia*(7-(s.metaCfg.folgas||[]).length)).toFixed(1)+'h';
+  save();toast('✓ Meta salva!');
 }
 
+function tgFolga(sid,dia){
+  const s=(db.students||[]).find(x=>x.id===sid);if(!s)return;
+  if(!s.metaCfg)s.metaCfg={horasDia:1,folgas:[]};
+  if(!s.metaCfg.folgas)s.metaCfg.folgas=[];
+  const i=s.metaCfg.folgas.indexOf(dia);
+  if(i>=0)s.metaCfg.folgas.splice(i,1);else s.metaCfg.folgas.push(dia);
+  save();document.getElementById('content').innerHTML=pageProjeto();
+}
 // ══════════════════════════════════════════════
-// USUÁRIOS
+// ADMIN — USUÁRIOS
 // ══════════════════════════════════════════════
 function pageUsuarios(){
-  const admins=(db.users||[]).filter(u=>u.role==='admin');
-  const alunos=(db.users||[]).filter(u=>u.role==='student');
-  return`
-    <div class="ph">
-      <div><div class="ptitle">Usuários</div></div>
-      <div style="display:flex;gap:8px">
-        <button class="btn bg2 bsm" onclick="openModal('newAdmin')">+ Admin</button>
-      </div>
-    </div>
-    <div class="card"><div class="ctitle"><div class="cdot" style="background:#5b6af5"></div>Admins</div>
-      ${admins.map(u=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)">
-        <div style="display:flex;align-items:center;gap:8px"><div class="sav" style="background:${acolor(u.nome)}22;color:${acolor(u.nome)}">${ini(u.nome)}</div><div><div style="font-weight:600">${u.nome}</div><div style="font-size:11px;color:var(--muted)">@${u.username}</div></div></div>
-        <span class="badge bb_">Admin</span>
-      </div>`).join('')}
-    </div>
-    <div class="card"><div class="ctitle"><div class="cdot" style="background:#34d399"></div>Alunos com Login</div>
-      ${alunos.map(u=>{const st=(db.students||[]).find(s=>s.userId===u.id);return`<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)">
-        <div style="display:flex;align-items:center;gap:8px"><div class="sav" style="background:${acolor(u.nome)}22;color:${acolor(u.nome)}">${ini(u.nome)}</div><div><div style="font-weight:600">${u.nome}</div><div style="font-size:11px;color:var(--muted)">@${u.username} · ${u.password}</div></div></div>
-        <span class="badge bg_">Aluno</span>
-      </div>`;}).join('')||'<div style="color:var(--muted);font-size:13px;padding:10px 0">Nenhum aluno com login.</div>'}
-    </div>`;
+  const adm=(db.users||[]).filter(u=>u.role==='admin');
+  const al=(db.users||[]).filter(u=>u.role==='student');
+  return`<div class="ph"><div><div class="ptitle">Usuários</div></div><button class="btn bg2 bsm" onclick="openModal('newAdmin')">+ Admin</button></div>
+  <div class="card"><div class="ctitle"><div class="cdot" style="background:#5b6af5"></div>Admins</div>
+    ${adm.map(u=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+      <div style="display:flex;align-items:center;gap:8px"><div class="sav" style="background:${acolor(u.nome)}22;color:${acolor(u.nome)}">${ini(u.nome)}</div><div><div style="font-size:13px;font-weight:600">${u.nome}</div><div style="font-size:11px;color:var(--muted)">@${u.username}</div></div></div>
+      <span class="badge bb_">Admin</span></div>`).join('')}
+  </div>
+  <div class="card"><div class="ctitle"><div class="cdot" style="background:#34d399"></div>Alunos</div>
+    ${al.map(u=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+      <div style="display:flex;align-items:center;gap:8px"><div class="sav" style="background:${acolor(u.nome)}22;color:${acolor(u.nome)}">${ini(u.nome)}</div><div><div style="font-size:13px;font-weight:600">${u.nome}</div><div style="font-size:11px;color:var(--muted)">@${u.username} · ${u.password}</div></div></div>
+      <span class="badge bg_">Aluno</span></div>`).join('')||'<div style="color:var(--muted);font-size:13px">Nenhum.</div>'}
+  </div>`;
 }
 
 // ══════════════════════════════════════════════
-// ALUNO PAGES
+// CALENDÁRIO SEMANAL + META %
 // ══════════════════════════════════════════════
-function pageAlunoInicio(){
-  const st=(db.students||[]).find(s=>s.userId===CU.id);
-  const nome=st?st.nome.split(' ')[0]:CU.nome.split(' ')[0];
-  const hoje=today();
-  const jaHoje=st&&(db.registros||[]).some(r=>r.studentId===st.id&&r.origem==='Aluno'&&r.data===hoje);
-  const total=st?(db.registros||[]).filter(r=>r.studentId===st.id&&r.origem==='Aluno').length:0;
-  const metas=st&&st.metas||[];
-  const ativas=metas.filter(m=>m.status!=='Concluída').length;
-  return`
-    <div style="max-width:600px">
-      <div style="margin-bottom:24px">
-        <div style="font-size:20px;font-weight:800">Olá, ${nome} 👋</div>
-        <div style="font-size:13px;color:var(--muted2)">${new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'})}</div>
-      </div>
-      ${!st?`<div style="background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.2);border-radius:var(--r);padding:14px;margin-bottom:16px;font-size:13px;color:var(--muted2)">⚠️ Perfil não configurado. Fale com o admin.</div>`:''}
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
-        <div onclick="setPage('aluno_form')" style="background:var(--surface);border:2px solid ${jaHoje?'var(--green)':'var(--accent)'};border-radius:var(--r);padding:20px;cursor:pointer;position:relative;overflow:hidden">
-          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:${jaHoje?'var(--green)':'var(--accent)'}"></div>
-          <div style="font-size:28px;margin-bottom:10px">📝</div>
-          <div style="font-size:15px;font-weight:800;margin-bottom:4px">Diário</div>
-          <div style="font-size:12px;color:var(--muted2);margin-bottom:10px">Como foi seu dia</div>
-          ${jaHoje?`<div style="font-size:11px;font-weight:700;color:var(--green)">✓ Registrado hoje</div>`:`<div style="font-size:11px;font-weight:700;color:var(--a2)">→ Responder agora</div>`}
-          <div style="font-size:10px;color:var(--muted);margin-top:4px">${total} registro${total!==1?'s':''}</div>
-        </div>
-        <div onclick="setPage('aluno_metas')" style="background:var(--surface);border:2px solid var(--gold);border-radius:var(--r);padding:20px;cursor:pointer;position:relative;overflow:hidden">
-          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold)"></div>
-          <div style="font-size:28px;margin-bottom:10px">🎯</div>
-          <div style="font-size:15px;font-weight:800;margin-bottom:4px">Metas</div>
-          <div style="font-size:12px;color:var(--muted2);margin-bottom:10px">Seus objetivos</div>
-          <div style="font-size:11px;font-weight:700;color:var(--gold)">${ativas} ativa${ativas!==1?'s':''}</div>
-        </div>
-      </div>
-      ${total>0?`<div class="card"><div class="ctitle"><div class="cdot" style="background:#34d399"></div>Últimos Registros</div>
-        ${(db.registros||[]).filter(r=>st&&r.studentId===st.id&&r.origem==='Aluno').sort((a,b)=>b.data.localeCompare(a.data)).slice(0,3).map(r=>{
-          const d={'Muito Baixa':'br_','Baixa':'bo_','Média':'bgold_','Boa':'bg_','Excelente':'bg_'};
-          return`<div style="display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border)">
-            <div style="display:flex;gap:5px;flex-wrap:wrap"><span class="badge ${r.campos.estudou==='Sim'?'bg_':'br_'}">${r.campos.estudou==='Sim'?'✓':'✗'}</span>${r.campos.disposicao?`<span class="badge ${d[r.campos.disposicao]||'bgr_'}" style="font-size:10px">${r.campos.disposicao}</span>`:''}</div>
-            <span style="font-size:11px;color:var(--muted)">${fdate(r.data)}</span>
-          </div>`;
-        }).join('')}
-        <div style="text-align:center;margin-top:10px"><button class="btn bg2 bsm" onclick="setPage('aluno_hist')">Ver histórico →</button></div>
-      </div>`:''}
-    </div>`;
+const DIAS_LABEL=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+
+function getInicioSemana(d){
+  const dt=new Date(d);
+  const dow=dt.getDay();
+  dt.setDate(dt.getDate()-dow);
+  return dt;
 }
 
-function pageAlunoForm(){
-  const st=(db.students||[]).find(s=>s.userId===CU.id);
-  const nome=st?st.nome.split(' ')[0]:CU.nome.split(' ')[0];
-  return`
-    <div class="ph"><div><div class="ptitle">📝 Diário</div><div class="psub">Como foi hoje, ${nome}?</div></div></div>
-    <div class="card" style="max-width:560px">
-      <div class="fg"><label>Data</label><input type="date" id="af_data" value="${today()}"></div>
-      <div style="height:1px;background:var(--border);margin:4px 0 14px"></div>
-      <div class="fg"><label>1 · Você estudou hoje?</label><div class="rg" id="rg_est"><div class="ro" onclick="selR('rg_est',this,'Sim')">✓ Sim</div><div class="ro" onclick="selR('rg_est',this,'Não')">✗ Não</div></div></div>
-      <div class="fg"><label>2 · Disposição antes de estudar</label><div class="rg" id="rg_disp">${['Muito Baixa','Baixa','Média','Boa','Excelente'].map(o=>`<div class="ro" onclick="selR('rg_disp',this,'${o}')">${o}</div>`).join('')}</div></div>
-      <div class="fg"><label>3 · Como você se sente agora?</label><textarea id="af_sent" placeholder="Descreva como está se sentindo..."></textarea></div>
-      <div class="fg"><label>4 · O que dificultou sua execução hoje?</label><textarea id="af_dif" placeholder="Cansaço, distração, falta de tempo..."></textarea></div>
-      <div class="fg"><label>5 · Qual foi sua principal vitória hoje?</label><textarea id="af_vit" placeholder="Revisei X questões, mantive foco..."></textarea></div>
-      <button class="btn bp" style="width:100%;padding:13px;font-size:15px;margin-top:4px" onclick="saveAlunoReg()">Enviar Registro</button>
-    </div>`;
-}
-
-function pageAlunoMetas(){
-  const st=(db.students||[]).find(s=>s.userId===CU.id);
-  const metas=st&&st.metas||[];
-  const hoje=today();
-  function ms(m){
-    if(m.status==='Concluída')return{l:'Concluída',c:'bg_',i:'✅'};
-    if(!m.prazo)return{l:'Em andamento',c:'bb_',i:'🔵'};
-    if(m.prazo<hoje)return{l:'Em atraso',c:'br_',i:'🔴'};
-    if((new Date(m.prazo)-new Date(hoje))/86400000<=3)return{l:'Vence em breve',c:'bgold_',i:'🟡'};
-    return{l:'Em dia',c:'bg_',i:'🟢'};
+function calcPctMeta(sid){
+  const s=(db.students||[]).find(x=>x.id===sid);
+  if(!s)return 0;
+  const cfg=s.metaCfg||{horasDia:1,folgas:[]};
+  const folgas=cfg.folgas||[];
+  const hMeta=cfg.horasDia||1;
+  // Dias ativos na semana atual
+  const ini=getInicioSemana(today());
+  let totalMeta=0,totalFeito=0;
+  for(let i=0;i<7;i++){
+    const d=new Date(ini);d.setDate(d.getDate()+i);
+    const ds=d.toISOString().slice(0,10);
+    const dow=d.getDay();
+    if(folgas.includes(dow))continue;
+    if(ds>today())continue; // dia futuro não conta ainda
+    totalMeta+=hMeta;
+    // Busca registro do dia
+    const reg=(db.registros||[]).find(r=>r.studentId===sid&&r.origem==='meta_dia'&&r.data===ds);
+    if(reg){
+      if(reg.campos?.status==='Cumpriu')totalFeito+=hMeta;
+      else if(reg.campos?.status==='Parcialmente')totalFeito+=(parseFloat(reg.campos.horas)||0);
+    }
   }
-  return`
-    <div class="ph"><div><div class="ptitle">🎯 Metas</div><div class="psub">Seus objetivos</div></div></div>
-    ${metas.length?`<div class="sgrid" style="grid-template-columns:repeat(3,1fr);max-width:400px">
-      <div class="sc"><div class="sv" style="font-size:20px">${metas.length}</div><div class="sl">Total</div></div>
-      <div class="sc"><div class="sv" style="font-size:20px;color:var(--green)">${metas.filter(m=>m.status==='Concluída').length}</div><div class="sl">Concluídas</div></div>
-      <div class="sc"><div class="sv" style="font-size:20px;color:var(--red)">${metas.filter(m=>ms(m).l==='Em atraso').length}</div><div class="sl">Atraso</div></div>
-    </div>`:''}
-    <div class="card" style="max-width:640px">
-      ${metas.length?`<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:13px">
-        <thead><tr style="border-bottom:2px solid var(--border)">
-          <th style="text-align:left;padding:8px;color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase">Meta</th>
-          <th style="text-align:center;padding:8px;color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase">Prazo</th>
-          <th style="text-align:center;padding:8px;color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase">Status</th>
-        </tr></thead>
-        <tbody>${metas.map(m=>{const s=ms(m);return`<tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 8px"><div style="font-weight:600">${m.titulo}</div>${m.descricao?`<div style="font-size:11px;color:var(--muted2)">${m.descricao}</div>`:''}</td><td style="text-align:center;padding:10px 8px;color:var(--muted2);font-size:12px">${m.prazo?fdate(m.prazo):'—'}</td><td style="text-align:center;padding:10px 8px"><span class="badge ${s.c}">${s.i} ${s.l}</span></td></tr>`;}).join('')}</tbody>
-      </table></div>`:'<div class="empty"><div class="ei">🎯</div><p style="color:var(--muted2)">Nenhuma meta ainda.<br><span style="font-size:12px;color:var(--muted)">Definidas pelo coach nas sessões.</span></p></div>'}
-    </div>`;
+  if(totalMeta===0)return 0;
+  return Math.round(totalFeito/totalMeta*100);
 }
 
-function pageAlunoHist(){
+function calendarioSemanal(st){
+  const cfg=st.metaCfg||{};
+  const metaConfigurada=!!(cfg.horasDia&&cfg.folgas!==undefined);
+  const folgas=cfg.folgas||[];
+  const hMeta=cfg.horasDia||1;
+  const ini=getInicioSemana(today());
+  const hj=today();
+  const agora=new Date();
+  const sabado=new Date(ini);sabado.setDate(sabado.getDate()+6);sabado.setHours(19,0,0,0);
+  const dentroPrazo=agora<sabado;
+
+  const dias=[];
+  for(let i=0;i<7;i++){
+    const d=new Date(ini);d.setDate(d.getDate()+i);
+    const ds=d.toISOString().slice(0,10);
+    const dow=d.getDay();
+    const folga=folgas.includes(dow);
+    const futuro=ds>hj;
+    const reg=(db.registros||[]).find(r=>r.studentId===st.id&&r.origem==='meta_dia'&&r.data===ds);
+    let pct=0;
+    if(reg){
+      if(reg.campos?.status==='Cumpriu')pct=100;
+      else if(reg.campos?.status==='Parcialmente')pct=Math.min(100,Math.round((parseFloat(reg.campos.horas)||0)/hMeta*100));
+    }
+    dias.push({ds,dow,folga,futuro,reg,pct,dia:d.getDate()});
+  }
+
+  const diasAtivos=dias.filter(d=>!d.folga&&!d.futuro);
+  const totalMeta=diasAtivos.length*hMeta;
+  const totalFeito=diasAtivos.reduce((a,d)=>{
+    if(!d.reg)return a;
+    if(d.reg.campos?.status==='Cumpriu')return a+hMeta;
+    if(d.reg.campos?.status==='Parcialmente')return a+(parseFloat(d.reg.campos.horas)||0);
+    return a;
+  },0);
+  const pctSemana=totalMeta>0?Math.round(totalFeito/totalMeta*100):0;
+  const corSemana=pctSemana>=80?'var(--green)':pctSemana>=50?'var(--gold)':'var(--red)';
+
+  const cards=dias.map(d=>{
+    if(d.folga)return`<div style="background:var(--s3);border:1px solid var(--border);border-radius:10px;padding:10px 6px;text-align:center;opacity:.4">
+      <div style="font-size:10px;color:var(--muted);font-weight:600">${DIAS_LABEL[d.dow]}</div>
+      <div style="font-size:11px;color:var(--muted)">${d.dia}</div>
+      <div style="font-size:18px;margin:4px 0">😴</div>
+      <div style="font-size:9px;color:var(--muted)">Folga</div>
+    </div>`;
+
+    const cor=d.pct>=100?'var(--green)':d.pct>0?'var(--gold)':d.futuro?'var(--border)':'var(--muted)';
+    const isHj=d.ds===hj;
+    // Só mostra "Registrar" se meta configurada, dia não futuro e dentro do prazo
+    const podeReg=metaConfigurada&&!d.futuro&&dentroPrazo;
+
+    return`<div onclick="${podeReg?`openModal('metaDia','${st.id}','${d.ds}')`:''}" style="background:${d.pct>=100?'rgba(52,211,153,.08)':d.pct>0?'rgba(240,180,41,.08)':'var(--s2)'};border:1px solid ${isHj?'var(--accent)':d.pct>0?cor:'var(--border)'};border-radius:10px;padding:10px 6px;text-align:center;cursor:${podeReg?'pointer':'default'};transition:all .15s;${isHj?'box-shadow:0 0 8px rgba(91,106,245,.3)':''}">
+      <div style="font-size:10px;color:${isHj?'var(--a2)':'var(--muted)'};font-weight:600">${DIAS_LABEL[d.dow]}</div>
+      <div style="font-size:11px;color:var(--muted2)">${d.dia}</div>
+      <div style="font-size:18px;margin:4px 0">${d.reg?(d.pct>=100?'✅':d.pct>0?'⚡':'❌'):(d.futuro?'·':metaConfigurada?'📝':'·')}</div>
+      <div style="font-size:10px;font-weight:700;color:${cor}">${d.reg?`${d.pct}%`:(d.futuro?'':metaConfigurada?'Registrar':'')}</div>
+    </div>`;
+  }).join('');
+
+  return`<div class="card">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+      <div class="ctitle" style="margin-bottom:0"><div class="cdot" style="background:#5b6af5"></div>Calendário Semanal</div>
+      ${metaConfigurada?`<div style="text-align:right"><div style="font-size:18px;font-weight:800;color:${corSemana}">${pctSemana}%</div><div style="font-size:9px;color:var(--muted);text-transform:uppercase">meta da semana</div></div>`:''}
+    </div>
+    ${metaConfigurada?`<div class="prog-wrap" style="margin-bottom:10px"><div class="prog-fill" style="width:${pctSemana}%;background:${corSemana}"></div></div>`:''}
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:8px">${cards}</div>
+    ${metaConfigurada?`<div style="font-size:10px;color:var(--muted);text-align:center">⏰ Prazo para registrar dias passados: <strong style="color:var(--gold)">Sábado até 19h</strong>${!dentroPrazo?' · <span style="color:var(--red)">Prazo encerrado</span>':''}</div>
+    <div style="font-size:10px;color:var(--muted2);text-align:center;margin-top:3px">Meta: ${hMeta}h/dia · ${totalMeta.toFixed(1)}h total na semana</div>`
+    :`<div style="font-size:12px;color:var(--muted);text-align:center;padding:6px 0">⏳ Aguardando configuração do coach para liberar registros</div>`}
+  </div>`;
+
+// ══════════════════════════════════════════════
+// ALUNO — PAINEL
+// ══════════════════════════════════════════════
+function alunoPanel(){
   const st=(db.students||[]).find(s=>s.userId===CU.id);
-  if(!st)return'<div class="empty"><div class="ei">⚠️</div><p>Perfil não configurado.</p></div>';
-  const recs=(db.registros||[]).filter(r=>r.studentId===st.id&&r.origem==='Aluno').sort((a,b)=>b.data.localeCompare(a.data));
-  const d={'Muito Baixa':'br_','Baixa':'bo_','Média':'bgold_','Boa':'bg_','Excelente':'bg_'};
+  if(!st)return`<div style="text-align:center;padding:40px;color:var(--muted)"><div style="font-size:36px;margin-bottom:12px">⚠️</div><p>Perfil não configurado. Fale com o admin.</p></div>`;
+  const dias=getDiasValidados(st.id);
+  const fase=getFaseAtual(dias);
+  const faseIdx=FASES.indexOf(fase);
+  const pct=dias<=0?0:Math.min(100,Math.round((dias-fase.inicio)/(fase.fim-fase.inicio+1)*100));
+  const streak=getStreak(st.id);
+  const hoje=today();
+  const jaHoje=(db.registros||[]).some(r=>r.studentId===st.id&&r.origem==='Aluno'&&r.data===hoje);
+  const rejeitadoHoje=(db.registros||[]).find(r=>r.studentId===st.id&&r.origem==='Aluno'&&r.data===hoje&&r.validado===false);
+  const proximaFase=FASES[faseIdx+1];
+  const diasRestantes=proximaFase?fase.fim-dias:0;
+  const nome=st.nome.split(' ')[0];
+
+  // Ranking
+  const ranking=(db.students||[]).map(s=>{
+    const d=getDiasValidados(s.id);
+    const h=(db.registros||[]).filter(r=>r.studentId===s.id&&r.origem==='Aluno'&&r.validado===true&&r.campos?.horas).reduce((a,r)=>a+(parseFloat(r.campos.horas)||0),0);
+    return{...s,dias:d,horas:h};
+  }).sort((a,b)=>b.dias-a.dias||b.horas-a.horas);
+  const myPos=ranking.findIndex(r=>r.id===st.id);
+  const medals=['🥇','🥈','🥉','4️⃣','5️⃣'];
+
+  // Stats semana
+  const regsSemana=(()=>{
+    const ini=getInicioSemana(hoje);
+    const fim=new Date(ini);fim.setDate(fim.getDate()+6);
+    return(db.registros||[]).filter(r=>r.studentId===st.id&&r.origem==='Aluno'&&r.data>=ini.toISOString().slice(0,10)&&r.data<=fim.toISOString().slice(0,10));
+  })();
+  const diasRegSemana=regsSemana.length;
+  const pctMeta=calcPctMeta(st.id);
+  const corPct=pctMeta>=80?'var(--green)':pctMeta>=50?'var(--gold)':'var(--a2)';
+  const msgMotiv=st.msgMotivacional||null;
+
   return`
-    <div class="ph"><div><div class="ptitle">📚 Histórico</div></div><button class="btn bp bsm" onclick="setPage('aluno_form')">+ Registro</button></div>
-    ${recs.map(r=>`<div class="tli">
-      <div class="tlh">
-        <div style="display:flex;gap:5px"><span class="badge ${r.campos.estudou==='Sim'?'bg_':'br_'}">${r.campos.estudou==='Sim'?'✓ Estudou':'✗ Não estudou'}</span>${r.campos.disposicao?`<span class="badge ${d[r.campos.disposicao]||'bgr_'}">${r.campos.disposicao}</span>`:''}</div>
-        <span class="tld">${fdate(r.data)}</span>
+  <style>
+    @keyframes rocket{0%{transform:translateY(0) rotate(-45deg);}50%{transform:translateY(-6px) rotate(-45deg);}100%{transform:translateY(0) rotate(-45deg);}}
+    @keyframes smoke{0%{opacity:.6;transform:scale(1) translateY(0);}100%{opacity:0;transform:scale(2) translateY(8px);}}
+    @keyframes pencil{0%,100%{transform:rotate(-10deg);}50%{transform:rotate(10deg);}}
+    .rocket-anim{animation:rocket 1.2s ease-in-out infinite;display:inline-block;}
+    .pencil-anim{animation:pencil 0.8s ease-in-out infinite;display:inline-block;}
+    .smoke{width:6px;height:6px;background:rgba(255,255,255,.3);border-radius:50%;position:absolute;animation:smoke .8s ease-out infinite;}
+  </style>
+
+  <div style="max-width:900px">
+    <div style="margin-bottom:14px">
+      <div style="font-size:20px;font-weight:800">Olá, ${nome} 👋</div>
+      <div style="font-size:12px;color:var(--muted2)">${new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'})}</div>
+    </div>
+
+    ${rejeitadoHoje?`<div style="background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);border-radius:var(--r);padding:12px 14px;margin-bottom:12px;font-size:13px;color:var(--red)">❌ <strong>Dia não validado pelo coach.</strong> Continue amanhã!</div>`:''}
+    ${jaHoje&&!rejeitadoHoje?`<div style="background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.25);border-radius:var(--r);padding:12px 14px;margin-bottom:12px;font-size:13px;color:var(--green)">✅ Registro enviado! Aguardando validação do coach.</div>`:''}
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start">
+
+      <!-- COLUNA ESQUERDA -->
+      <div>
+        <!-- FASE + STREAK -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px;grid-column:1/-1">
+            <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px">Fase Atual</div>
+            <div style="font-size:15px;font-weight:800;color:${fase.cor};margin-bottom:6px">${fase.nome}</div>
+            <div class="prog-wrap" style="margin-bottom:4px"><div class="prog-fill" style="width:${pct}%;background:${fase.cor}"></div></div>
+            <div style="font-size:11px;color:var(--muted)">Dia ${dias} de ${fase.fim}${proximaFase?` · Faltam ${diasRestantes} para ${proximaFase.nome}`:' · 🏆 Fase máxima!'}</div>
+          </div>
+          <div class="streak" style="padding:10px">
+            <span style="font-size:22px">🔥</span>
+            <div><div style="font-size:18px;font-weight:800;color:var(--gold)">${streak}</div><div style="font-size:9px;color:var(--muted);text-transform:uppercase">Dias seguidos</div></div>
+          </div>
+          <div style="background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:10px;display:flex;align-items:center;gap:8px">
+            <span style="font-size:22px">📅</span>
+            <div><div style="font-size:18px;font-weight:800">${dias}</div><div style="font-size:9px;color:var(--muted);text-transform:uppercase">Total validados</div></div>
+          </div>
+        </div>
+
+        <!-- RANKING + REGISTRO -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+          <div onclick="setPage('aluno_ranking')" style="background:linear-gradient(135deg,#1a1e28,#222736);border:1px solid rgba(240,180,41,.3);border-radius:var(--r);padding:14px;cursor:pointer;position:relative;overflow:hidden;transition:all .2s" onmouseover="this.style.borderColor='var(--gold)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(240,180,41,.3)';this.style.transform='none'">
+            <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent)"></div>
+            <div style="position:relative;display:inline-block;margin-bottom:6px">
+              <span class="rocket-anim" style="font-size:26px">🚀</span>
+              <div class="smoke" style="bottom:-4px;left:8px;animation-delay:0s"></div>
+              <div class="smoke" style="bottom:-4px;left:14px;animation-delay:.2s"></div>
+            </div>
+            <div style="font-size:12px;font-weight:800;color:var(--gold);margin-bottom:3px">Ranking</div>
+            <div style="font-size:10px;color:var(--muted2)">${myPos>=0?`${myPos===0?'1º 🥇':myPos===1?'2º 🥈':myPos===2?'3º 🥉':`${myPos+1}º`} lugar`:'—'}</div>
+            <div style="font-size:9px;color:var(--muted);margin-top:4px">Ver completo →</div>
+          </div>
+          <div onclick="setPage('aluno_form')" style="background:linear-gradient(135deg,#1a1e28,#222736);border:1px solid ${jaHoje?'rgba(52,211,153,.4)':'rgba(91,106,245,.4)'};border-radius:var(--r);padding:14px;cursor:pointer;position:relative;overflow:hidden;transition:all .2s" onmouseover="this.style.borderColor='${jaHoje?'var(--green)':'var(--accent)'}';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='${jaHoje?'rgba(52,211,153,.4)':'rgba(91,106,245,.4)'}';this.style.transform='none'">
+            <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,${jaHoje?'var(--green)':'var(--accent)'},transparent)"></div>
+            <div style="font-size:26px;margin-bottom:6px"><span class="pencil-anim">✏️</span></div>
+            <div style="font-size:12px;font-weight:800;color:${jaHoje?'var(--green)':'var(--a2)'};margin-bottom:3px">${jaHoje?'Registrado':'Fazer Registro'}</div>
+            <div style="font-size:10px;color:var(--muted2)">${jaHoje?'Enviado ✅':'Registre seu dia'}</div>
+            <div style="font-size:9px;color:var(--muted);margin-top:4px">${jaHoje?'Aguardando →':'Agora →'}</div>
+          </div>
+        </div>
+
+        <!-- FASES -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+          ${FASES.map((f,i)=>{
+            const concluida=dias>f.fim;
+            const ativa=dias>=f.inicio&&dias<=f.fim&&dias>0;
+            const fpct=concluida?100:ativa?Math.min(100,Math.round((dias-f.inicio)/(f.fim-f.inicio+1)*100)):0;
+            return`<div class="fase-card ${ativa?'ativa':''}" style="${ativa?`border-color:${f.cor};box-shadow:0 0 10px ${f.cor}22;`:''}${concluida?`border-color:${f.cor}30;`:''}">
+              <div style="display:flex;align-items:center;gap:7px;margin-bottom:5px">
+                <div class="fase-num" style="background:${concluida?f.cor:ativa?f.cor+'33':'var(--s3)'};color:${concluida||ativa?f.cor:'var(--muted)'};">${concluida?'✅':i+1}</div>
+                <div style="flex:1"><div style="font-size:11px;font-weight:700;color:${concluida?'var(--green)':ativa?f.cor:'var(--muted)'}">${f.nome}</div><div style="font-size:9px;color:var(--muted)">Dias ${f.inicio}–${f.fim}</div></div>
+                ${ativa?`<span style="font-size:9px;font-weight:700;color:${f.cor};background:${f.cor}22;padding:2px 6px;border-radius:8px">ATUAL</span>`:''}
+              </div>
+              ${ativa||concluida?`<div class="prog-wrap" style="height:3px"><div class="prog-fill" style="width:${fpct}%;background:${f.cor}"></div></div>`:''}
+            </div>`;
+          }).join('')}
+        </div>
       </div>
-      ${r.campos.sentimento?`<div class="tlf"><div class="tlfl">Sentimento</div><div class="tlfv">${r.campos.sentimento}</div></div>`:''}
-      ${r.campos.dificuldade?`<div class="tlf"><div class="tlfl">Dificuldade</div><div class="tlfv">${r.campos.dificuldade}</div></div>`:''}
-      ${r.campos.vitoria?`<div class="tlf"><div class="tlfl" style="color:var(--green)">🏆 Vitória</div><div class="tlfv">${r.campos.vitoria}</div></div>`:''}
-    </div>`).join('')||'<div class="empty"><div class="ei">📭</div><p>Nenhum registro ainda.</p></div>'}`;
+
+      <!-- COLUNA DIREITA -->
+      <div>
+        <!-- RESUMO DA SEMANA -->
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:10px">
+          <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;font-weight:700;margin-bottom:12px">📊 Resumo da Semana</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
+            <div style="background:var(--s2);border-radius:var(--r2);padding:12px;text-align:center">
+              <div style="font-size:28px;font-weight:800;color:var(--a2)">${diasRegSemana}</div>
+              <div style="font-size:10px;color:var(--muted);text-transform:uppercase;margin-top:2px">Dias registrados</div>
+            </div>
+            <div style="background:var(--s2);border-radius:var(--r2);padding:12px;text-align:center">
+              <div style="font-size:28px;font-weight:800;color:${corPct}">${pctMeta}%</div>
+              <div style="font-size:10px;color:var(--muted);text-transform:uppercase;margin-top:2px">Da meta semanal</div>
+            </div>
+          </div>
+          <div class="prog-wrap"><div class="prog-fill" style="width:${pctMeta}%;background:${corPct}"></div></div>
+          <div style="font-size:10px;color:var(--muted);margin-top:4px;text-align:center">${pctMeta===0?'Nenhum registro ainda esta semana':pctMeta>=100?'🎉 Meta semanal concluída!':pctMeta>=50?'Mais da metade feito, continue!':'Vamos lá, você consegue!'}</div>
+        </div>
+
+        <!-- MENSAGEM MOTIVACIONAL -->
+        <div style="background:linear-gradient(135deg,rgba(91,106,245,.08),rgba(139,150,255,.04));border:1px solid rgba(91,106,245,.25);border-radius:var(--r);padding:16px">
+          <div style="font-size:10px;color:var(--a2);text-transform:uppercase;letter-spacing:.8px;font-weight:700;margin-bottom:10px">💬 Mensagem Motivacional</div>
+          ${msgMotiv?`
+            <div style="font-size:14px;color:var(--text);line-height:1.7;font-style:italic;margin-bottom:10px">"${msgMotiv.texto}"</div>
+            <div style="font-size:11px;color:var(--muted);text-align:right">— ${msgMotiv.autor||'Coach'} · ${fdate(msgMotiv.data)}</div>
+          `:`
+            <div style="font-size:13px;color:var(--muted);text-align:center;padding:20px 0">—</div>
+          `}
+        </div>
+
+        <!-- CALENDÁRIO (abaixo na coluna direita) -->
+        ${calendarioSemanal(st)}
+      </div>
+    </div>
+  </div>`;
+}
+
+}
+function alunoRanking(){
+  const st=(db.students||[]).find(s=>s.userId===CU.id);
+  const ranking=(db.students||[]).map(s=>{
+    const d=getDiasValidados(s.id);
+    const pct=calcPctMeta(s.id);
+    const str=getStreak(s.id);
+    return{...s,dias:d,pct,streak:str};
+  }).sort((a,b)=>b.pct-a.pct||b.dias-a.dias);
+  const medals=['🥇','🥈','🥉'];
+  const list=ranking.map((r,i)=>{
+    const isMe=r.id===st?.id;
+    const corPct=r.pct>=80?'var(--green)':r.pct>=50?'var(--gold)':'var(--red)';
+    return`<div style="display:flex;align-items:center;gap:12px;padding:14px;border-radius:var(--r);margin-bottom:8px;background:${isMe?'rgba(91,106,245,.1)':'var(--s2)'};border:1px solid ${isMe?'var(--a2)':'var(--border)'}">
+      <div style="font-size:${i<3?'28px':'18px'};width:36px;text-align:center;font-weight:800;color:var(--muted)">${medals[i]||`#${i+1}`}</div>
+      <div class="sav" style="width:38px;height:38px;font-size:14px;font-weight:800;border-radius:50%;background:${acolor(r.nome)}22;color:${acolor(r.nome)};flex-shrink:0">${ini(r.nome)}</div>
+      <div style="flex:1">
+        <div style="font-size:14px;font-weight:${isMe?'800':'600'};color:${isMe?'var(--a2)':'var(--text)'}">${r.nome}${isMe?' 👈':''}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">🔥 ${r.streak} seguidos · ${r.dias} dias totais</div>
+        <div class="prog-wrap" style="margin-top:5px;height:4px"><div class="prog-fill" style="width:${r.pct}%;background:${corPct}"></div></div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:18px;font-weight:800;color:${corPct}">${r.pct}%</div>
+        <div style="font-size:10px;color:var(--muted)">da meta</div>
+      </div>
+    </div>`;
+  }).join('')||'<div style="text-align:center;padding:40px;color:var(--muted)">Nenhum dado ainda.</div>';
+  return`
+    <div class="ph"><div>
+      <button class="btn bg2 bsm" onclick="setPage('aluno_painel')" style="margin-bottom:8px">← Início</button>
+      <div class="ptitle">🚀 Ranking</div><div class="psub">Ordenado por % da meta semanal</div>
+    </div></div>
+    <div style="background:linear-gradient(135deg,rgba(240,180,41,.06),transparent);border:1px solid rgba(240,180,41,.2);border-radius:var(--r);padding:14px;margin-bottom:16px;text-align:center">
+      <div style="font-size:28px;margin-bottom:6px">🏆</div>
+      <div style="font-size:13px;color:var(--muted2)">Quem cumpriu mais a <strong>sua própria meta</strong> está na frente.<br>Justo para todos!</div>
+    </div>
+    ${list}`;
+}
+
+// ══════════════════════════════════════════════
+// ALUNO — FORMULÁRIO
+// ══════════════════════════════════════════════
+function alunoForm(){
+  const st=(db.students||[]).find(s=>s.userId===CU.id);
+  const nome=st?st.nome.split(' ')[0]:CU.nome.split(' ')[0];
+  const emojiHTML=EMOJIS.map(e=>`<div class="emoji-opt ${RV['disp']===e.val?'sel':''}" onclick="selEmoji('${e.val}',this)" title="${e.label}"><span>${e.emoji}</span></div>`).join('');
+  return`<div class="ph"><div>
+    <button class="btn bg2 bsm" onclick="setPage('aluno_painel')" style="margin-bottom:8px">← Início</button>
+    <div class="ptitle">📝 Registro do Dia</div>
+    <div class="psub">${new Date().toLocaleDateString('pt-BR',{day:'numeric',month:'long',year:'numeric'})}</div>
+  </div></div>
+  <div class="card" style="max-width:520px">
+    <div class="fg"><label>Data</label><input type="date" id="af_d" value="${today()}"></div>
+    <div style="height:1px;background:var(--border);margin:4px 0 14px"></div>
+
+    <div class="fg">
+      <label>1 · Como estava sua disposição?</label>
+      <div class="emoji-row" id="emojiRow">${emojiHTML}</div>
+      <div id="emojiLabel" style="text-align:center;font-size:12px;color:var(--muted2);height:16px"></div>
+    </div>
+
+    <div class="fg">
+      <label>2 · Como você se sente agora?</label>
+      <textarea id="af_s" placeholder="Descreva como está se sentindo..."></textarea>
+    </div>
+    <div class="fg">
+      <label>3 · O que dificultou sua execução?</label>
+      <textarea id="af_dif" placeholder="Cansaço, distração..."></textarea>
+    </div>
+    <div class="fg">
+      <label>4 · Qual sua principal vitória hoje?</label>
+      <textarea id="af_v" placeholder="Revisei X questões, mantive o foco..."></textarea>
+    </div>
+    <button class="btn bp" style="width:100%;padding:13px;font-size:15px" onclick="saveAlunoReg()">Enviar Registro</button>
+  </div>`;
+}
+
+function selEmoji(val,el){
+  RV['disp']=val;
+  document.querySelectorAll('.emoji-opt').forEach(e=>e.classList.remove('sel'));
+  el.classList.add('sel');
+  const label=EMOJIS.find(e=>e.val===val);
+  const lbl=document.getElementById('emojiLabel');
+  if(lbl&&label)lbl.textContent=label.label;
 }
 
 function saveAlunoReg(){
   const st=(db.students||[]).find(s=>s.userId===CU.id);
-  if(!st){toast('Perfil não configurado. Fale com o admin.');return;}
+  if(!st){toast('Perfil não configurado.');return;}
   if(!db.registros)db.registros=[];
   db.registros.push({
     id:uid(),studentId:st.id,authorId:CU.id,
-    data:document.getElementById('af_data').value||today(),
+    data:document.getElementById('af_d')?.value||today(),
     origem:'Aluno',quemRegistrou:CU.nome,
+    validado:null,
     campos:{
-      estudou:RV['rg_est']||'',disposicao:RV['rg_disp']||'',
-      sentimento:gv('af_sent'),dificuldade:gv('af_dif'),vitoria:gv('af_vit')
+      disposicao:RV['disp']||'Média',
+      sentimento:gv('af_s'),dificuldade:gv('af_dif'),vitoria:gv('af_v')
     }
   });
-  save();RV={};toast('✓ Registro enviado!');setPage('aluno_inicio');
+  save();RV={};toast('✅ Registro enviado! Aguardando validação.');setPage('aluno_painel');
+}
+
+// ══════════════════════════════════════════════
+// ALUNO — EVOLUÇÃO (LINHA DO TEMPO)
+// ══════════════════════════════════════════════
+function alunoEvolucao(){
+  const st=(db.students||[]).find(s=>s.userId===CU.id);
+  if(!st)return'<div style="text-align:center;padding:40px;color:var(--muted)">Perfil não configurado.</div>';
+  const recs=(db.registros||[]).filter(r=>r.studentId===st.id&&r.origem==='Aluno').sort((a,b)=>b.data.localeCompare(a.data));
+  const list=recs.map(r=>{
+    const emoji=EMOJIS.find(e=>e.val===r.campos?.disposicao)||EMOJIS[2];
+    const avatarClass=r.validado===true?'validado':r.validado===false?'rejeitado':'pendente';
+    const statusIcon=r.validado===true?'✅':r.validado===false?'❌':'⏳';
+    return`<div class="tl-dia">
+      <div class="tl-dia-avatar ${avatarClass}">${emoji.emoji}</div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+          <div style="font-size:12px;font-weight:600">${fdate(r.data)}</div>
+          <div style="display:flex;align-items:center;gap:6px">
+            ${r.campos?.horas?`<span style="font-size:11px;color:var(--a2);font-weight:700">⏱ ${r.campos.horas}h</span>`:''}
+            <span style="font-size:14px">${statusIcon}</span>
+            ${r.validado===false?`<span style="font-size:10px;color:var(--red)">Dia não validado pelo coach</span>`:''}
+            ${r.validado===true?`<span style="font-size:10px;color:var(--green)">Dia validado</span>`:''}
+            ${r.validado===null||r.validado===undefined?`<span style="font-size:10px;color:var(--gold)">Aguardando validação</span>`:''}
+          </div>
+        </div>
+        ${r.campos?.sentimento?`<div style="font-size:12px;color:var(--muted2);font-style:italic">"${r.campos.sentimento}"</div>`:''}
+        ${r.campos?.vitoria?`<div style="font-size:11px;color:var(--green);margin-top:2px">🏆 ${r.campos.vitoria}</div>`:''}
+      </div>
+    </div>`;
+  }).join('')||'<div style="text-align:center;padding:40px;color:var(--muted)">Nenhum registro ainda.</div>';
+  const dias=getDiasValidados(st.id);
+  const total=recs.length;
+  const validados=recs.filter(r=>r.validado===true).length;
+  const rejeitados=recs.filter(r=>r.validado===false).length;
+  return`
+    <div class="sgrid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="sc"><div class="sv">${total}</div><div class="sl">Enviados</div></div>
+      <div class="sc"><div class="sv" style="color:var(--green)">${validados}</div><div class="sl">Validados</div></div>
+      <div class="sc"><div class="sv" style="color:var(--red)">${rejeitados}</div><div class="sl">Rejeitados</div></div>
+    </div>
+    <div class="card"><div class="ctitle"><div class="cdot" style="background:#5b6af5"></div>Sua Linha do Tempo</div>${list}</div>`;
+}
+
+// ══════════════════════════════════════════════
+// ALUNO — CONQUISTAS
+// ══════════════════════════════════════════════
+function alunoConquistas(){
+  const st=(db.students||[]).find(s=>s.userId===CU.id);
+  if(!st)return'';
+  const list=CONQUISTAS_DEF.map(c=>{
+    const desbloqueada=c.check(st);
+    return`<div class="conquista-card ${desbloqueada?'desbloqueada':''}">
+      <div class="conquista-icon ${desbloqueada?'':'conquista-locked'}">${c.icon}</div>
+      <div style="flex:1">
+        <div style="font-size:13px;font-weight:700;color:${desbloqueada?'var(--gold)':'var(--muted2)'}">${c.nome}</div>
+        <div style="font-size:11px;color:var(--muted)">${c.desc}</div>
+      </div>
+      ${desbloqueada?`<span class="badge bgold_">✨ Desbloqueado</span>`:`<span class="badge bgr_">🔒</span>`}
+    </div>`;
+  }).join('');
+  const total=CONQUISTAS_DEF.filter(c=>c.check(st)).length;
+  return`
+    <div class="ph"><div><div class="ptitle">🏆 Conquistas</div><div class="psub">${total} de ${CONQUISTAS_DEF.length} desbloqueadas</div></div></div>
+    <div class="prog-wrap" style="margin-bottom:16px"><div class="prog-fill" style="width:${Math.round(total/CONQUISTAS_DEF.length*100)}%;background:var(--gold)"></div></div>
+    ${list}`;
+}
+
+// ══════════════════════════════════════════════
+// ALUNO — PERFIL
+// ══════════════════════════════════════════════
+function alunoPerfil(){
+  const st=(db.students||[]).find(s=>s.userId===CU.id);
+  if(!st)return'';
+  const dias=getDiasValidados(st.id);
+  const fase=getFaseAtual(dias);
+  const mt=st.metas||[];
+  const hj=today();
+  function ms(m){
+    if(m.status==='Concluída')return{l:'Concluída',c:'bg_',i:'✅'};
+    if(!m.prazo)return{l:'Em andamento',c:'bb_',i:'🔵'};
+    if(m.prazo<hj)return{l:'Em atraso',c:'br_',i:'🔴'};
+    if((new Date(m.prazo)-new Date(hj))/86400000<=3)return{l:'Em breve',c:'bgold_',i:'🟡'};
+    return{l:'Em dia',c:'bg_',i:'🟢'};
+  }
+  return`
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px">
+        <div class="sav" style="width:50px;height:50px;font-size:18px;font-weight:800;border-radius:50%;background:${acolor(st.nome)}22;color:${acolor(st.nome)};border:2px solid ${acolor(st.nome)}">${ini(st.nome)}</div>
+        <div>
+          <div style="font-size:16px;font-weight:800">${st.nome}</div>
+          <div style="font-size:12px;color:var(--muted)">${st.objetivo||'Sem objetivo'}</div>
+          <div style="font-size:11px;margin-top:3px;color:${fase.cor}">${fase.nome} · Dia ${dias}</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ctitle"><div class="cdot" style="background:#f0b429"></div>Metas</div>
+      ${mt.length?mt.map(m=>{const s=ms(m);return`<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)">
+        <div><div style="font-size:13px;font-weight:600">${m.titulo}</div>${m.prazo?`<div style="font-size:11px;color:var(--muted)">${fdate(m.prazo)}</div>`:''}</div>
+        <span class="badge ${s.c}">${s.i} ${s.l}</span>
+      </div>`;}).join(''):'<div style="color:var(--muted);font-size:13px;text-align:center;padding:20px">Metas definidas pelo coach nas sessões.</div>'}
+    </div>`;
 }
 
 // ══════════════════════════════════════════════
 // MODAIS
 // ══════════════════════════════════════════════
-function openModal(type,extra,origemForce){
-  RV={};
-  document.getElementById('mo').classList.remove('hidden');
+function openModal(type,extra,extra2){
+  RV={};document.getElementById('mo').classList.remove('hidden');
   const box=document.getElementById('mb');
 
   if(type==='newStudent'){
-    box.innerHTML=`
-      <div class="mtitle">👤 Novo Aluno</div>
-      <div style="background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.2);border-radius:var(--r2);padding:10px 12px;font-size:12px;color:var(--muted2);margin-bottom:14px">🔐 Login gerado automaticamente.</div>
-      <div class="fg"><label>Nome completo *</label><input type="text" id="m_nome" placeholder="João Silva"></div>
+    box.innerHTML=`<div class="mtitle">👤 Novo Aluno</div>
+      <div style="background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.2);border-radius:var(--r2);padding:8px 12px;font-size:12px;color:var(--muted2);margin-bottom:12px">🔐 Login gerado automaticamente.</div>
+      <div class="fg"><label>Nome *</label><input type="text" id="m_n" placeholder="João Silva"></div>
       <div class="g2">
-        <div class="fg"><label>Objetivo</label><input type="text" id="m_obj" placeholder="TRT 2025"></div>
-        <div class="fg"><label>Início</label><input type="date" id="m_ini" value="${today()}"></div>
+        <div class="fg"><label>Objetivo</label><input type="text" id="m_o" placeholder="TRT 2025"></div>
+        <div class="fg"><label>Início</label><input type="date" id="m_i" value="${today()}"></div>
       </div>
-      <div class="fg"><label>E-mail</label><input type="email" id="m_email"></div>
-      <div class="mfooter"><button class="btn bg2" onclick="closeModal()">Cancelar</button><button class="btn bp" onclick="saveNewStudent()">Criar Aluno</button></div>`;
+      <div class="fg"><label>E-mail</label><input type="email" id="m_e"></div>
+      <div class="mfooter"><button class="btn bg2" onclick="closeModal()">Cancelar</button><button class="btn bp" onclick="saveNewSt()">Criar</button></div>`;
     return;
   }
 
   if(type==='editStudent'){
     const s=(db.students||[]).find(x=>x.id===extra);if(!s)return;
-    box.innerHTML=`
-      <div class="mtitle">✏️ Editar — ${s.nome}</div>
-      <div class="fg"><label>Nome *</label><input type="text" id="e_nome" value="${s.nome}"></div>
+    box.innerHTML=`<div class="mtitle">✏️ Editar — ${s.nome}</div>
+      <div class="fg"><label>Nome *</label><input type="text" id="e_n" value="${s.nome}"></div>
       <div class="g2">
-        <div class="fg"><label>Objetivo</label><input type="text" id="e_obj" value="${s.objetivo||''}"></div>
-        <div class="fg"><label>Início</label><input type="date" id="e_ini" value="${s.inicio||today()}"></div>
+        <div class="fg"><label>Objetivo</label><input type="text" id="e_o" value="${s.objetivo||''}"></div>
+        <div class="fg"><label>Início</label><input type="date" id="e_i" value="${s.inicio||today()}"></div>
       </div>
-      <div class="fg"><label>E-mail</label><input type="email" id="e_email" value="${s.email||''}"></div>
-      <div class="mfooter"><button class="btn bg2" onclick="closeModal()">Cancelar</button><button class="btn bp" onclick="saveEditStudent('${extra}')">Salvar</button></div>`;
+      <div class="mfooter"><button class="btn bg2" onclick="closeModal()">Cancelar</button><button class="btn bp" onclick="saveEditSt('${extra}')">Salvar</button></div>`;
     return;
   }
 
   if(type==='registro'){
     const opts=(db.students||[]).map(s=>`<option value="${s.nome}">`).join('');
-    box.innerHTML=`
-      <div class="mtitle">➕ Novo Registro</div>
+    box.innerHTML=`<div class="mtitle">➕ Novo Registro</div>
       <div class="g2">
-        <div class="fg"><label>Aluno *</label><input type="text" id="m_aluno" list="alList" autocomplete="off" placeholder="Nome do aluno"><datalist id="alList">${opts}</datalist></div>
-        <div class="fg"><label>Data *</label><input type="date" id="m_data" value="${today()}"></div>
+        <div class="fg"><label>Aluno *</label><input type="text" id="m_al" list="alL" autocomplete="off" placeholder="Nome do aluno"${CSid?` value="${(db.students||[]).find(x=>x.id===CSid)?.nome||''}"`:''}/><datalist id="alL">${opts}</datalist></div>
+        <div class="fg"><label>Data *</label><input type="date" id="m_dt" value="${today()}"></div>
       </div>
       <div class="g2">
-        <div class="fg"><label>Quem registrou *</label><input type="text" id="m_quem" value="${CU?CU.nome:''}"></div>
-        <div class="fg"><label>Tipo *</label><div class="rg" id="rg_orig">
-          <div class="ro" onclick="selR('rg_orig',this,'WhatsApp');showOF('WhatsApp')">📱 WhatsApp</div>
-          <div class="ro" onclick="selR('rg_orig',this,'Sessão');showOF('Sessão')">🎯 Sessão</div>
-          <div class="ro" onclick="selR('rg_orig',this,'Evento');showOF('Evento')">⚡ Evento</div>
+        <div class="fg"><label>Quem registrou *</label><input type="text" id="m_q" value="${CU?CU.nome:''}"></div>
+        <div class="fg"><label>Tipo *</label><div class="rg" id="rg_or">
+          <div class="ro" onclick="selR('rg_or',this,'WhatsApp');showOF('WhatsApp')">📱 WhatsApp</div>
+          <div class="ro" onclick="selR('rg_or',this,'Sessão');showOF('Sessão')">🎯 Sessão</div>
+          <div class="ro" onclick="selR('rg_or',this,'Evento');showOF('Evento')">⚡ Evento</div>
         </div></div>
       </div>
-      <div id="origF"></div>
-      <div class="mfooter"><button class="btn bg2" onclick="closeModal()">Cancelar</button><button class="btn bp" onclick="saveRegistro()">Salvar</button></div>`;
-    if(origemForce){const el=document.querySelector(`#rg_orig .ro[onclick*="${origemForce}"]`);if(el){selR('rg_orig',el,origemForce);showOF(origemForce);}}
-    if(CSid){const s=(db.students||[]).find(x=>x.id===CSid);if(s)document.getElementById('m_aluno').value=s.nome;}
-    return;
-  }
-
-  if(type==='editRegistro'){
-    const r=(db.registros||[]).find(x=>x.id===extra);if(!r)return;
-    const c=r.campos||{};
-    let fh='';
-    if(r.origem==='WhatsApp'){
-      if(c.execucao)RV['rg_exec']=c.execucao;
-      if(c.engajamento)RV['rg_eng']=c.engajamento;
-      if(c.intervencao)RV['rg_int']=c.intervencao;
-      fh=`<div class="fg"><label>Execução</label><div class="rg" id="rg_exec">${['Cumpriu','Cumpriu Parcialmente','Não Cumpriu','Reprogramou','Não Respondeu'].map(o=>`<div class="ro ${c.execucao===o?execSC(o):''}" onclick="selR('rg_exec',this,'${o.replace(/'/g,"\\'")}')"> ${o}</div>`).join('')}</div></div>
-        <div class="fg"><label>Engajamento</label><div class="rg" id="rg_eng">${['Alto','Médio','Baixo'].map(o=>`<div class="ro ${c.engajamento===o?(o==='Alto'?'sg':o==='Médio'?'sgold':'sr'):''}" onclick="selR('rg_eng',this,'${o}')">${o}</div>`).join('')}</div></div>
-        <div class="fg"><label>Observação</label><textarea id="f_obs">${c.observacao||''}</textarea></div>
-        <div class="fg"><label>Intervenção</label><div class="rg" id="rg_int">${['Incentivo','Elogio','Reorganização','Cobrança','Encaminhamento'].map(o=>`<div class="ro ${c.intervencao===o?'sb':''}" onclick="selR('rg_int',this,'${o}')">${o}</div>`).join('')}</div></div>`;
-    } else if(r.origem==='Sessão'){
-      if(c.execucao)RV['rg_exec']=c.execucao;
-      fh=`<div class="fg"><label>Resumo</label><textarea id="f_resumo">${c.resumo||''}</textarea></div>
-        <div class="g2"><div class="fg"><label>Dificuldades</label><textarea id="f_dif">${c.dificuldades||''}</textarea></div><div class="fg"><label>Avanços</label><textarea id="f_av">${c.avancos||''}</textarea></div></div>
-        <div class="g2"><div class="fg"><label>Meta</label><input type="text" id="f_meta" value="${c.meta||''}"></div><div class="fg"><label>Próximo</label><input type="text" id="f_prox" value="${c.proximo||''}"></div></div>
-        <div class="fg"><label>Execução</label><div class="rg" id="rg_exec">${['Cumpriu','Cumpriu Parcialmente','Não Cumpriu','Reprogramou','Não Respondeu'].map(o=>`<div class="ro ${c.execucao===o?execSC(o):''}" onclick="selR('rg_exec',this,'${o.replace(/'/g,"\\'")}')"> ${o}</div>`).join('')}</div></div>
-        <div class="fg"><label>Obs estratégicas</label><textarea id="f_obs">${c.observacao||''}</textarea></div>`;
-    } else if(r.origem==='Evento'){
-      if(c.impacto)RV['rg_imp']=c.impacto;
-      fh=`<div class="fg"><label>Descrição *</label><textarea id="f_desc">${c.descricao||''}</textarea></div>
-        <div class="fg"><label>Impacto</label><div class="rg" id="rg_imp">${['Positivo','Negativo','Neutro','Incerto'].map(o=>`<div class="ro ${c.impacto===o?(o==='Positivo'?'sg':o==='Negativo'?'sr':o==='Incerto'?'sgold':'sgr'):''}" onclick="selR('rg_imp',this,'${o}')">${o}</div>`).join('')}</div></div>`;
-    }
-    box.innerHTML=`<div class="mtitle">✏️ Editar · ${r.origem}</div>
-      <div class="g2"><div class="fg"><label>Data</label><input type="date" id="e_rdata" value="${r.data}"></div><div class="fg"><label>Quem registrou</label><input type="text" id="e_rquem" value="${r.quemRegistrou||''}"></div></div>
-      ${fh}
-      <div class="mfooter"><button class="btn bg2" onclick="closeModal()">Cancelar</button><button class="btn bp" onclick="saveEditReg('${extra}')">Salvar</button></div>`;
+      <div id="oF"></div>
+      <div class="mfooter"><button class="btn bg2" onclick="closeModal()">Cancelar</button><button class="btn bp" onclick="saveReg()">Salvar</button></div>`;
     return;
   }
 
   if(type==='novaMeta'){
     box.innerHTML=`<div class="mtitle">🎯 Nova Meta</div>
-      <div class="fg"><label>Título *</label><input type="text" id="m_titulo" placeholder="Ex: Concluir módulo X..."></div>
-      <div class="fg"><label>Descrição</label><textarea id="m_desc" style="min-height:60px" placeholder="Detalhes..."></textarea></div>
-      <div class="g2"><div class="fg"><label>Prazo</label><input type="date" id="m_prazo"></div><div class="fg"><label>Status</label><select id="m_status"><option value="Pendente">Pendente</option><option value="Em andamento">Em andamento</option></select></div></div>
+      <div class="fg"><label>Título *</label><input type="text" id="m_t" placeholder="Concluir módulo X..."></div>
+      <div class="fg"><label>Descrição</label><textarea id="m_dc" style="min-height:50px"></textarea></div>
+      <div class="g2">
+        <div class="fg"><label>Prazo</label><input type="date" id="m_pr"></div>
+        <div class="fg"><label>Status</label><select id="m_st"><option value="Pendente">Pendente</option><option value="Em andamento">Em andamento</option></select></div>
+      </div>
       <div class="mfooter"><button class="btn bg2" onclick="closeModal()">Cancelar</button><button class="btn bp" onclick="saveMeta('${extra}')">Criar</button></div>`;
+    return;
+  }
+
+  if(type==='metaDia'){
+    const sid=extra;const data=extra2||today();
+    const s=(db.students||[]).find(x=>x.id===sid);if(!s)return;
+    const cfg=s.metaCfg||{};
+    const hMeta=cfg.horasDia||1;
+    const regExist=(db.registros||[]).find(r=>r.studentId===sid&&r.origem==='meta_dia'&&r.data===data);
+    box.innerHTML=`<div class="mtitle">📅 Registro — ${fdate(data)}</div>
+      <div style="background:var(--s2);border-radius:var(--r2);padding:10px 12px;font-size:12px;color:var(--muted2);margin-bottom:14px">Meta do dia: <strong style="color:var(--a2)">${hMeta}h</strong></div>
+      <div class="fg"><label>Como foi?</label>
+        <div class="rg" id="rg_ms">
+          <div class="ro ${regExist?.campos?.status==='Cumpriu'?'sg':''}" onclick="selR('rg_ms',this,'Cumpriu');document.getElementById('horasParcial').style.display='none'">✅ Cumpriu (${hMeta}h)</div>
+          <div class="ro ${regExist?.campos?.status==='Parcialmente'?'sgold':''}" onclick="selR('rg_ms',this,'Parcialmente');document.getElementById('horasParcial').style.display='block'">⚡ Parcialmente</div>
+          <div class="ro ${regExist?.campos?.status==='Não Cumpriu'?'sr':''}" onclick="selR('rg_ms',this,'Não Cumpriu');document.getElementById('horasParcial').style.display='none'">❌ Não Cumpriu</div>
+        </div>
+      </div>
+      <div id="horasParcial" style="display:${regExist?.campos?.status==='Parcialmente'?'block':'none'}">
+        <div class="fg">
+          <label>Quantas horas você fez?</label>
+          <input type="number" id="hp_input" min="0.1" max="${hMeta}" step="0.5" placeholder="Ex: 1.5" value="${regExist?.campos?.horas||''}" oninput="const v=parseFloat(this.value)||0;const p=Math.min(100,Math.round(v/${hMeta}*100));document.getElementById('pctPreview').textContent=v>0?p+'% da meta':''">
+        </div>
+        <div id="pctPreview" style="font-size:16px;color:var(--a2);font-weight:800;text-align:center;margin:6px 0">${regExist?.campos?.horas?Math.min(100,Math.round(regExist.campos.horas/hMeta*100))+'% da meta':''}</div>
+      </div>
+      <div class="fg"><label>Relato livre — como foi o estudo?</label><textarea id="md_obs" placeholder="Escreva livremente sobre como foi..." style="min-height:100px">${regExist?.campos?.obs||''}</textarea></div>
+      <div class="mfooter">
+        <button class="btn bg2" onclick="closeModal()">Cancelar</button>
+        <button class="btn bp" onclick="saveMetaDia('${sid}','${data}',${hMeta})">Salvar</button>
+      </div>`;
+    if(regExist?.campos?.status)RV['rg_ms']=regExist.campos.status;
     return;
   }
 
   if(type==='newAdmin'){
     box.innerHTML=`<div class="mtitle">🔐 Novo Admin</div>
-      <div class="fg"><label>Nome *</label><input type="text" id="m_nome"></div>
-      <div class="g2"><div class="fg"><label>Usuário *</label><input type="text" id="m_user" autocapitalize="none"></div><div class="fg"><label>Senha *</label><input type="text" id="m_pass"></div></div>
-      <div class="mfooter"><button class="btn bg2" onclick="closeModal()">Cancelar</button><button class="btn bp" onclick="saveNewAdmin()">Criar</button></div>`;
+      <div class="fg"><label>Nome *</label><input type="text" id="m_n"></div>
+      <div class="g2">
+        <div class="fg"><label>Usuário *</label><input type="text" id="m_u" autocapitalize="none"></div>
+        <div class="fg"><label>Senha *</label><input type="text" id="m_p"></div>
+      </div>
+      <div class="mfooter"><button class="btn bg2" onclick="closeModal()">Cancelar</button><button class="btn bp" onclick="saveAdmin()">Criar</button></div>`;
+    return;
+  }
+
+  if(type==='editRegistro'){
+    const r=(db.registros||[]).find(x=>x.id===extra);if(!r)return;
+    const c=r.campos||{};let f='';
+    if(r.origem==='WhatsApp'){
+      f=`<div class="fg"><label>Execução</label><div class="rg" id="rg_ex">${['Cumpriu','Cumpriu Parcialmente','Não Cumpriu','Reprogramou','Não Respondeu'].map(o=>`<div class="ro" onclick="selR('rg_ex',this,'${o.replace(/'/g,"\\'")}')"> ${o}</div>`).join('')}</div></div>
+      <div class="fg"><label>Observação</label><textarea id="f_ob">${c.observacao||''}</textarea></div>`;
+    } else if(r.origem==='Sessão'){
+      f=`<div class="fg"><label>Resumo</label><textarea id="f_re">${c.resumo||''}</textarea></div>
+      <div class="g2"><div class="fg"><label>Dificuldades</label><textarea id="f_di">${c.dificuldades||''}</textarea></div><div class="fg"><label>Avanços</label><textarea id="f_av">${c.avancos||''}</textarea></div></div>`;
+    } else if(r.origem==='Evento'){
+      f=`<div class="fg"><label>Descrição *</label><textarea id="f_de">${c.descricao||''}</textarea></div>`;
+    }
+    box.innerHTML=`<div class="mtitle">✏️ Editar · ${r.origem}</div>
+      <div class="g2"><div class="fg"><label>Data</label><input type="date" id="e_rd" value="${r.data}"></div><div class="fg"><label>Quem</label><input type="text" id="e_rq" value="${r.quemRegistrou||''}"></div></div>
+      ${f}
+      <div class="mfooter"><button class="btn bg2" onclick="closeModal()">Cancelar</button><button class="btn bp" onclick="saveEditReg('${extra}')">Salvar</button></div>`;
     return;
   }
 }
 
-function showOF(orig){
-  const el=document.getElementById('origF');if(!el)return;
-  if(orig==='WhatsApp'){el.innerHTML=`
-    <div class="fg"><label>Execução</label><div class="rg" id="rg_exec">${['Cumpriu','Cumpriu Parcialmente','Não Cumpriu','Reprogramou','Não Respondeu'].map(o=>`<div class="ro" onclick="selR('rg_exec',this,'${o.replace(/'/g,"\\'")}')">${o}</div>`).join('')}</div></div>
-    <div class="fg"><label>Engajamento</label><div class="rg" id="rg_eng">${['Alto','Médio','Baixo'].map(o=>`<div class="ro" onclick="selR('rg_eng',this,'${o}')">${o}</div>`).join('')}</div></div>
-    <div class="fg"><label>Observação</label><textarea id="f_obs" placeholder="Relato livre..."></textarea></div>
-    <div class="fg"><label>Intervenção</label><div class="rg" id="rg_int">${['Incentivo','Elogio','Reorganização','Cobrança','Encaminhamento'].map(o=>`<div class="ro" onclick="selR('rg_int',this,'${o}')">${o}</div>`).join('')}</div></div>`;}
-  else if(orig==='Sessão'){el.innerHTML=`
-    <div class="fg"><label>Resumo</label><textarea id="f_resumo" placeholder="O que foi discutido..."></textarea></div>
-    <div class="g2"><div class="fg"><label>Dificuldades</label><textarea id="f_dif"></textarea></div><div class="fg"><label>Avanços</label><textarea id="f_av"></textarea></div></div>
-    <div class="g2"><div class="fg"><label>Meta definida</label><input type="text" id="f_meta"></div><div class="fg"><label>Próximo objetivo</label><input type="text" id="f_prox"></div></div>
-    <div class="fg"><label>Execução</label><div class="rg" id="rg_exec">${['Cumpriu','Cumpriu Parcialmente','Não Cumpriu','Reprogramou','Não Respondeu'].map(o=>`<div class="ro" onclick="selR('rg_exec',this,'${o.replace(/'/g,"\\'")}')">${o}</div>`).join('')}</div></div>
-    <div class="fg"><label>Obs estratégicas</label><textarea id="f_obs"></textarea></div>`;}
-  else if(orig==='Evento'){el.innerHTML=`
-    <div class="fg"><label>Descrição *</label><textarea id="f_desc" placeholder="Ex: demissão, aprovação..."></textarea></div>
-    <div class="fg"><label>Impacto</label><div class="rg" id="rg_imp">${['Positivo','Negativo','Neutro','Incerto'].map(o=>`<div class="ro" onclick="selR('rg_imp',this,'${o}')">${o}</div>`).join('')}</div></div>`;}
+function showOF(o){
+  const el=document.getElementById('oF');if(!el)return;
+  if(o==='WhatsApp')el.innerHTML=`<div class="fg"><label>Execução</label><div class="rg" id="rg_ex">${['Cumpriu','Cumpriu Parcialmente','Não Cumpriu','Reprogramou','Não Respondeu'].map(x=>`<div class="ro" onclick="selR('rg_ex',this,'${x.replace(/'/g,"\\'")}')"> ${x}</div>`).join('')}</div></div><div class="fg"><label>Engajamento</label><div class="rg" id="rg_en">${['Alto','Médio','Baixo'].map(x=>`<div class="ro" onclick="selR('rg_en',this,'${x}')">${x}</div>`).join('')}</div></div><div class="fg"><label>Observação</label><textarea id="f_ob"></textarea></div><div class="fg"><label>Intervenção</label><div class="rg" id="rg_in">${['Incentivo','Elogio','Reorganização','Cobrança','Encaminhamento'].map(x=>`<div class="ro" onclick="selR('rg_in',this,'${x}')">${x}</div>`).join('')}</div></div>`;
+  else if(o==='Sessão')el.innerHTML=`<div class="fg"><label>Resumo</label><textarea id="f_re"></textarea></div><div class="g2"><div class="fg"><label>Dificuldades</label><textarea id="f_di"></textarea></div><div class="fg"><label>Avanços</label><textarea id="f_av"></textarea></div></div><div class="g2"><div class="fg"><label>Meta</label><input type="text" id="f_mt"></div><div class="fg"><label>Próximo</label><input type="text" id="f_pr"></div></div><div class="fg"><label>Obs</label><textarea id="f_ob"></textarea></div>`;
+  else if(o==='Evento')el.innerHTML=`<div class="fg"><label>Descrição *</label><textarea id="f_de"></textarea></div><div class="fg"><label>Impacto</label><div class="rg" id="rg_im">${['Positivo','Negativo','Neutro','Incerto'].map(x=>`<div class="ro" onclick="selR('rg_im',this,'${x}')">${x}</div>`).join('')}</div></div>`;
 }
 
-function saveNewStudent(){
-  const nome=gv('m_nome');if(!nome){alert('Nome obrigatório!');return;}
-  // Auto login
-  const base=nome.split(' ')[0].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');
+function saveNewSt(){
+  const n=gv('m_n');if(!n){alert('Nome obrigatório!');return;}
+  const base=n.split(' ')[0].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');
   const pin=String(Math.floor(1000+Math.random()*9000));
-  let u=base;let c=1;
-  while((db.users||[]).find(x=>x.username===u)){u=base+c;c++;}
-  if(!db.users)db.users=[];
-  const nid=uid();
-  db.users.push({id:nid,username:u,password:pin,role:'student',nome});
+  let u=base;let c=1;while((db.users||[]).find(x=>x.username===u)){u=base+c;c++;}
+  if(!db.users)db.users=[];const nid=uid();
+  db.users.push({id:nid,username:u,password:pin,role:'student',nome:n});
   if(!db.students)db.students=[];
-  const s={id:uid(),nome,objetivo:gv('m_obj'),inicio:gv('m_ini')||today(),email:gv('m_email'),markers:[],metas:[],userId:nid};
-  db.students.push(s);
-  save();closeModal();
-  toast(`✓ Criado! Login: ${u} / Senha: ${pin}`);
-  CSid=s.id;CP='projeto';window._pt='timeline';renderApp();
+  const s={id:uid(),nome:n,objetivo:gv('m_o'),inicio:gv('m_i')||today(),email:gv('m_e'),markers:[],metas:[],userId:nid};
+  db.students.push(s);save();closeModal();toast(`✓ Criado! Login: ${u} / Senha: ${pin}`);CSid=s.id;CP='projeto';window._pt='timeline';renderApp();
 }
 
-function saveEditStudent(sid){
-  const s=(db.students||[]).find(x=>x.id===sid);if(!s)return;
-  const nome=gv('e_nome');if(!nome){alert('Nome obrigatório!');return;}
-  s.nome=nome;s.objetivo=gv('e_obj');s.inicio=gv('e_ini');s.email=gv('e_email');
-  if(s.userId){const u=(db.users||[]).find(x=>x.id===s.userId);if(u)u.nome=nome;}
-  save();closeModal();toast('✓ Atualizado!');renderApp();
+function saveEditSt(sid){
+  const s=(db.students||[]).find(x=>x.id===sid);
+  if(!s){alert('Aluno não encontrado!');return;}
+  const nEl=document.getElementById('e_n');
+  const oEl=document.getElementById('e_o');
+  const iEl=document.getElementById('e_i');
+  const n=nEl?nEl.value.trim():'';
+  if(!n){alert('Nome obrigatório!');return;}
+  s.nome=n;
+  s.objetivo=oEl?oEl.value.trim():'';
+  s.inicio=iEl?iEl.value:'';
+  if(s.userId){const u=(db.users||[]).find(x=>x.id===s.userId);if(u)u.nome=n;}
+  save();closeModal();toast('✓ Aluno atualizado!');renderApp();
 }
 
-function saveRegistro(){
-  const nomeAluno=document.getElementById('m_aluno')?.value.trim();
-  const origem=RV['rg_orig'];
-  const quem=gv('m_quem');
-  if(!nomeAluno){toast('Informe o aluno!');return;}
-  if(!origem){toast('Selecione o tipo!');return;}
-  if(!quem){toast('Informe quem registrou!');return;}
-  let s=(db.students||[]).find(x=>x.nome.toLowerCase()===nomeAluno.toLowerCase());
-  if(!s){s={id:uid(),nome:nomeAluno,objetivo:'',inicio:today(),markers:[],metas:[],userId:null};if(!db.students)db.students=[];db.students.push(s);toast(`Aluno "${nomeAluno}" criado.`);}
-  let campos={};
-  if(origem==='WhatsApp')campos={execucao:RV['rg_exec']||'',engajamento:RV['rg_eng']||'',observacao:gv('f_obs'),intervencao:RV['rg_int']||''};
-  else if(origem==='Sessão')campos={resumo:gv('f_resumo'),dificuldades:gv('f_dif'),avancos:gv('f_av'),meta:gv('f_meta'),proximo:gv('f_prox'),execucao:RV['rg_exec']||'',observacao:gv('f_obs')};
-  else if(origem==='Evento'){const d=gv('f_desc');if(!d){toast('Descrição obrigatória!');return;}campos={descricao:d,impacto:RV['rg_imp']||''};}
+function saveReg(){
+  const na=document.getElementById('m_al')?.value.trim();
+  const or=RV['rg_or'],qu=gv('m_q');
+  if(!na){toast('Informe o aluno!');return;}if(!or){toast('Selecione o tipo!');return;}if(!qu){toast('Informe quem registrou!');return;}
+  let s=(db.students||[]).find(x=>x.nome.toLowerCase()===na.toLowerCase());
+  if(!s){s={id:uid(),nome:na,objetivo:'',inicio:today(),markers:[],metas:[],userId:null};if(!db.students)db.students=[];db.students.push(s);}
+  let c={};
+  if(or==='WhatsApp')c={execucao:RV['rg_ex']||'',engajamento:RV['rg_en']||'',observacao:gv('f_ob'),intervencao:RV['rg_in']||''};
+  else if(or==='Sessão')c={resumo:gv('f_re'),dificuldades:gv('f_di'),avancos:gv('f_av'),meta:gv('f_mt'),proximo:gv('f_pr'),observacao:gv('f_ob')};
+  else if(or==='Evento'){const d=gv('f_de');if(!d){toast('Descrição obrigatória!');return;}c={descricao:d,impacto:RV['rg_im']||''};}
   if(!db.registros)db.registros=[];
-  db.registros.push({id:uid(),studentId:s.id,authorId:CU?CU.id:'',data:gv('m_data')||today(),origem,quemRegistrou:quem,campos});
+  db.registros.push({id:uid(),studentId:s.id,authorId:CU?CU.id:'',data:gv('m_dt')||today(),origem:or,quemRegistrou:qu,validado:undefined,campos:c});
   save();closeModal();toast('✓ Registro salvo!');CSid=s.id;CP='projeto';window._pt='timeline';renderApp();
 }
 
 function saveEditReg(rid){
   const r=(db.registros||[]).find(x=>x.id===rid);if(!r)return;
-  r.data=gv('e_rdata')||r.data;r.quemRegistrou=gv('e_rquem')||r.quemRegistrou;
-  if(r.origem==='WhatsApp'){r.campos.execucao=RV['rg_exec']||r.campos.execucao;r.campos.engajamento=RV['rg_eng']||r.campos.engajamento;r.campos.observacao=gv('f_obs');r.campos.intervencao=RV['rg_int']||r.campos.intervencao;}
-  else if(r.origem==='Sessão'){r.campos.resumo=gv('f_resumo');r.campos.dificuldades=gv('f_dif');r.campos.avancos=gv('f_av');r.campos.meta=gv('f_meta');r.campos.proximo=gv('f_prox');r.campos.execucao=RV['rg_exec']||r.campos.execucao;r.campos.observacao=gv('f_obs');}
-  else if(r.origem==='Evento'){const d=gv('f_desc');if(!d){alert('Descrição obrigatória!');return;}r.campos.descricao=d;r.campos.impacto=RV['rg_imp']||r.campos.impacto;}
-  save();closeModal();toast('✓ Registro atualizado!');renderApp();
+  r.data=gv('e_rd')||r.data;r.quemRegistrou=gv('e_rq')||r.quemRegistrou;
+  if(r.origem==='WhatsApp'){r.campos.execucao=RV['rg_ex']||r.campos.execucao;r.campos.observacao=gv('f_ob');}
+  else if(r.origem==='Sessão'){r.campos.resumo=gv('f_re');r.campos.dificuldades=gv('f_di');r.campos.avancos=gv('f_av');}
+  else if(r.origem==='Evento'){const d=gv('f_de');if(!d){alert('Obrigatório!');return;}r.campos.descricao=d;}
+  save();closeModal();toast('✓ Atualizado!');document.getElementById('content').innerHTML=pageProjeto();
 }
 
 function saveMeta(sid){
-  const titulo=gv('m_titulo');if(!titulo){alert('Título obrigatório!');return;}
+  const t=gv('m_t');if(!t){alert('Título obrigatório!');return;}
   const s=(db.students||[]).find(x=>x.id===sid);if(!s)return;
   if(!s.metas)s.metas=[];
-  s.metas.push({titulo,descricao:gv('m_desc'),prazo:gv('m_prazo')||null,status:gv('m_status')||'Pendente'});
-  save();closeModal();toast('✓ Meta criada!');renderApp();
+  s.metas.push({titulo:t,descricao:gv('m_dc'),prazo:gv('m_pr')||null,status:gv('m_st')||'Pendente'});
+  save();closeModal();toast('✓ Meta criada!');document.getElementById('content').innerHTML=pageProjeto();
 }
 
-function saveNewAdmin(){
-  const nome=gv('m_nome'),user=gv('m_user').toLowerCase(),pass=gv('m_pass');
-  if(!nome||!user||!pass){alert('Todos os campos são obrigatórios!');return;}
-  if((db.users||[]).find(u=>u.username===user)){alert('Usuário já existe!');return;}
+function saveAdmin(){
+  const n=gv('m_n'),u=gv('m_u').toLowerCase(),p=gv('m_p');
+  if(!n||!u||!p){alert('Todos os campos!');return;}
+  if((db.users||[]).find(x=>x.username===u)){alert('Usuário já existe!');return;}
   if(!db.users)db.users=[];
-  db.users.push({id:uid(),username:user,password:pass,role:'admin',nome});
+  db.users.push({id:uid(),username:u,password:p,role:'admin',nome:n});
   save();closeModal();toast('✓ Admin criado!');renderApp();
 }
 
-function closeModal(){document.getElementById('mo').classList.add('hidden');RV={};}
-function closeModalOutside(e){if(e.target===document.getElementById('mo'))closeModal();}
-
-// ══════════════════════════════════════════════
-// RADIO
-// ══════════════════════════════════════════════
-const RC={'Cumpriu':'sg','Cumpriu Parcialmente':'so','Não Cumpriu':'sr','Reprogramou':'sgold','Não Respondeu':'sgr','Alto':'sg','Médio':'sgold','Baixo':'sr','Sim':'sg','Não':'sr','Muito Baixa':'sr','Baixa':'so','Média':'sgold','Boa':'sg','Excelente':'sg','Incentivo':'sb','Elogio':'sg','Reorganização':'sb','Cobrança':'so','Encaminhamento':'sb','Positivo':'sg','Negativo':'sr','Neutro':'sgr','Incerto':'sgold','WhatsApp':'sg','Sessão':'sb','Evento':'sgold'};
-function selR(gid,el,val){document.querySelectorAll(`#${gid} .ro`).forEach(o=>{o.className='ro';});RV[gid]=val;el.classList.add(RC[val]||'sb');}
-function execSC(v){return{'Cumpriu':'sg','Cumpriu Parcialmente':'so','Não Cumpriu':'sr','Reprogramou':'sgold','Não Respondeu':'sgr'}[v]||'';}
-
-// ══════════════════════════════════════════════
-// AI ANALYSIS
-// ══════════════════════════════════════════════
-function formatAI(txt){
-  return txt.replace(/#{1,3}\s*/g,'').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'$1')
-    .split('\n').map(l=>{const t=l.trim();if(!t)return'<div style="height:5px"></div>';if(/^[📊📈⚠️🧠🎯✅❌🔴🟡🟢]\s/.test(t))return`<div style="font-weight:700;color:var(--a2);margin-top:12px;margin-bottom:3px">${t}</div>`;return`<div style="margin-bottom:2px">${t}</div>`;}).join('');
+function saveMetaDia(sid,data,hMeta){
+  const status=RV['rg_ms'];
+  if(!status){toast('Selecione como foi!');return;}
+  let horas=0;
+  if(status==='Cumpriu') horas=hMeta;
+  else if(status==='Parcialmente'){
+    const inp=document.getElementById('hp_input');
+    horas=parseFloat(inp?.value||0);
+    if(!horas||horas<=0){toast('Informe as horas!');return;}
+  }
+  const pct=Math.min(100,Math.round(horas/hMeta*100));
+  db.registros=(db.registros||[]).filter(r=>!(r.studentId===sid&&r.origem==='meta_dia'&&r.data===data));
+  db.registros.push({
+    id:uid(),studentId:sid,authorId:CU?CU.id:'',
+    data,origem:'meta_dia',quemRegistrou:CU?.nome||'Aluno',
+    campos:{status,horas,pct,obs:gv('md_obs'),metaHoras:hMeta}
+  });
+  save();closeModal();
+  toast(`✓ ${pct}% da meta registrado!`);
+  renderApp();
 }
 
-async function gerarAnalise(sid){
+// RADIO
+const RC={'Cumpriu':'sg','Cumpriu Parcialmente':'so','Não Cumpriu':'sr','Reprogramou':'sgold','Não Respondeu':'sgr','Alto':'sg','Médio':'sgold','Baixo':'sr','Sim':'sg','Não':'sr','Incentivo':'sb','Elogio':'sg','Reorganização':'sb','Cobrança':'so','Encaminhamento':'sb','Positivo':'sg','Negativo':'sr','Neutro':'sgr','Incerto':'sgold','WhatsApp':'sg','Sessão':'sb','Evento':'sgold'};
+function selR(gid,el,val){document.querySelectorAll(`#${gid} .ro`).forEach(o=>o.className='ro');RV[gid]=val;el.classList.add(RC[val]||'sb');}
+
+// ══════════════════════════════════════════════
+// ANÁLISE IA
+// ══════════════════════════════════════════════
+function fmtAI(txt){return txt.replace(/#{1,3}\s*/g,'').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'$1').split('\n').map(l=>{const t=l.trim();if(!t)return'<div style="height:4px"></div>';if(/^[📊📈⚠️🧠🎯]\s/.test(t))return`<div style="font-weight:700;color:var(--a2);margin-top:10px;margin-bottom:2px">${t}</div>`;return`<div style="margin-bottom:2px">${t}</div>`;}).join('');}
+
+async function gerarAnalise(sid,silencioso=false){
   const s=(db.students||[]).find(x=>x.id===sid);if(!s)return;
   const recs=(db.registros||[]).filter(r=>r.studentId===sid);
-  if(recs.length<2){toast('Adicione mais registros antes.');return;}
+  if(recs.length<2){if(!silencioso)toast('Adicione mais registros antes.');return;}
 
-  const mR=recs.filter(r=>r.origem==='WhatsApp').slice(-14).map(r=>`[${r.data}] Exec:${r.campos.execucao||'—'} Eng:${r.campos.engajamento||'—'} Obs:${r.campos.observacao||'—'}`).join('\n');
-  const sR=recs.filter(r=>r.origem==='Sessão').slice(-5).map(r=>`[${r.data}] ${r.campos.resumo||'—'} | Dif:${r.campos.dificuldades||'—'} | Av:${r.campos.avancos||'—'}`).join('\n');
-  const aR=recs.filter(r=>r.origem==='Aluno').slice(-14).map(r=>`[${r.data}] Estudou:${r.campos.estudou||'—'} Disp:${r.campos.disposicao||'—'} Sent:"${r.campos.sentimento||'—'}" Dif:"${r.campos.dificuldade||'—'}" Vit:"${r.campos.vitoria||'—'}"`).join('\n');
-  const ev=recs.filter(r=>r.origem==='Evento').map(r=>`[${r.data}] ${r.campos.descricao||'—'} (${r.campos.impacto||'—'})`).join('\n');
+  if(!silencioso){
+    document.getElementById('mo').classList.remove('hidden');
+    const box=document.getElementById('mb');
+    box.innerHTML=`<div class="mtitle">🤖 Gerando Análise — ${s.nome}</div><div style="padding:40px;text-align:center;color:var(--muted2)"><span class="spin"></span> Analisando dados dos últimos 7 dias...</div>`;
+  }
 
-  const prompt=`Você é um analista comportamental especialista em coaching educacional. Analise os dados abaixo e gere um relatório comportamental semanal.
+  const dias=getDiasValidados(sid);
+  const fase=getFaseAtual(dias);
+  const aR=recs.filter(r=>r.origem==='Aluno').slice(-14).map(r=>`[${r.data}] ${EMOJIS.find(e=>e.val===r.campos?.disposicao)?.emoji||'😐'} Sent:"${r.campos?.sentimento||'—'}" Dif:"${r.campos?.dificuldade||'—'}" Vit:"${r.campos?.vitoria||'—'}" Validado:${r.validado===true?'Sim':r.validado===false?'Não':'Pendente'}`).join('\n');
+  const mR=recs.filter(r=>r.origem==='WhatsApp').slice(-14).map(r=>`[${r.data}] ${r.campos?.execucao||'—'} | ${r.campos?.observacao||'—'}`).join('\n');
+  const sR=recs.filter(r=>r.origem==='Sessão').slice(-5).map(r=>`[${r.data}] ${r.campos?.resumo||'—'}`).join('\n');
+  const metaR=recs.filter(r=>r.origem==='meta_dia').slice(-7).map(r=>`[${r.data}] ${r.campos?.status||'—'} ${r.campos?.horas?r.campos.horas+'h':''} ${r.campos?.pct!=null?r.campos.pct+'% da meta':''} "${r.campos?.obs||'—'}"`).join('\n');
+  const pctSemana=calcPctMeta(sid);
+
+  const prompt=`Você é um analista comportamental especialista em coaching educacional. Analise os dados abaixo e gere um relatório dos últimos 7 dias.
 
 ALUNO: ${s.nome}
 OBJETIVO: ${s.objetivo||'—'}
-MARCADORES ATIVOS: ${(s.markers||[]).join(', ')||'Nenhum'}
+FASE: ${fase.nome} (Dia ${dias})
+MARCADORES: ${(s.markers||[]).join(', ')||'Nenhum'}
+META SEMANAL CUMPRIDA: ${pctSemana}%
+
+── REGISTROS COMPORTAMENTAIS DO ALUNO ──
+${aR||'Sem registros'}
+
+── REGISTROS DE META DIÁRIA ──
+${metaR||'Sem registros'}
 
 ── REGISTROS MAÍSA/WHATSAPP ──
 ${mR||'Sem registros'}
@@ -1105,15 +1564,9 @@ ${mR||'Sem registros'}
 ── SESSÕES DE COACHING ──
 ${sR||'Sem sessões'}
 
-── AUTO-REGISTROS DO ALUNO ──
-${aR||'Sem registros'}
-
-── EVENTOS RELEVANTES ──
-${ev||'Nenhum'}
-
 Gere o relatório neste formato:
 
-📊 RESUMO DA SEMANA
+📊 RESUMO DOS ÚLTIMOS 7 DIAS
 [2-3 frases sobre o estado geral]
 
 📈 EVOLUÇÃO IDENTIFICADA
@@ -1125,20 +1578,10 @@ Gere o relatório neste formato:
 🧠 ANÁLISE COMPORTAMENTAL
 [interpretação psicológica baseada nos dados]
 
-🎯 RECOMENDAÇÕES PARA A PRÓXIMA SEMANA
+🎯 RECOMENDAÇÕES PARA OS PRÓXIMOS 7 DIAS
 1. [ação específica]
 2. [ação específica]
 3. [ação específica]`;
-
-  // Mostra loading
-  document.getElementById('mo').classList.remove('hidden');
-  const box=document.getElementById('mb');
-  box.innerHTML=`
-    <div class="mtitle">🤖 Gerando Análise — ${s.nome}</div>
-    <div style="padding:40px;text-align:center;color:var(--muted2)">
-      <div><span class="spin"></span> Analisando dados comportamentais...</div>
-      <div style="font-size:12px;margin-top:12px;color:var(--muted)">Isso pode levar alguns segundos</div>
-    </div>`;
 
   try{
     const res=await fetch('https://api.anthropic.com/v1/messages',{
@@ -1151,63 +1594,49 @@ Gere o relatório neste formato:
       },
       body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:1200,messages:[{role:'user',content:prompt}]})
     });
-    if(!res.ok){const e=await res.text();throw new Error(e);}
+    if(!res.ok)throw new Error('status '+res.status);
     const data=await res.json();
     const txt=data.content?.map(b=>b.text||'').join('')||'Sem resposta.';
-    salvarAnaliseTexto(sid,txt);
+    if(!db.analises)db.analises=[];
+    db.analises.push({id:uid(),studentId:sid,geradoEm:new Date().toISOString(),conteudo:txt,auto:silencioso});
+    save();
+    if(silencioso){
+      toast(`✓ Análise automática gerada para ${s.nome}!`);
+      renderApp();
+    } else {
+      closeModal();toast('✓ Análise gerada!');window._pt='ia';document.getElementById('content').innerHTML=pageProjeto();
+    }
   }catch(e){
-    console.error(e);
-    // Tenta via função Netlify como fallback
-    try{
-      const res2=await fetch('/.netlify/functions/analise',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:1200,messages:[{role:'user',content:prompt}]})
-      });
-      const data2=await res2.json();
-      const txt2=data2.texto||'';
-      if(txt2&&txt2!=='Sem resposta.'){salvarAnaliseTexto(sid,txt2);return;}
-    }catch(e2){console.error(e2);}
-    box.innerHTML=`
-      <div class="mtitle">🤖 Análise — ${s.nome}</div>
-      <div style="background:rgba(240,180,41,.07);border:1px solid rgba(240,180,41,.2);border-radius:var(--r);padding:12px 14px;margin-bottom:14px;font-size:12px;color:var(--muted2)">
-        Cole o prompt no Claude.ai e cole a resposta abaixo.
-      </div>
-      <button class="btn bp" style="width:100%;margin-bottom:14px" onclick="copiarPromptAI(${JSON.stringify(prompt)})">📋 Copiar Prompt</button>
-      <div class="fg"><label>Cole a resposta aqui</label>
-        <textarea id="ai_resposta" style="min-height:180px" placeholder="Cole a análise..."></textarea>
-      </div>
-      <div class="mfooter">
-        <button class="btn bg2" onclick="closeModal()">Cancelar</button>
-        <button class="btn bp" onclick="salvarAnaliseManual('${sid}')">Salvar</button>
-      </div>`;
-  }
+    if(silencioso){toast('Erro ao gerar análise automática.');return;}
+    const box=document.getElementById('mb');
+    window._promptTemp=prompt;
+    box.innerHTML=`<div class="mtitle">🤖 Análise — ${s.nome}</div>
+      <div style="background:rgba(240,180,41,.07);border:1px solid rgba(240,180,41,.2);border-radius:var(--r);padding:12px;margin-bottom:14px;font-size:12px;color:var(--muted2)">Cole o prompt no Claude.ai e cole a resposta abaixo.</div>
+      <button class="btn bp" style="width:100%;margin-bottom:12px" onclick="navigator.clipboard.writeText(window._promptTemp).then(()=>toast('✓ Copiado!'))">📋 Copiar Prompt</button>
+      <div class="fg"><label>Cole a resposta</label><textarea id="ai_r" style="min-height:160px"></textarea></div>
+      <div class="mfooter"><button class="btn bg2" onclick="closeModal()">Cancelar</button><button class="btn bp" onclick="salvarAI('${sid}')">Salvar</button></div>`;
   }
 }
 
-function salvarAnaliseTexto(sid,txt){
-  if(!db.analises)db.analises=[];
-  db.analises.push({id:uid(),studentId:sid,geradoEm:new Date().toISOString(),conteudo:txt});
-  save();closeModal();toast('✓ Análise gerada!');window._pt='evolucao';renderApp();
+// Verifica se algum aluno precisa de análise automática (a cada 7 dias desde a última)
+async function verificarAnaliseAuto(){
+  const hoje=today();
+  for(const s of(db.students||[])){
+    const ultimaAnalise=(db.analises||[]).filter(a=>a.studentId===s.id).sort((a,b)=>b.geradoEm.localeCompare(a.geradoEm))[0];
+    const ultimoReg=(db.registros||[]).filter(r=>r.studentId===s.id&&r.validado===true).sort((a,b)=>b.data.localeCompare(a.data))[0];
+    if(!ultimoReg)continue;
+    // Calcula dias desde a última análise (ou desde o primeiro registro se nunca gerou)
+    const refData=ultimaAnalise?ultimaAnalise.geradoEm.slice(0,10):ultimoReg.data;
+    const diffDias=Math.floor((new Date(hoje)-new Date(refData))/86400000);
+    if(diffDias>=7){
+      await gerarAnalise(s.id,true);
+    }
+  }
 }
+function salvarAI(sid){const t=document.getElementById('ai_r')?.value.trim();if(!t){alert('Cole a resposta!');return;}if(!db.analises)db.analises=[];db.analises.push({id:uid(),studentId:sid,geradoEm:new Date().toISOString(),conteudo:t});save();closeModal();toast('✓ Análise salva!');window._pt='ia';document.getElementById('content').innerHTML=pageProjeto();}
 
-function copiarPromptAI(prompt){
-  navigator.clipboard.writeText(prompt).then(()=>{
-    toast('✓ Prompt copiado! Cole no Claude.ai');
-  }).catch(()=>{
-    const ta=document.createElement('textarea');
-    ta.value=prompt;ta.style.position='fixed';ta.style.opacity='0';
-    document.body.appendChild(ta);ta.focus();ta.select();
-    try{document.execCommand('copy');toast('✓ Copiado!');}catch(e){toast('Copie manualmente.');}
-    document.body.removeChild(ta);
-  });
-}
-
-function salvarAnaliseManual(sid){
-  const txt=document.getElementById('ai_resposta')?.value.trim();
-  if(!txt){alert('Cole a resposta antes de salvar.');return;}
-  salvarAnaliseTexto(sid,txt);
-}
+function closeModal(){document.getElementById('mo').classList.add('hidden');RV={};}
+function closeModalOutside(e){if(e.target===document.getElementById('mo'))closeModal();}
 
 // ══════════════════════════════════════════════
 // DEMO + INIT
@@ -1223,9 +1652,7 @@ function salvarAnaliseManual(sid){
   }
 })();
 
-// Inicia sync (Firebase se configurado, senão só local)
 initSync();
-
 document.getElementById('lu').focus();
 </script>
 </body>
